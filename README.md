@@ -60,6 +60,7 @@ Sur le plateau de jeu apparaissent aussi, à intervalle régulier, des ennemis q
 **Chaque joueur ou joueuse peut déplacer son avatar sur l'écran à l'aide de la souris** (cf. chapitre Déplacement) :
 - si son avatar passe au dessus d'un bonus, il récupère la capacité correspondant
 - si son avatar entre en collision avec un ennemi, les deux sont détruits et le joueur perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer"
+- si son avatar reçoit un tir d'un ennemi, il perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer".
 - si son avatar entre en collision avec un partenaire???
 
 
