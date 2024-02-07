@@ -112,7 +112,7 @@ Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la S
 ### D.2. Déplacement
 
 **Le déplacement de l'avatar se contrôle à l'aide de la souris :** c'est la position du curseur par rapport à l'avatar qui détermine la direction et la vitesse de déplacement :
-- si la souris est à droite de l'avatar, il se déplace vers la droite, si elle est à gauche, l'avatar se déplace à gauche, etc.
+- si la souris est à droite de l'avatar, il se déplace vers la droite, si elle est à gauche, l'avatar se déplace à gauche???? **possibilité de retour en arrière pour un shoot them up??**, etc.
 - il est possible de contrôler la direction de déplacement à 360° et pas seulement sur les 4 points cardinaux
 - plus le curseur de la souris est proche de l'avatar plus celui-ci ralentit, plus le curseur s'éloigne plus l'avatar accélère (_avec une vitesse maximum fixée par vous selon la jouabilité désirée_).
 
