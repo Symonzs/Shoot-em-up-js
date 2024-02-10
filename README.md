@@ -57,7 +57,7 @@ Sur la page d'accueil on doit pouvoir voir :
 
 Sur le plateau de jeu apparaissent aussi, à intervalle régulier, des ennemis qui peuvent tirer et que l'on doit éviter et des bonus qui permettent d'améliorer les chances du personnage (invincibilité, nouvelles armes, nouvelles vies...). Le personnage peut aussi tirer sur les ennemis et les détruire plus ou moins facilement.
 
-**Chaque joueur ou joueuse peut déplacer son avatar sur l'écran à l'aide de la souris** (cf. chapitre Déplacement) :
+**Chaque joueur ou joueuse peut déplacer son avatar sur l'écran à l'aide de la souris ou du clavier** (cf. chapitre Déplacement) :
 - si son avatar passe au dessus d'un bonus, il récupère la capacité correspondant
 - si son avatar entre en collision avec un ennemi, les deux sont détruits et le joueur perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer"
 - si son avatar reçoit un tir d'un ennemi, il perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer".
@@ -113,10 +113,20 @@ Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la S
 
 ### D.2. Déplacement
 
-**Le déplacement de l'avatar se contrôle à l'aide de la souris :** c'est la position du curseur par rapport à l'avatar qui détermine la direction et la vitesse de déplacement :
-- si la souris est à droite de l'avatar, il se déplace vers la droite, si elle est à gauche, l'avatar se déplace à gauche???? **possibilité de retour en arrière pour un shoot them up??**, etc.
+**Le déplacement de l'avatar se contrôle à l'aide de la souris ou du clavier (au choix).**
+
+**Si vous choisissez un déplacement avec la souris,** c'est la position du curseur par rapport à l'avatar qui détermine la direction et la vitesse de déplacement :
+- si la souris est à droite de l'avatar, il se déplace vers la droite, si elle est à gauche, l'avatar se déplace à gauche, etc.
 - il est possible de contrôler la direction de déplacement à 360° et pas seulement sur les 4 points cardinaux
-- plus le curseur de la souris est proche de l'avatar plus celui-ci ralentit, plus le curseur s'éloigne plus l'avatar accélère (_avec une vitesse maximum fixée par vous selon la jouabilité désirée_).
+- plus le curseur de la souris est proche de l'avatar plus celui-ci ralentit, plus le curseur s'éloigne plus l'avatar accélère.
+
+**Si vous choisissez un déplacement avec le clavier,** c'est l'appui sur les flèches gauche/droite/haut/bas qui permettent de contrôler la direction de déplacement :
+- il est possible d'appuyer en même temps sur plusieurs touches pour se déplacer en diagonale
+- la vitesse de déplacement de l'avatar dépend de la durée d'appui sur les touches (effet d'inertie/accélération)
+
+**Dans les deux cas :**
+- la vitesse de l'avatar sera limitée à un maximum fixé par vous selon la jouabilité désirée.
+- le déplacement de l'avatar ne pourra pas se faire au delà au limites de l'écran de jeu (_il n'est pas possible de sortir du cadre_)
 
 ### D.3. UI
 **Vous êtes libres de la mise en page de votre application.** Si vous êtes en manque d'inspiration pour le design de votre site, vous pouvez tout à fait vous inspirer de jeux ou de sites grand public.
