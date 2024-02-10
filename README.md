@@ -106,8 +106,8 @@ Sur cet écran vous présentez les membres de votre équipe. Pour chaque membre,
 
 ### D.1. Stack technique
 Comme expliqué en amphi, vous devrez utiliser pour ce jeu :
-- un canvas
-- un serveur Node.JS avec Socket.io
+- une balise canvas
+- un serveur Node.js avec Socket.io
 - des tests unitaires
 
 Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la SAÉ, nous vous conseillons plutôt :
@@ -115,9 +115,9 @@ Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la S
 
 	Vous allez notamment démarrer par un TD de gestion de projet pour vous aider à organiser la production de votre jeu, le découper en tâches, etc. Cela vous aidera par la suite à répartir les tâches et à suivre l'avancement du développement.
 
-	Vous aurez aussi des TP techniques. Au moment de la publication de ce sujet, aucun TP "technique" n'est encore passé, attendez-donc le premier TP (sur le canvas) avant de commencer à coder. Cela vous permettra de démarrer la partie "front" de votre jeu en suivant les bonnes pratiques et en évitant les pièges classiques dans lesquels tombent souvent les débutants.
+	Vous aurez aussi des TP "techniques". Au moment de la publication de ce sujet, aucun de ces TP "technique" n'est encore passé, attendez-donc le premier TP (sur le canvas) avant de commencer à coder. Cela vous permettra de démarrer la partie "front" de votre jeu en suivant les bonnes pratiques et en évitant les pièges classiques dans lesquels tombent souvent les débutants.
 
-	> _**NB:** Si vous souhaitez faire de la veille technique sur les différents sujets en amont du cours pas de soucis bien sûr, mais évitez d'intégrer vos découvertes dans votre projet avant le cours+TP correspondant pour ne pas avoir à "défaire" ce que vous avez fait !_
+	> _**NB:** Si vous souhaitez faire de la veille technique sur les différents sujets en amont des TD/TP pas de soucis bien sûr, mais évitez d'intégrer vos découvertes dans votre projet avant le cours/TD/TP correspondant pour ne pas avoir à "défaire" ce que vous avez fait !_
 
 - **De profiter du temps que vous avez de disponible pour commencer à réfléchir** à la structure de votre projet, les règles du jeu que vous voulez proposer, le nom de votre jeu, le design de l'interface et des différents éléments, le contenu de l'écran "Crédits", la répartition des tâches et/ou pair programming, etc.
 
@@ -144,7 +144,7 @@ Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la S
 
 En ce qui concerne les styles vous avez le choix d'utiliser un framework CSS, un préprocesseur CSS (Sass, less) ou de partir de zéro.
 
-Même si le but est d'évaluer vos compétences en développement JS, nous savons tous qu'une application, même la meilleure, si elle n'a pas une interface agréable ne sera pas utilisée. Ici votre public, ce sont vos encadrant.e.s de TP, et nous ne sommes pas bon public, justement. Nous porterons donc une attention particulière à la qualité de mise en page et de design de votre jeu !
+Même si le but est d'évaluer vos compétences en développement JS, nous savons tous qu'une application, même la meilleure, si elle n'a pas une interface agréable ne sera pas utilisée par le public qu'elle vise. Ici votre public, ce sont vos encadrant.e.s de TP, et nous ne sommes pas spécialement bon public, justement. Nous porterons donc une attention particulière à la qualité de mise en page et de design de votre jeu !
 
 ## E. Pistes d'amélioration
 Si vous avez besoin d'idées pour rendre votre jeu encore meilleur, voici quelques pistes d'amélioration :
@@ -157,6 +157,7 @@ Si vous avez besoin d'idées pour rendre votre jeu encore meilleur, voici quelqu
 Vous serez évalués sur :
 - le respect du cahier des charges
 - la qualité du code de votre application ([DRY](https://fr.wikipedia.org/wiki/Ne_vous_r%C3%A9p%C3%A9tez_pas), [YAGNI](https://fr.wikipedia.org/wiki/YAGNI), [KISS](https://fr.wikipedia.org/wiki/Principe_KISS))
+- le découpage des issues / milestones
 - la beauté de votre log Git et la participation des différents membre de l'équipe
 - les tests
 - les performances
@@ -164,16 +165,18 @@ Vous serez évalués sur :
 - l'absence de similitudes avec le code des autres équipes ou du code trouvé en ligne
 - la tête du client
 
+> **NB :** l'ordre d'apparition des différents points ci-dessus n'est pas en rapport avec le nombre de points qu'ils pèsent dans la note finale.
 
 ## G. Modalités de rendu et deadline
 **Nous attendons vos projets via un dépot git **PRIVÉ** (_sur https://gitlab.univ-lille.fr_).**
 
-Ce dépôt devra obligatoirement être nommé `sae-2023-groupeX-nom1-nom2` (_où X est la lettre de votre groupe, et où nom1/2 sont vos noms de famille_)
+Ce dépôt devra obligatoirement être nommé `sae-2023-groupeX-nom1-nom2` (_où X est la lettre de votre groupe, et où nom1/2 sont vos noms de famille_) et **placé dans le compte gitlab d'un.e des membres de votre équipe** (pas dans un "groupe", pour ne pas polluer gitlab avec un groupe à la racine).
 
-Seuls les membres de votre équipe doivent avoir accès à ce repo ainsi que tous les encadrants de TP (en reporter) : `@patricia.everaere-caillier`, `@thomas.clavier` et `@thomas.fritsch`.
+Seuls les membres de votre équipe doivent avoir accès à ce repo ainsi que tous les encadrants de TD/TP (en reporter) :
+`@isabelle.delille`, `@patricia.everaere-caillier`, `@thomas.clavier` et `@thomas.fritsch`.
 
 ### G.1. Date de rendu
-Vos derniers commits sur le projet doivent être faits **avant le 13 avril à 23h59**.
+Vos derniers commits sur le projet doivent être faits **avant le 08 avril à 23h59**.
 
 Tout commit passé cette date ne sera **PAS** pris en compte.
 
@@ -185,24 +188,26 @@ Votre dépôt doit contenir un fichier `README.md` avec les éléments suivants 
 - Enfin, expliquez ce dont vous êtes le plus fier/fière
 
 ### G.3. Soutenance
-**Vos projets seront présentés en soutenance le 14 avril 2023** \
-L'heure de passage de votre équipe vous sera notifié sur mattermost.
+**Vos projets seront présentés en soutenance entre le 9 et le 11 avril 2024** \
+L'heure de passage de votre équipe vous sera notifié par email.
 
-Lors de cette soutenance, nous reprendrons les points précisés dans le cahier des charges, et vérifierons leur fonctionnalité.
+Lors de cette soutenance, nous reprendrons les points précisés dans ce cahier des charges, et vérifierons leur fonctionnalité.
 
 
 ## H. Tips
 
-- **Commencez par choisir un nom de projet qui impressionne** et marque les esprits
-- **Utilisez ensuite le système d'issues (tickets) de gitlab pour lister toutes les tâches à réaliser** et vous répartir ainsi le travail, ainsi que cela vous a été présenté en gestion de projet.
+- **Commencez par choisir un nom de jeu qui impressionne** et marque les esprits
+- **Utilisez ensuite le système d'issues (tickets) et de milestones (jalons) de gitlab pour lister toutes les tâches à réaliser** et vous répartir ainsi le travail, ainsi que cela vous sera présenté en TD de gestion de projet.
 
 	Veillez à créer des issues suffisamment **précises** : une grosse issue `"jeu"` ne va pas vous aider à répartir le travail, au contraire de tâches plus "fines" comme par exemple `"contrôle orientation déplacement"`, `"contrôle vitesse déplacement"`, `"affichage bonus"`, etc.
 
 	Nous vous recommandons d'utiliser ensuite la page "Issues" > "Board" qui offre un tableau kanban ("à la Trello") pour suivre l'affectation et l'avancement des tickets.
 
-- **Pour simplifier le setup de votre projet** (_configuration de babel, webpack, etc._) **le plus simple est probablement de repartir du code de vos TPs** puis de le nettoyer pour enlever les éléments inutiles
+- **Pour simplifier le setup de votre projet** (_configuration de babel, webpack, etc._) **le plus simple est probablement de repartir du code de vos TPs** puis de le **nettoyer** pour enlever les éléments inutiles
 
-	N'oubliez pas que nos TPs contiennent des fichiers de configuration qui sont cachés (`.babelrc`, `.vscode`, `.prettierrc`) mais qu'il ne faut pas copier le dossier `.git` !
+	N'oubliez pas que nos TPs contiennent des fichiers de configuration qui sont cachés (`.babelrc`, `.vscode`, `.prettierrc`) et qu'un copier/coller depuis l'explorateur de fichier peut facilement "oublier" ces fichiers. Faites attention en particulier à ne pas oublier le fichier `.gitignore` (_ça devrait vous permettre d'éviter de commit par erreur le dossier `/build` ou `/node_modules`_ 😬).
+
+	⚠️ Attention en revanche à ne surtout pas copier le dossier `.git` d'un TP dans votre nouveau projet !
 
 ## I. Questions
 
