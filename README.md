@@ -68,7 +68,7 @@ Sur le plateau de jeu apparaissent aussi, à intervalle régulier, des ennemis q
 
 L'écran "Rejouer" affiche un message indiquant à l'utilisateur.rice :
 - **le temps** pendant lequel il a survécu
-- **le nombre d'ennemis abattus** 
+- **le nombre d'ennemis abattus**
 - **un "score"** calculé sur la base des deux critères ci-dessus (_règle de calcul de votre choix_)
 - **un bouton** permettant de rejoindre à nouveau la partie en repartant du départ
 
@@ -101,11 +101,13 @@ Comme expliqué en amphi, vous devrez utiliser pour ce jeu :
 - des tests unitaires
 
 Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la SAÉ, nous vous conseillons plutôt :
-- **D'avancer au rythme des cours et TPs encadrés.**
+- **D'avancer au rythme des cours, TD et TPs encadrés.**
 
-	Au moment de la publication de ce sujet, le premier cours et TP sur le [canvas](https://gitlab.univ-lille.fr/jsae/tp1) est déjà publié, cela vous permettra d'avancer sur la partie "front" de votre jeu en suivant les bonnes pratiques et en évitant les pièges classiques dans lesquels tombent souvent les débutants.
+	Vous allez notamment démarrer par un TD de gestion de projet pour vous aider à organiser la production de votre jeu, le découper en tâches, etc. Cela vous aidera par la suite à répartir les tâches et à suivre l'avancement du développement.
 
-	> _**NB:** Si vous souhaitez faire de la veille sur les différents sujets en amont du cours pas de soucis bien sûr, mais évitez d'intégrer vos découvertes dans votre projet avant le cours+TP correspondant pour ne pas avoir à "défaire" ce que vous avez fait !_
+	Vous aurez aussi des TP techniques. Au moment de la publication de ce sujet, aucun TP "technique" n'est encore passé, attendez-donc le premier TP (sur le canvas) avant de commencer à coder. Cela vous permettra de démarrer la partie "front" de votre jeu en suivant les bonnes pratiques et en évitant les pièges classiques dans lesquels tombent souvent les débutants.
+
+	> _**NB:** Si vous souhaitez faire de la veille technique sur les différents sujets en amont du cours pas de soucis bien sûr, mais évitez d'intégrer vos découvertes dans votre projet avant le cours+TP correspondant pour ne pas avoir à "défaire" ce que vous avez fait !_
 
 - **De profiter du temps que vous avez de disponible pour commencer à réfléchir** à la structure de votre projet, les règles du jeu que vous voulez proposer, le nom de votre jeu, le design de l'interface et des différents éléments, le contenu de l'écran "Crédits", la répartition des tâches et/ou pair programming, etc.
 
