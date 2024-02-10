@@ -133,6 +133,7 @@ Plutôt que de foncer tête baissée dans chaque sujet dès le lancement de la S
 **Si vous choisissez un déplacement avec le clavier,** c'est l'appui sur les flèches gauche/droite/haut/bas qui permettent de contrôler la direction de déplacement :
 - il est possible d'appuyer en même temps sur plusieurs touches pour se déplacer en diagonale
 - la vitesse de déplacement de l'avatar dépend de la durée d'appui sur les touches (effet d'inertie/accélération)
+- lorsqu'on relâche les touches, l'avatar continue de se déplacer pendant un court instant dans la même direction (inertie/décélération)
 
 **Dans les deux cas :**
 - la vitesse de l'avatar sera limitée à un maximum fixé par vous selon la jouabilité désirée.
