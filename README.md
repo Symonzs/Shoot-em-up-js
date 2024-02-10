@@ -1,4 +1,4 @@
-<img src="images/readme/header.jpg">
+<img src="header.jpg">
 
 
 ## Sommaire <!-- omit in toc -->
@@ -53,16 +53,26 @@ Sur la page d'accueil on doit pouvoir voir :
 
 ### C.2. Jeu
 
-**Le jeu se présente sous la forme d'un plateau, en deux dimensions, sur lequel le personnage peut se déplacer. Le background du jeu peut être mobile ou pas.**
+**Le jeu se présente sous la forme d'un plateau, en deux dimensions, sur lequel on peut déplacer un avatar. Le background du jeu peut être mobile ou pas.**
 
-Sur le plateau de jeu apparaissent aussi, à intervalle régulier, des ennemis qui peuvent tirer et que l'on doit éviter et des bonus qui permettent d'améliorer les chances du personnage (invincibilité, nouvelles armes, nouvelles vies...). Le personnage peut aussi tirer sur les ennemis et les détruire plus ou moins facilement.
+#### Ennemis
+Sur le plateau de jeu apparaissent des ennemis que l'on doit éviter. Les ennemis évoluent au fur et à mesure de l'avancée dans le jeu pour augmenter progressivement la difficulté. Il faudra faire évoluer :
+- leur rythme d'apparition (délai entre l'apparition de deux ennemis)
+- leur façon de se déplacer (trajectoire, vitesse)
+- leur capacité ou non à tirer des projectiles plus ou moins difficiles à éviter par les joueurs
 
-**Chaque joueur ou joueuse peut déplacer son avatar sur l'écran à l'aide de la souris ou du clavier** (cf. chapitre Déplacement) :
+#### Bonus
+Des bonus qui permettent d'améliorer les chances du personnage (invincibilité, nouvelles armes, nouvelles vies...) apparaissent également dans le jeu.
+
+#### Avatar
+
+**Chaque joueur ou joueuse peut déplacer son avatar sur l'écran à l'aide de la souris ou du clavier** (cf. chapitre [D.2. Déplacement](#d2-déplacement)) :
 - si son avatar passe au dessus d'un bonus, il récupère la capacité correspondant
 - si son avatar entre en collision avec un ennemi, les deux sont détruits et le joueur perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer"
 - si son avatar reçoit un tir d'un ennemi, il perd une vie. S'il n'a plus de vie, le jeu s'arrête et on arrive sur la vue "rejouer".
 - si son avatar entre en collision avec un partenaire, aucun des deux ne perd de vie
 
+L'avatar peut aussi tirer sur les ennemis et les détruire plus ou moins facilement. La nature de son tir et son mode de fonctionnement dépend des bonus récupérés.
 
 ### C.3. Écran "Rejouer"
 
