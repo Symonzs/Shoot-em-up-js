@@ -47,7 +47,7 @@ Si vous pensez à des vues supplémentaires que vous trouveriez pertinentes, vou
 Sur la page d'accueil on doit pouvoir voir :
 - **un formulaire de connexion** permettant de choisir un pseudo (_vous pouvez éventuellement permettre à la personne qui va jouer de choisir d'autres options comme par exemple sa couleur, une image pour représenter son "personnage" dans le jeu, etc._)
 
-- **la possibilité de rejoindre une partie en cours ou de démarrer une nouvelle partie**
+- **la possibilité de rejoindre une partie en cours (co-op) ou de démarrer une nouvelle partie**
 
 - **la difficulté** du jeu (nombre de vies, nombre d'ennemis..)
 
