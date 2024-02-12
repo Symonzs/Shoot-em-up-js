@@ -170,7 +170,7 @@ Vous serez évalués sur :
 ## G. Modalités de rendu et deadline
 **Nous attendons vos projets via un dépot git **PRIVÉ** (_sur https://gitlab.univ-lille.fr_).**
 
-Ce dépôt devra obligatoirement être nommé `sae-2023-groupeX-nom1-nom2-nom3` (_où X est la lettre de votre groupe, et où nom1/2/3 sont vos noms de famille_) et **placé dans le compte gitlab d'un.e des membres de votre équipe** (pas dans un "groupe", pour ne pas polluer gitlab avec un groupe à la racine).
+Ce dépôt devra obligatoirement être nommé `sae-2024-groupeX-nom1-nom2-nom3` (_où X est la lettre de votre groupe, et où nom1/2/3 sont vos noms de famille_) et **placé dans le compte gitlab d'un.e des membres de votre équipe** (pas dans un "groupe", pour ne pas polluer gitlab avec un groupe à la racine).
 
 Seuls les membres de votre équipe doivent avoir accès à ce repo ainsi que tous les encadrants de TD/TP (en reporter) :
 `@isabelle.delille`, `@patricia.everaere-caillier`, `@thomas.clavier` et `@thomas.fritsch`.
