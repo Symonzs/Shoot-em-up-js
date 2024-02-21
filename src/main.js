@@ -1,7 +1,6 @@
 import Draw from "./draw.js";
 import { calcCoord } from "./coordCalculator.js";
 import { calcDistance } from "./coordCalculator.js";
-import { velocity } from "./coordCalculator.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -52,28 +51,26 @@ let x = latestImageX,
   xSpeed = 0,
   ySpeed = 0,
   latestCursorX = 0,
-  latestCursorY = 0,
-  magieNoir = 0;
-
-let imageMiddleX = image.width / 2;
+  latestCursorY = 0;
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   drawList.forEach((draw) => draw.render(context));
   context.drawImage(image, x, y);
-  latestImageX = x;
-  latestImageY = y;
+  latestImageX = x + image.width / 2;
+  latestImageY = y + image.height / 2;
   requestAnimationFrame(render);
 }
 
 function moveMonster() {
-  magieNoir++;
-  console.log(
-    `distance x: ${calcDistance(latestImageX, latestCursorX)}, distance y: ${calcDistance(latestImageY, latestCursorY)} \n\n coordImage x: ${latestImageX}, coordImage y: ${latestImageY} \n\n coordCursor x: ${latestCursorX}, coordCursor y: ${latestCursorY} \n\n coord x: ${x}, coord y: ${y} \n\n speed x: ${xSpeed}, speed y: ${ySpeed} \n\n`
-  );
+  xSpeed = velocityX(calcDistance(latestImageX, latestCursorX));
+  ySpeed = velocityY(calcDistance(latestImageY, latestCursorY));
+  console.log(xSpeed, ySpeed);
+  x -= xSpeed;
+  y -= ySpeed;
 }
 
-setInterval(moveMonster, 10000 / 60);
+setInterval(moveMonster, 1000 / 60);
 
 canvas.addEventListener("mousemove", (event) => {
   if (event.offsetX != latestCursorX) {
@@ -83,3 +80,48 @@ canvas.addEventListener("mousemove", (event) => {
     latestCursorY = event.offsetY;
   }
 });
+
+const time = 10;
+const maxSpeed = 13;
+
+const ratio = canvas.width / canvas.height;
+const maxSpeedY = maxSpeed;
+const maxSpeedX = maxSpeed * (ratio / 1.45);
+
+export function velocityX(distance) {
+  let negative = false;
+  const speed = distance / time;
+  if (speed < 0) {
+    negative = true;
+  }
+  if (Math.abs(speed) + -0.5 < 0) {
+    return 0;
+  }
+  if (Math.abs(speed) > maxSpeedX) {
+    if (negative) {
+      return -maxSpeedX;
+    }
+    return maxSpeedX;
+  } else {
+    return speed;
+  }
+}
+
+export function velocityY(distance) {
+  let negative = false;
+  const speed = distance / time;
+  if (speed < 0) {
+    negative = true;
+  }
+  if (Math.abs(speed) + -0.5 < 0) {
+    return 0;
+  }
+  if (Math.abs(speed) > maxSpeedY) {
+    if (negative) {
+      return -maxSpeedY;
+    }
+    return maxSpeedY;
+  } else {
+    return speed;
+  }
+}
