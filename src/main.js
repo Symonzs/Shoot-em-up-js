@@ -58,9 +58,6 @@ imagemechant.src = "/images/mechant.png";
 const monster = new Joueur(imagemechant, 5, 1800, 340);
 entityList.push(monster);
 
-const monster2 = new Joueur(imagemechant, 5, 1400, 420);
-entityList.push(monster2);
-
 let x = 0,
   y = 0,
   xSpeed = 0,
@@ -72,9 +69,15 @@ function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   drawList.forEach((draw) => draw.render(context));
   entityList.forEach((entity) => entity.render(context));
+
   context.drawImage(image, x, y);
 
   requestAnimationFrame(render);
+}
+
+function update() {
+  moveMonster();
+  entityList.forEach((entity) => entity.move());
 }
 
 function moveMonster() {
@@ -123,4 +126,4 @@ document.addEventListener("keyup", (event) => {
   }
 });
 
-setInterval(moveMonster, 1000 / 60);
+setInterval(update, 1000 / 60);
