@@ -4,13 +4,13 @@ import { contexte } from "./main.js";
 import Missile from "./missile.js";
 
 export default class Joueur extends Entity {
-  constructor(image, speed, spawnX, spawnY) {
-    super(image, speed, spawnX, spawnY);
+  constructor(image, speed,hp, spawnX, spawnY) {
+    super(image, speed,hp, spawnX, spawnY);
     this.x = spawnX;
     this.y = spawnY;
     this.compteur = 0;
     this.canFire = setInterval(() => {
-      this.missileList.push(new Missile(this.imageMissile, 5, this.x, this.y));
+      this.missileList.push(new Missile(this.imageMissile, 15,999, this.x, this.y));
     }, 5000);
     this.missileList = [];
     this.imageMissile = new Image();
@@ -21,8 +21,9 @@ export default class Joueur extends Entity {
     this.missileList = this.missileList.filter(
       (missile) => missile.x > 0 && missile.x < canvase.width
     );
-    this.missileList.forEach((missile) => missile.move);
-
+   
+    this.missileList.forEach((missile) => missile.move());
+      
     if (this.y + this.image.height > canvase.height) {
       //this.y = canvase.height - this.image.height;
       this.speed = -this.speed;
