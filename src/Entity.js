@@ -9,7 +9,5 @@ export default class Entity {
     this.hp = hp;
   }
 
-  render() {
-    console.log("render");
-  }
+  
 }

@@ -63,11 +63,8 @@ const monster7 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster7);
 
 let x = 0,
-  y = 0,
-  xSpeed = 0,
-  ySpeed = 0;
+  y = 0;
 
-let speed = 10;
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -87,10 +84,10 @@ function update() {
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
     if (
-      entity.x < x + image.width &&
-      entity.x + entity.image.width > x &&
-      entity.y < y + image.height &&
-      entity.y + entity.image.height > y &&
+      entity.x < player.x + player.image.width &&
+      entity.x + entity.image.width > player.x &&
+      entity.y < player.y + player.image.height &&
+      entity.y + entity.image.height > player.y &&
       canBeTouched
     ) {
       console.log("collision");
