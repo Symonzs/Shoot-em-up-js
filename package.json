@@ -4,14 +4,12 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-
   "scripts": {
     "build": "webpack --mode=production",
     "watch": "webpack --mode=development --watch",
     "start": "webpack serve --mode=development",
     "test": "node --test",
     "test:watch": "node --test --watch"
-
   },
   "author": "Thomas Fritsch <thomas.fritsch@univ-lille.fr> (https://gitlab.univ-lille.fr/thomas.fritsch)",
   "homepage": "https://gitlab.univ-lille.fr/jsae",
@@ -21,7 +19,10 @@
     "@babel/core": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "babel-loader": "^9.1.3",
+    "jsdom": "^24.0.0",
+    "jsdom-global": "^3.0.2",
     "prettier": "^3.2.5",
+    "sinon": "^17.0.1",
     "webpack": "^5.90.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.2"

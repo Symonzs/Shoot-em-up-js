@@ -75,9 +75,6 @@ export default class Joueur extends Entity {
 
   move() {
     this.xSpeed = this.velocityX(calcDistance(this.x, this.latestCursorX));
-    console.log("x " +this.x);
-    console.log(this.latestCursorX);
-   //console.log(calcDistance(this.x, this.latestCursorX));
     this.ySpeed = this.velocityY(calcDistance(this.y, this.latestCursorY));
     
     this.x -= this.xSpeed;

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import Character from './Character.js';
+
 import Joueur from '../Joueur.js';
 
 const image = new Image();
