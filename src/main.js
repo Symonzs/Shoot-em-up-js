@@ -33,7 +33,7 @@ let canBeTouched = true;
 requestAnimationFrame(render);
 
 const image = new Image();
-image.src = "/images/monster.png";
+image.src = "/images/gentil.png";
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
