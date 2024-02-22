@@ -1,5 +1,4 @@
 import Character from "./Character.js";
-import Draw from "./draw.js";
 import Entity from "./Entity.js";
 import Joueur from "./joueur.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
