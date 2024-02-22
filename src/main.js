@@ -1,3 +1,4 @@
+import Character from "./Character.js";
 import Draw from "./draw.js";
 import Entity from "./Entity.js";
 import Joueur from "./joueur.js";
@@ -5,17 +6,17 @@ import KamikazeEnemy from "./KamikazeEnemy.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
-  canvasResizeObserver = new ResizeObserver(() => resampleCanvas()),
-  lineWidthSelector = document.querySelector('input[type="range"]'),
-  colorSelector = document.querySelector('input[type="color"]');
+  canvasResizeObserver = new ResizeObserver(() => resampleCanvas());
+ 
+
 
 export const canvase = canvas;
 export const contexte = context;
 
 canvasResizeObserver.observe(canvas);
 
-lineWidthSelector.value = context.lineWidth;
-colorSelector.value = context.strokeStyle;
+
+
 
 function resampleCanvas() {
   canvas.width = canvas.clientWidth;
@@ -26,25 +27,8 @@ let drawList = [];
 let entityList = [];
 let canBeTouched = true;
 
-canvas.addEventListener("mousedown", (event) => {
-  drawList.push(
-    new Draw(
-      event.offsetX,
-      event.offsetY,
-      lineWidthSelector.value,
-      colorSelector.value
-    )
-  );
-  canvas.addEventListener("mousemove", onMouseMove);
-});
 
-canvas.addEventListener("mouseup", (event) =>
-  canvas.removeEventListener("mousemove", onMouseMove)
-);
 
-function onMouseMove(event) {
-  drawList[drawList.length - 1].append(event.offsetX, event.offsetY);
-}
 
 requestAnimationFrame(render);
 
@@ -53,6 +37,8 @@ image.src = "/images/monster.png";
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
+const player = new Character(image, 5, 1, 0, 0);
+entityList.push(player);
 
 const imagemechant = new Image();
 imagemechant.src = "/images/Sprite-0002.png";
@@ -88,13 +74,12 @@ function render() {
   drawList.forEach((draw) => draw.render(context));
   entityList.forEach((entity) => entity.render(context));
 
-  context.drawImage(image, x, y);
+  
 
   requestAnimationFrame(render);
 }
 
 function update() {
-  moveMonster();
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
 }
@@ -117,50 +102,5 @@ function isInContact(entitylist) {
   });
 }
 
-function moveMonster() {
-  y += ySpeed;
-  if (y < 0) {
-    y = 0;
-  } else if (y + image.height > canvas.height) {
-    y = canvas.height - image.height;
-  }
-
-  x += xSpeed;
-  if (x < 0) {
-    x = 0;
-  } else if (x + image.width > canvas.width) {
-    x = canvas.width - image.width;
-  }
-}
-
-document.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "ArrowRight":
-      xSpeed = speed;
-      break;
-    case "ArrowLeft":
-      xSpeed = -speed;
-      break;
-    case "ArrowUp":
-      ySpeed = -speed;
-      break;
-    case "ArrowDown":
-      ySpeed = speed;
-      break;
-  }
-});
-
-document.addEventListener("keyup", (event) => {
-  switch (event.key) {
-    case "ArrowRight":
-    case "ArrowLeft":
-      xSpeed = 0;
-      break;
-    case "ArrowUp":
-    case "ArrowDown":
-      ySpeed = 0;
-      break;
-  }
-});
 
 setInterval(update, 1000 / 60);
