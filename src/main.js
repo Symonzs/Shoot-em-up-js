@@ -26,7 +26,6 @@ let drawList = [];
 let entityList = [];
 let canBeTouched = true;
 
-
 canvas.addEventListener("mousedown", (event) => {
   drawList.push(
     new Draw(
@@ -58,23 +57,23 @@ image.addEventListener("load", (event) => {
 const imagemechant = new Image();
 imagemechant.src = "/images/Sprite-0002.png";
 
-const monster = new Joueur(imagemechant, 5,1, 1800, 340);
+const monster = new Joueur(imagemechant, 5, 1, 1800, 340);
 entityList.push(monster);
 
 const imgkami = new Image();
 imgkami.src = "/images/Sprite-first.png";
 
-const monster2 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster2 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster2);
-const monster3 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster3 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster3);
-const monster4 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster4 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster4);
-const monster5 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster5 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster5);
-const monster6 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster6 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster6);
-const monster7 = new KamikazeEnemy(imgkami, 20,999, 1800, 340);
+const monster7 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster7);
 
 let x = 0,
@@ -100,9 +99,15 @@ function update() {
   isInContact(entityList);
 }
 
-function isInContact(entitylist){
+function isInContact(entitylist) {
   entitylist.forEach((entity) => {
-    if (entity.x < x + image.width && entity.x + entity.image.width > x && entity.y < y + image.height && entity.y + entity.image.height > y && canBeTouched) {
+    if (
+      entity.x < x + image.width &&
+      entity.x + entity.image.width > x &&
+      entity.y < y + image.height &&
+      entity.y + entity.image.height > y &&
+      canBeTouched
+    ) {
       console.log("collision");
       canBeTouched = false;
       setTimeout(() => {
@@ -110,7 +115,6 @@ function isInContact(entitylist){
       }, 1000);
     }
   });
-
 }
 
 function moveMonster() {
