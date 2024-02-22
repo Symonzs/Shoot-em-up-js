@@ -14,7 +14,7 @@ export default class BasicShooter extends Entity {
     }, 5000);
     this.missileList = [];
     this.imageMissile = new Image();
-    this.imageMissile.src = "/images/mechant.png";
+    this.imageMissile.src = "/images/basicbullet.png";
   }
 
   move() {
