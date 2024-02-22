@@ -1,6 +1,5 @@
 import Entity from "./Entity.js";
-import { calcCoord } from "./coordCalculator.js";
-import { calcDistance } from "./coordCalculator.js";
+import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
 import { contexte } from "./main.js";
 import { canvase } from "./main.js";
 
@@ -33,49 +32,9 @@ export default class Joueur extends Entity {
     canvase.height = canvase.clientHeight;
   }
 
-  
-
-  velocityX(distance) {
-    let negative = false;
-    const speed = distance / this.time;
-    if (speed < 0) {
-      negative = true;
-    }
-    if (Math.abs(speed) + -0.5 < 0) {
-      return 0;
-    }
-    if (Math.abs(speed) > this.maxSpeedX) {
-      if (negative) {
-        return -this.maxSpeedX;
-      }
-      return this.maxSpeedX;
-    } else {
-      return speed;
-    }
-  }
-
-  velocityY(distance) {
-    let negative = false;
-    const speed = distance / this.time;
-    if (speed < 0) {
-      negative = true;
-    }
-    if (Math.abs(speed) + -0.5 < 0) {
-      return 0;
-    }
-    if (Math.abs(speed) > this.maxSpeedY) {
-      if (negative) {
-        return -this.maxSpeedY;
-      }
-      return this.maxSpeedY;
-    } else {
-      return speed;
-    }
-  }
-
   move() {
-    this.xSpeed = this.velocityX(calcDistance(this.x, this.latestCursorX));
-    this.ySpeed = this.velocityY(calcDistance(this.y, this.latestCursorY));
+    this.xSpeed = velocity(calcDistance(this.x, this.latestCursorX), this.maxSpeedX, this.time);
+    this.ySpeed = velocity(calcDistance(this.y, this.latestCursorY), this.maxSpeedY, this.time);
     
     this.x -= this.xSpeed;
     this.y -= this.ySpeed;

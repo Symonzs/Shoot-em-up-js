@@ -1,13 +1,10 @@
 import assert from 'node:assert/strict';
-import Joueur from '../Joueur.js';
+import { velocity } from '../coordCalculator.js';
+import { describe, it } from 'node:test';
 
-const image = new Image();
-image.src = "/images/monster.png";
-
-describe('Joueur.velocityX', () => {
+describe('coordCalculator', () => {
   it('should return 0 when distance is 0', () => {
-    const joueur = new Joueur(image, 5, 1, 0, 0);
-    assert.strictEqual(joueur.velocityX(0), 0);
+    assert.strictEqual((velocity(0,13,5)), 0);
   });
 
  /* it('should return positive speed for positive distance', () => {

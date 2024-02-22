@@ -4,3 +4,22 @@ export function calcCoord(sprite, cursor) {
 export function calcDistance(sprite, cursor) {
   return sprite - cursor;
 }
+
+export function velocity(distance, maxSpeed, time) {
+  let negative = false;
+  const speed = distance / time;
+  if (speed < 0) {
+    negative = true;
+  }
+  if (Math.abs(speed) + -0.5 < 0) {
+    return 0;
+  }
+  if (Math.abs(speed) > maxSpeed) {
+    if (negative) {
+      return -maxSpeed;
+    }
+    return maxSpeed;
+  } else {
+    return speed;
+  }
+}
