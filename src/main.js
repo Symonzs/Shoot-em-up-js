@@ -1,7 +1,8 @@
-import Character from "./Character.js";
+
 import Entity from "./Entity.js";
-import Joueur from "./joueur.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
+import BasicShooter from "./BasicShooter.js";
+import Joueur from "./Joueur.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -36,13 +37,13 @@ image.src = "/images/monster.png";
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
-const player = new Character(image, 5, 1, 0, 0);
-entityList.push(player);
+const joueur = new Joueur(image, 5, 1, 0, 0);
+entityList.push(joueur);
 
 const imagemechant = new Image();
 imagemechant.src = "/images/Sprite-0002.png";
 
-const monster = new Joueur(imagemechant, 5, 1, 1800, 340);
+const monster = new BasicShooter(imagemechant, 5, 1, 1800, 340);
 entityList.push(monster);
 
 const imgkami = new Image();
@@ -83,10 +84,10 @@ function update() {
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
     if (
-      entity.x < player.x + player.image.width &&
-      entity.x + entity.image.width > player.x &&
-      entity.y < player.y + player.image.height &&
-      entity.y + entity.image.height > player.y &&
+      entity.x < joueur.x + joueur.image.width &&
+      entity.x + entity.image.width > joueur.x &&
+      entity.y < joueur.y + joueur.image.height &&
+      entity.y + entity.image.height > joueur.y &&
       canBeTouched
     ) {
       console.log("collision");

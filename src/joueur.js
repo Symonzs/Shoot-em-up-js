@@ -1,48 +1,92 @@
 import Entity from "./Entity.js";
-import { canvase } from "./main.js";
+import { calcCoord } from "./coordCalculator.js";
+import { calcDistance } from "./coordCalculator.js";
 import { contexte } from "./main.js";
-import Missile from "./missile.js";
+import { canvase } from "./main.js";
 
 export default class Joueur extends Entity {
-  constructor(image, speed,hp, spawnX, spawnY) {
-    super(image, speed,hp, spawnX, spawnY);
+  constructor(image, speed, hp, spawnX, spawnY) {
+    super(image, speed, hp, spawnX, spawnY);
     this.x = spawnX;
     this.y = spawnY;
-    this.compteur = 0;
-    this.canFire = setInterval(() => {
-      this.missileList.push(new Missile(this.imageMissile, 15,999, this.x, this.y));
-    }, 5000);
-    this.missileList = [];
-    this.imageMissile = new Image();
-    this.imageMissile.src = "/images/mechant.png";
+    this.xSpeed = 0;
+    this.ySpeed = 0;
+    this.latestCursorX = 0;
+    this.latestCursorY = 0;
+    this.time = 10;
+    this.maxSpeed = 13;
+    this.ratio = canvase.width / canvase.height;
+    this.maxSpeedY = this.maxSpeed;
+    this.maxSpeedX = this.maxSpeed; //* (this.ratio * 1.25);
+    canvase.addEventListener("mousemove", (event) => {
+      if (event.offsetX != this.latestCursorX) {
+        this.latestCursorX = event.offsetX;
+      }
+      if (event.offsetY != this.latestCursorY) {
+        this.latestCursorY = event.offsetY;
+      }
+    });
+  }
+
+  resampleCanvas() {
+    canvase.width = canvase.clientWidth;
+    canvase.height = canvase.clientHeight;
+  }
+
+  
+
+  velocityX(distance) {
+    let negative = false;
+    const speed = distance / this.time;
+    if (speed < 0) {
+      negative = true;
+    }
+    if (Math.abs(speed) + -0.5 < 0) {
+      return 0;
+    }
+    if (Math.abs(speed) > this.maxSpeedX) {
+      if (negative) {
+        return -this.maxSpeedX;
+      }
+      return this.maxSpeedX;
+    } else {
+      return speed;
+    }
+  }
+
+  velocityY(distance) {
+    let negative = false;
+    const speed = distance / this.time;
+    if (speed < 0) {
+      negative = true;
+    }
+    if (Math.abs(speed) + -0.5 < 0) {
+      return 0;
+    }
+    if (Math.abs(speed) > this.maxSpeedY) {
+      if (negative) {
+        return -this.maxSpeedY;
+      }
+      return this.maxSpeedY;
+    } else {
+      return speed;
+    }
   }
 
   move() {
-    this.missileList = this.missileList.filter(
-      (missile) => missile.x > 0 && missile.x < canvase.width
-    );
-   
-    this.missileList.forEach((missile) => missile.move());
-      
-    if (this.y + this.image.height > canvase.height) {
-      //this.y = canvase.height - this.image.height;
-      this.speed = -this.speed;
-      this.compteur++;
-    }
-    if (this.y < 0) {
-      this.speed = Math.abs(this.speed);
-      this.compteur++;
-    }
-    if (this.compteur > 1) {
-      this.x = Math.random() * canvase.width;
-      this.compteur = 0;
-    }
-    this.y += this.speed;
+    this.xSpeed = this.velocityX(calcDistance(this.x, this.latestCursorX));
+    console.log("x " +this.x);
+    console.log(this.latestCursorX);
+   //console.log(calcDistance(this.x, this.latestCursorX));
+    this.ySpeed = this.velocityY(calcDistance(this.y, this.latestCursorY));
+    
+    this.x -= this.xSpeed;
+    this.y -= this.ySpeed;
+    
   }
 
   render() {
-    this.missileList.forEach((missile) => missile.render(contexte));
-
-    contexte.drawImage(this.image, this.x, this.y);
+    contexte.drawImage(this.image, this.x - (this.image.width / 2), this.y - (this.image.height / 2));
+    
   }
 }
