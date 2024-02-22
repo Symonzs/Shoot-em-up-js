@@ -11,7 +11,7 @@ export default class BasicShooter extends Entity {
     this.compteur = 0;
     this.canFire = setInterval(() => {
       console.log("fire");
-      this.missileList.push(new Missile(this.imageMissile, 15,999, this.x, this.y));
+      this.missileList.push(new Missile(this.imageMissile, 15,999, this.x, this.y-20));
     }, 5000);
     this.missileList = [];
     this.imageMissile = new Image();
