@@ -8,6 +8,7 @@ export default class Missile extends Entity {
     this.x = spawnX;
     this.y = spawnY;
     this.hp = hp;
+    this.canBeHurt = false;
   }
 
   move() {

@@ -7,6 +7,7 @@ export default class Entity {
     this.x = spawnX;
     this.y = spawnY;
     this.hp = hp;
+    this.canBeHurt = true;
   }
 
   

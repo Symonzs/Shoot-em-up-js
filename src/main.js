@@ -22,8 +22,6 @@ function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 }
-
-let drawList = [];
 let entityList = [];
 let canBeTouched = true;
 
@@ -38,7 +36,6 @@ image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
 const joueur = new Joueur(image, 5, 1, 0, 0);
-entityList.push(joueur);
 
 const imagemechant = new Image();
 imagemechant.src = "/images/Sprite-0002.png";
@@ -49,6 +46,7 @@ entityList.push(monster);
 const imgkami = new Image();
 imgkami.src = "/images/Sprite-first.png";
 
+/*
 const monster2 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster2);
 const monster3 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
@@ -61,6 +59,7 @@ const monster6 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster6);
 const monster7 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster7);
+*/
 
 let x = 0,
   y = 0;
@@ -68,7 +67,7 @@ let x = 0,
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  drawList.forEach((draw) => draw.render(context));
+  joueur.render(context);
   entityList.forEach((entity) => entity.render(context));
 
   
@@ -77,26 +76,34 @@ function render() {
 }
 
 function update() {
+  joueur.move();
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
 }
 
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
-    if (
-      entity.x < joueur.x + joueur.image.width &&
-      entity.x + entity.image.width > joueur.x &&
-      entity.y < joueur.y + joueur.image.height &&
-      entity.y + entity.image.height > joueur.y &&
-      canBeTouched
-    ) {
-      console.log("collision");
-      canBeTouched = false;
-      setTimeout(() => {
-        canBeTouched = true;
-      }, 1000);
-    }
+    hit(entity);
+    entity.missileList.forEach((misile) => {
+      hit(misile);
   });
+});
+}
+
+function hit(entity) {
+  if (
+    entity.x < joueur.x + joueur.image.width &&
+    entity.x + entity.image.width > joueur.x &&
+    entity.y < joueur.y + joueur.image.height &&
+    entity.y + entity.image.height > joueur.y &&
+    canBeTouched
+  ) {
+    console.log("collision");
+    canBeTouched = false;
+    setTimeout(() => {
+      canBeTouched = true;
+    }, 1000);
+  }
 }
 
 
