@@ -4,18 +4,24 @@ import { describe, it } from 'node:test';
 
 describe('coordCalculator', () => {
   it('should return 0 when distance is 0', () => {
-    assert.strictEqual((velocity(0,13,5)), 0);
+    assert.strictEqual((velocity(0,13,10)), 0);
   });
 
- /* it('should return positive speed for positive distance', () => {
-    const joueur = new Joueur(image, 5, 1, 0, 0);
-    assert(joueur.velocityX(20) > 0);
+ it('should return positive speed for positive distance', () => {
+  assert((velocity(20,13,10)) > 0);
   });
 
   it('should return negative speed for negative distance', () => {
-    const joueur = new Joueur(image, 5, 1, 0, 0);
-    assert(joueur.velocityX(-20) < 0);
-  });*/
+    assert((velocity(-20,13,10)) < 0);
+  });
 
-  // Ajoutez d'autres tests selon vos besoins
+  it('should return maxSpeed for distance > maxSpeed', () => {
+    assert.strictEqual((velocity(2000,13,10)), 13);
+  });
+
+  it('should return -maxSpeed for distance < -maxSpeed', () => {
+    assert.strictEqual((velocity(-2000,13,10)), -13);
+  });
+
+  
 });
