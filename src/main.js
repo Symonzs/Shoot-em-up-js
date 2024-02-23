@@ -40,13 +40,13 @@ const joueur = new Joueur(image, 5, 1, 0, 0);
 const imagemechant = new Image();
 imagemechant.src = "/images/Sprite-0002.png";
 
-const monster = new BasicShooter(imagemechant, 5, 1, 1800, 340);
+const monster = new BasicShooter(imagemechant, 5, 1, 1800, 340, 0, 70);
 entityList.push(monster);
 
 const imgkami = new Image();
 imgkami.src = "/images/Sprite-first.png";
 
-/*
+
 const monster2 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster2);
 const monster3 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
@@ -59,7 +59,7 @@ const monster6 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster6);
 const monster7 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
 entityList.push(monster7);
-*/
+
 
 let x = 0,
   y = 0;

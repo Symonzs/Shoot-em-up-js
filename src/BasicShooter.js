@@ -1,18 +1,22 @@
+import DiagonalMissile from "./DiagonalMissile.js";
 import Entity from "./Entity.js";
+import LinearMissile from "./LinearMissile.js";
 import { canvase } from "./main.js";
 import { contexte } from "./main.js";
-import Missile from "./missile.js";
+
 
 export default class BasicShooter extends Entity {
-  constructor(image, speed,hp, spawnX, spawnY) {
+  constructor(image, speed,hp, spawnX, spawnY, varProjX, varProjY) {
     super(image, speed,hp, spawnX, spawnY);
     this.x = spawnX;
     this.y = spawnY;
+    this.varProjX = varProjX;
+    this.varProjY = varProjY;
     this.compteur = 0;
     this.canFire = setInterval(() => {
       console.log("fire");
-      this.missileList.push(new Missile(this.imageMissile, 15,999, this.x, this.y-20));
-    }, 5000);
+      this.missileList.push(new DiagonalMissile(this.imageMissile, 15,(Math.random()*61) -30  ,999, this.x + this.varProjX, this.y + this.varProjY));
+    }, 1000);
     this.missileList = [];
     this.imageMissile = new Image();
     this.imageMissile.src = "/images/basicbullet.png";
@@ -35,7 +39,7 @@ export default class BasicShooter extends Entity {
       this.compteur++;
     }
     if (this.compteur > 1) {
-      this.x = Math.random() * canvase.width;
+      this.x = (Math.random() * canvase.width/2) + canvase.width/2;
       this.compteur = 0;
     }
     this.y += this.speed;
