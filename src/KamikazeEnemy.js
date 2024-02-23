@@ -31,8 +31,4 @@ export default class KamikazeEnemy extends Entity {
     this.speedX = Math.cos(this.angle) * this.speed;
     this.speedY = Math.sin(this.angle) * this.speed;
   }
-
-  render() {
-    contexte.drawImage(this.image, this.x, this.y);
-  }
 }

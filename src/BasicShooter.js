@@ -1,8 +1,5 @@
 import DiagonalMissile from "./DiagonalMissile.js";
 import Entity from "./Entity.js";
-import LinearMissile from "./LinearMissile.js";
-import { canvase } from "./main.js";
-import { contexte } from "./main.js";
 
 
 export default class BasicShooter extends Entity {
@@ -24,12 +21,12 @@ export default class BasicShooter extends Entity {
 
   move() {
     this.missileList = this.missileList.filter(
-      (missile) => missile.x > 0 && missile.x < canvase.width
+      (missile) => missile.x > 0 && missile.x < this.canvasWidth
     );
    
     this.missileList.forEach((missile) => missile.move());
       
-    if (this.y + this.image.height > canvase.height) {
+    if (this.y + this.image.height > this.canvasHeight) {
       //this.y = canvase.height - this.image.height;
       this.speed = -this.speed;
       this.compteur++;
@@ -39,15 +36,9 @@ export default class BasicShooter extends Entity {
       this.compteur++;
     }
     if (this.compteur > 1) {
-      this.x = (Math.random() * canvase.width/2) + canvase.width/2;
+      this.x = (Math.random() * this.canvasWidth/2) + this.canvasWidth/2;
       this.compteur = 0;
     }
     this.y += this.speed;
-  }
-
-  render() {
-    this.missileList.forEach((missile) => missile.render(contexte));
-
-    contexte.drawImage(this.image, this.x, this.y);
   }
 }

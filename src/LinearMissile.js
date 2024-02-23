@@ -15,8 +15,4 @@ export default class LinearMissile extends Missiles {
   move() {
     this.x -= this.speed;
   }
-
-  render() {
-    contexte.drawImage(this.image, this.x, this.y);
-  }
 }

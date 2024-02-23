@@ -1,8 +1,7 @@
-
 import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
-import Joueur from "./Joueur.js";
+import Joueur from "./joueur.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -15,7 +14,17 @@ export const contexte = context;
 
 canvasResizeObserver.observe(canvas);
 
+function getInitialImageValues(path) {
+  const image = new Image();
+  image.src = path;
+  const imageInfo = {
+    "path": path,
+    "width": image.width,
+    "height": image.height
+  }
+  return imageInfo;
 
+}
 
 
 function resampleCanvas() {
@@ -35,40 +44,55 @@ image.src = "/images/gentil.png";
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
-const joueur = new Joueur(image, 5, 1, 0, 0);
+const joueur = new Joueur(getInitialImageValues(image.src), 5, 1, 0, 0);
 
-const imagemechant = new Image();
-imagemechant.src = "/images/Sprite-0002.png";
+const imagemechant = "/images/Sprite-0002.png";
 
-const monster = new BasicShooter(imagemechant, 5, 1, 1800, 340, 0, 70);
+const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 340, 0, 70);
 entityList.push(monster);
 
-const imgkami = new Image();
-imgkami.src = "/images/Sprite-first.png";
+const imgkami = "/images/Sprite-first.png";
 
 
-const monster2 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster2 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster2);
-const monster3 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster3 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster3);
-const monster4 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster4 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster4);
-const monster5 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster5 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster5);
-const monster6 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster6 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster6);
-const monster7 = new KamikazeEnemy(imgkami, 20, 999, 1800, 340);
+const monster7 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster7);
 
 
-let x = 0,
-  y = 0;
+canvas.addEventListener("mousemove", (event) => {
+  if (event.offsetX != joueur.latestCursorX) {
+    joueur.latestCursorX = event.offsetX;
+  }
+  if (event.offsetY != joueur.latestCursorY) {
+    joueur.latestCursorY = event.offsetY;
+  }
+});
 
+function drawEntity(entity) {
+  const values = entity.render();
+  const image = new Image();
+  image.src = entity.image.path;
+  context.drawImage(image, values.x, values.y);
+}
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
-  joueur.render(context);
-  entityList.forEach((entity) => entity.render(context));
+  const playerValues = joueur.render();
+  const playerImage = new Image();
+  playerImage.src = joueur.image.path;
+  context.drawImage(playerImage, playerValues.x - (playerValues.imageInfo.width / 2), playerValues.y - (playerValues.imageInfo.height / 2));
+  entityList.forEach((entity) => {
+    drawEntity(entity);
+  });
 
   
 
