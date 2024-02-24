@@ -92,6 +92,10 @@ function render() {
   context.drawImage(playerImage, playerValues.x - (playerValues.imageInfo.width / 2), playerValues.y - (playerValues.imageInfo.height / 2));
   entityList.forEach((entity) => {
     drawEntity(entity);
+    entity.missileList.forEach((missile) => {
+      console.log(missile);
+      drawEntity(missile);
+    });
   });
 
   

@@ -8,9 +8,9 @@ describe('Tire bien !', () => {
   it('should shoot a missile after 5 sec', (done) => {
 
     const artificialImage = {
-        "path": "blc normalement",
-        "width": 10,
-        "height": 10
+      "path": "path",
+      "width": 80,
+      "height": 80
     }
     const basicShooter = new BasicShooter(artificialImage, 15, 10, 0, 0, 0, 0);
     setTimeout(() => {

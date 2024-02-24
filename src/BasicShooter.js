@@ -5,6 +5,7 @@ import Entity from "./Entity.js";
 export default class BasicShooter extends Entity {
   constructor(image, speed,hp, spawnX, spawnY, varProjX, varProjY) {
     super(image, speed,hp, spawnX, spawnY);
+    console.log(this.image);
     this.x = spawnX;
     this.y = spawnY;
     this.varProjX = varProjX;
@@ -15,8 +16,13 @@ export default class BasicShooter extends Entity {
       this.missileList.push(new DiagonalMissile(this.imageMissile, 15,(Math.random()*61) -30  ,999, this.x + this.varProjX, this.y + this.varProjY));
     }, 1000);
     this.missileList = [];
-    this.imageMissile = new Image();
-    this.imageMissile.src = "/images/basicbullet.png";
+    this.imageMissile = {
+      "path": "images/basicbullet.png",
+      "width": 20,
+      "height": 20,
+    
+    };
+
   }
 
   move() {
@@ -25,7 +31,6 @@ export default class BasicShooter extends Entity {
     );
    
     this.missileList.forEach((missile) => missile.move());
-      
     if (this.y + this.image.height > this.canvasHeight) {
       //this.y = canvase.height - this.image.height;
       this.speed = -this.speed;
