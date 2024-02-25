@@ -14,8 +14,6 @@ export default class DiagonalMissile extends Missiles {
   move() {
     this.x -= this.speedX;
     this.y += this.speedY;
-    if (this.y <= 0 || this.y >= this.canvasWidth - this.canvasHeight) {
-        this.speedY = -this.speedY;
-      }
+   
   }
 }

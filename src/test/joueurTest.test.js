@@ -15,4 +15,16 @@ describe('joueur', () => {
         player.hit(bullet);
         assert.strictEqual(player.hp, 9);
     });
+
+    it('should move correctly',() => {
+        const artificialImage = {
+            "path": "path",
+            "width": 80,
+            "height": 80
+          }
+          const player = new Joueur(artificialImage, 5, 10, 100, 100);
+          player.move();
+            assert.strictEqual(player.x, 90);
+            assert.strictEqual(player.y, 90);
+    });
 });
