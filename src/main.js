@@ -50,9 +50,13 @@ const imagemechant = "/images/Sprite-0002.png";
 const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 340, 0, 70);
 entityList.push(monster);
 
+const HPBar = new Image();
+HPBar.src = "/images/hpbar.png";
+const HPButNormal = new Image();
+HPButNormal.src = "/images/hp.png";
+/*
 const imgkami = "/images/Sprite-first.png";
 
-/*
 const monster2 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster2);
 const monster3 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
@@ -83,6 +87,17 @@ function drawEntity(entity) {
   context.drawImage(image, values.x, values.y);
 }
 
+function renderHP() {
+  const startingX = 10;
+  const startingY = 10;
+  context.drawImage(HPBar, startingX, startingY);
+  const borderWidth = 7;
+  const borderHeight = 5;
+  for (let i = 0; i < joueur.hp; i++) {
+    context.drawImage(HPButNormal, startingX+(borderWidth+i*47),startingY+borderHeight);
+  }
+}
+
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   const playerValues = joueur.render();
@@ -95,9 +110,7 @@ function render() {
       drawEntity(missile);
     });
   });
-
-  
-
+  renderHP();
   requestAnimationFrame(render);
 }
 

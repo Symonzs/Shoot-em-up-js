@@ -12,7 +12,7 @@ export default class BasicShooter extends Entity {
     this.varProjY = varProjY;
     this.compteur = 0;
     this.canFire = setInterval(() => {
-      console.log("fire");
+      
       this.missileList.push(new DiagonalMissile(this.imageMissile, 15,(Math.random()*61) -30  ,999, this.x + this.varProjX, this.y + this.varProjY));
     }, 1000);
     this.missileList = [];
@@ -24,6 +24,7 @@ export default class BasicShooter extends Entity {
     };
 
   }
+  
   move() {
     this.missileList = this.missileList.filter(
       (missile) => missile.x > 0 && missile.x < this.canvasWidth
