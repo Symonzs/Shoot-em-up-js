@@ -2,6 +2,7 @@ import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
+import getInitialImageValues from "./GetInitialImage.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -14,7 +15,7 @@ export const contexte = context;
 
 canvasResizeObserver.observe(canvas);
 
-function getInitialImageValues(path) {
+/*function getInitialImageValues(path) {
   const image = new Image();
   image.src = path;
   const imageInfo = {
@@ -24,7 +25,7 @@ function getInitialImageValues(path) {
   }
   return imageInfo;
 
-}
+}*/
 
 
 function resampleCanvas() {
@@ -47,7 +48,7 @@ const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, 0, 0);
 
 const imagemechant = "/images/Sprite-0002.png";
 
-const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 340, 0, 70);
+const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 340, 0, 70, getInitialImageValues("/images/basicbullet.png"));
 entityList.push(monster);
 
 const HPBar = new Image();
@@ -84,7 +85,10 @@ function drawEntity(entity) {
   const values = entity.render();
   const image = new Image();
   image.src = entity.image.path;
-  context.drawImage(image, values.x, values.y);
+  //console.log(values.imageInfo.width, values.imageInfo.height);
+  context.drawImage(image, values.x - (values.imageInfo.width/2), values.y - (values.imageInfo.height/2));
+  console.log(values.x);
+  //context.drawImage(image, values.x, values.y);
 }
 
 function renderHP() {

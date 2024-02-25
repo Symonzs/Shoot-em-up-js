@@ -9,7 +9,16 @@ export default class LinearMissile extends Missiles {
     this.canBeHurt = false;
   }
 
-  move() {
+  
+
+  move(X,Y) {
+    if(X && Y){
+    if(this.x > X-300 ){
+        this.x -= this.speed;
+    }
+  }
+  else{
     this.x -= this.speed;
   }
+}
 }
