@@ -24,7 +24,6 @@ export default class BasicShooter extends Entity {
     };
 
   }
-
   move() {
     this.missileList = this.missileList.filter(
       (missile) => missile.x > 0 && missile.x < this.canvasWidth
@@ -44,6 +43,6 @@ export default class BasicShooter extends Entity {
       this.x = (Math.random() * this.canvasWidth/2) + this.canvasWidth/2;
       this.compteur = 0;
     }
-    this.y += this.speed;
+    //this.y += this.speed;
   }
 }

@@ -15,6 +15,7 @@ export default class Joueur extends Entity {
     this.ratio = this.canvasWidth / this.canvasHeight;
     this.maxSpeedY = this.maxSpeed;
     this.maxSpeedX = this.maxSpeed; //* (this.ratio * 1.25);
+    this.canBeTouched = true;
   }
 
   move() {
@@ -23,5 +24,21 @@ export default class Joueur extends Entity {
     
     this.x -= this.xSpeed;
     this.y -= this.ySpeed;
+  }
+
+  hit(entity) {
+    const hit = entity.x < this.x + this.image.width &&
+    entity.x + entity.image.width > this.x &&
+    entity.y < this.y + this.image.height &&
+    entity.y + entity.image.height > this.y &&
+    this.canBeTouched;
+    if (hit) {
+      console.log("collision");
+      this.canBeTouched = false;
+      setTimeout(() => {
+        this.canBeTouched = true;
+      }, 1000);
+    }
+    return hit;
   }
 }

@@ -12,11 +12,13 @@ describe('Tire bien !', () => {
       "width": 80,
       "height": 80
     }
-    const basicShooter = new BasicShooter(artificialImage, 15, 10, 0, 0, 0, 0);
-    setTimeout(() => {
+    let basicShooter = new BasicShooter(artificialImage, 15, 10, 0, 0, 0, 0);
+    const testTimeout = setTimeout(() => {
       assert.strictEqual(basicShooter.missileList.length, 1);
       done();
     }, 5000);
+    clearTimeout(testTimeout);
+    clearTimeout(basicShooter.canFire);
   });
 
 

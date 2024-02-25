@@ -32,7 +32,6 @@ function resampleCanvas() {
   canvas.height = canvas.clientHeight;
 }
 let entityList = [];
-let canBeTouched = true;
 
 
 
@@ -53,7 +52,7 @@ entityList.push(monster);
 
 const imgkami = "/images/Sprite-first.png";
 
-
+/*
 const monster2 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster2);
 const monster3 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
@@ -66,7 +65,7 @@ const monster6 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800
 entityList.push(monster6);
 const monster7 = new KamikazeEnemy(getInitialImageValues(imgkami), 20, 999, 1800, 340);
 entityList.push(monster7);
-
+*/
 
 canvas.addEventListener("mousemove", (event) => {
   if (event.offsetX != joueur.latestCursorX) {
@@ -93,7 +92,6 @@ function render() {
   entityList.forEach((entity) => {
     drawEntity(entity);
     entity.missileList.forEach((missile) => {
-      console.log(missile);
       drawEntity(missile);
     });
   });
@@ -111,13 +109,13 @@ function update() {
 
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
-    hit(entity);
-    entity.missileList.forEach((misile) => {
-      hit(misile);
+    joueur.hit(entity);
+    entity.missileList.forEach((missile) => {
+      joueur.hit(missile);
   });
 });
 }
-
+/*
 function hit(entity) {
   if (
     entity.x < joueur.x + joueur.image.width &&
@@ -133,6 +131,6 @@ function hit(entity) {
     }, 1000);
   }
 }
-
+*/
 
 setInterval(update, 1000 / 60);
