@@ -19,8 +19,8 @@ export default class Joueur extends Entity {
   }
  
   move() {
-    this.xSpeed = velocity(calcDistance(this.x, this.latestCursorX), this.maxSpeedX, this.time);
-    this.ySpeed = velocity(calcDistance(this.y, this.latestCursorY), this.maxSpeedY, this.time);
+    this.xSpeed = velocity(calcDistance(this.x+this.image.width/2, this.latestCursorX), this.maxSpeedX, this.time);
+    this.ySpeed = velocity(calcDistance(this.y+this.image.height/2, this.latestCursorY), this.maxSpeedY, this.time);
     
     this.x -= this.xSpeed;
     this.y -= this.ySpeed;

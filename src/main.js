@@ -48,7 +48,8 @@ const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, 0, 0);
 
 const imagemechant = "/images/Sprite-0002.png";
 
-const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 340, 0, 70, getInitialImageValues("/images/basicbullet.png"));
+const mechantValues =  getInitialImageValues(imagemechant);
+const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 500, 0, 70, getInitialImageValues("/images/basicbullet.png"));
 entityList.push(monster);
 
 const HPBar = new Image();
@@ -81,15 +82,6 @@ canvas.addEventListener("mousemove", (event) => {
   }
 });
 
-function drawEntity(entity) {
-  const values = entity.render();
-  const image = new Image();
-  image.src = entity.image.path;
-  //console.log(values.imageInfo.width, values.imageInfo.height);
-  context.drawImage(image, values.x - (values.imageInfo.width/2), values.y - (values.imageInfo.height/2));
-  console.log(values.x);
-  //context.drawImage(image, values.x, values.y);
-}
 
 function renderHP() {
   const startingX = 10;
@@ -102,12 +94,23 @@ function renderHP() {
   }
 }
 
+function drawEntity(entity) {
+  const values = entity.render();
+  const image = new Image();
+  image.src = entity.image.path;
+  //console.log(values.imageInfo.width, values.imageInfo.height);
+  context.drawImage(image, values.x, values.y);
+  //context.drawImage(image, values.x, values.y);
+  context.strokeRect(values.x, values.y, values.imageInfo.width, values.imageInfo.height); // display hitbox
+}
+
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   const playerValues = joueur.render();
   const playerImage = new Image();
   playerImage.src = joueur.image.path;
-  context.drawImage(playerImage, playerValues.x - (playerValues.imageInfo.width / 2), playerValues.y - (playerValues.imageInfo.height / 2));
+  context.drawImage(playerImage, playerValues.x, playerValues.y);
+  context.strokeRect(playerValues.x, playerValues.y, playerValues.imageInfo.width, playerValues.imageInfo.height); //display hitbox
   entityList.forEach((entity) => {
     drawEntity(entity);
     entity.missileList.forEach((missile) => {

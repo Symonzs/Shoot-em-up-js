@@ -31,7 +31,7 @@ export default class BasicShooter extends Entity {
       (missile) => missile.x > 0 && missile.x < this.canvasWidth
     );
    
-    this.missileList.forEach((missile) => missile.move(this.x, this.y));
+    this.missileList.forEach((missile) => missile.move());
     if (this.y + this.image.height > this.canvasHeight) {
       //this.y = canvase.height - this.image.height;
       this.speed = -this.speed;
