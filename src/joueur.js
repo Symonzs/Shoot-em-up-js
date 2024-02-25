@@ -33,7 +33,8 @@ export default class Joueur extends Entity {
     entity.y + entity.image.height > this.y &&
     this.canBeTouched;
     if (hit) {
-      console.log("collision");
+      this.hp -= 1;
+      console.log(`hp: ${this.hp}`);
       this.canBeTouched = false;
       setTimeout(() => {
         this.canBeTouched = true;

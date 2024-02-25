@@ -43,7 +43,7 @@ image.src = "/images/gentil.png";
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
-const joueur = new Joueur(getInitialImageValues(image.src), 5, 1, 0, 0);
+const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, 0, 0);
 
 const imagemechant = "/images/Sprite-0002.png";
 
