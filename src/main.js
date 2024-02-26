@@ -2,7 +2,7 @@ import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
-import {getInitialImageValues, getHitBoxValues, getRenderValues} from "./GetInitialValues.js";
+import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRenderValues} from "./GetInitialValues.js";
 import LinearMissile from "./LinearMissile.js";
 
 const canvas = document.querySelector(".gameCanvas"),
@@ -38,7 +38,7 @@ let entityList = [];
 const image = new Image();
 image.src = "/images/gentil.png";
 
-const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, getRenderValues(image, 0, 0), getHitBoxValues(10, 18, 30, 90));
+const joueur = new Joueur(5, 10, getRenderValues(image, 0, 0), getHitBoxValues(10, 18, 30, 90));
 requestAnimationFrame(render);
 
 image.addEventListener("load", (event) => {
@@ -50,7 +50,7 @@ image.addEventListener("load", (event) => {
 const basicShooterImageValues = getInitialImageValues("/images/Sprite-0002.png");
 const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
 
-const basicShooter = new BasicShooter(basicShooterImageValues, 5, 1, getRenderValues(basicShooterImageValues, 1800, 500), basicShooterProjImageValues, getRenderValues(basicShooterProjImageValues, 1000, 1000), getHitBoxValues(1000, 1000, 10, 10), 0 , 70);
+const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , 70);
 entityList.push(basicShooter);
 
 const HPBar = new Image();
@@ -61,11 +61,11 @@ HPButNormal.src = "/images/hp.png";
 const imgkami = "/images/Sprite-first.png";
 const sharkImageValues = getInitialImageValues(imgkami);
 
-for (let i = 0; i < 10; i++) {
-  const monster = new KamikazeEnemy(sharkImageValues, 15, 999, getRenderValues(sharkImageValues, 1800, 340));
+
+for (let i = 0; i < 1; i++) {
+  const monster = new KamikazeEnemy(15, 999, getRenderValues(sharkImageValues, 1800, 340));
   entityList.push(monster);
 }
-
 canvas.addEventListener("mousemove", (event) => {
   if (event.offsetX != joueur.latestCursorX) {
     joueur.latestCursorX = event.offsetX;
@@ -90,7 +90,7 @@ function renderHP() {
 function drawEntity(entity) {
   const values = entity.render();
   const image = new Image();
-  image.src = entity.image.path;
+  image.src = entity.image;
   context.drawImage(image, values.x, values.y);
   context.strokeStyle = "red";
   context.strokeRect(entity.hitboxCoordinates.x, entity.hitboxCoordinates.y, entity.hitboxCoordinates.width, entity.hitboxCoordinates.height);

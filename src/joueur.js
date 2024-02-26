@@ -2,8 +2,9 @@ import Entity from "./Entity.js";
 import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
 
 export default class Joueur extends Entity {
-  constructor(image, speed, hp, renderCoordinates) {
-    super(image, speed, hp, renderCoordinates);
+  constructor(speed, hp, renderCoordinates) {
+    super(speed, hp, renderCoordinates);
+    this.image = "/images/gentil.png";
     this.hitboxCoordinates = {
       "x": renderCoordinates.x+5,
       "y": renderCoordinates.y+15,

@@ -1,6 +1,5 @@
 export default class Entity {
-  constructor(image, speed,hp, renderCoordinates) {
-    this.image = image;
+  constructor(speed,hp, renderCoordinates) {
     this.speed = speed;
     this.hitboxCoordinates = renderCoordinates;
     this.renderCoordinates = renderCoordinates;
@@ -9,11 +8,11 @@ export default class Entity {
     this.hp = hp;
     this.canBeHurt = true;
     this.canvasWidth = 1920;
-    this.canvasHeight = 1080;
+    this.canvasHeight = 1000;
   }
   render() {
     const values = {
-      "imageInfo": this.image.path,
+      "imageInfo": this.image,
       "x": this.renderCoordinates.x,
       "y": this.renderCoordinates.y,
       "width": this.renderCoordinates.width,

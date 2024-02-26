@@ -19,7 +19,16 @@ export function getRenderValues(imageValues, x, y) {
   return values;
 }
 
+export function getProjectileRenderValues(imageValues) {
+  const values = {
+    "x": 0,
+    "y": 0,
+    "width": imageValues.width,
+    "height": imageValues.height
+  }
+  return values;
 
+}
 
 export function getHitBoxValues(x, y, height, width) {
   const values = {

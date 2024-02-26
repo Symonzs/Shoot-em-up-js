@@ -3,8 +3,9 @@ import Entity from "./Entity.js";
 
 
 export default class KamikazeEnemy extends Entity {
-  constructor(image, speed,hp, renderCoordinates) {
-    super(image, speed,hp, renderCoordinates);
+  constructor(speed,hp, renderCoordinates) {
+    super(speed,hp, renderCoordinates);
+    this.image = "/images/Sprite-first.png";
     this.missileList = [];
     this.angle = Math.random() * Math.PI * 0.25 - Math.PI * 0.125;
     this.speedX = Math.cos(this.angle) * speed;

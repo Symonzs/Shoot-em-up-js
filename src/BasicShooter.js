@@ -4,57 +4,79 @@ import LinearMissile from "./LinearMissile.js";
 
 
 export default class BasicShooter extends Entity {
-  constructor(image, speed,hp, renderCoordinates, imagebullet, renderCoordinatesProj, hitboxCoordinatesProj, varProjX, varProjY) {
-    super(image, speed,hp, renderCoordinates);
-    this.hitboxCoordinates = {
-      "x": renderCoordinates.x,
-      "y": renderCoordinates.y+10,
-      "width": renderCoordinates.width,
-      "height": renderCoordinates.height-28
-    }  
-  
-    this.imagebullet = imagebullet;
+  constructor(speed,hp, renderCoordinates, renderCoordinatesProj, varProjX, varProjY) {
+    super(speed,hp, renderCoordinates);
+
+    this.missileList = [];
+    console.log(renderCoordinatesProj);
+    this.image = `/images/Sprite-0002.png`;
+    this.imagebullet = "/images/basicbullet.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
-    this.hitboxCoordinatesProj = hitboxCoordinatesProj;
-    
+    this.hitboxCoordinatesProj = renderCoordinatesProj;
+    this.updateHiboxes();
+
     this.varProjX = varProjX;
     this.varProjY = varProjY;
     this.compteur = 0;
+    
     this.canFire = setInterval(() => {
         console.log("fire");
-        hitboxCoordinatesProj.x = this.hitboxCoordinates.x + this.varProjX;
-        hitboxCoordinatesProj.y = this.hitboxCoordinates.y + this.varProjY;
-        renderCoordinatesProj.x = this.renderCoordinates.x + this.varProjX;
-        renderCoordinatesProj.y = this.renderCoordinates.y + this.varProjY;
-        this.missileList.push(new LinearMissile(this.imagebullet, 15 ,999, renderCoordinatesProj));
+        const newMissileRenderCoordinates = {
+          "x": this.renderCoordinates.x + this.varProjX,
+          "y": this.renderCoordinates.y + this.varProjY,
+          "width": this.renderCoordinatesProj.width,
+          "height": this.renderCoordinatesProj.height
+        }
+        this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
     }, 1000);
-    this.missileList = [];
     
 
   }
   
+
+  updateHiboxes() {
+    this.hitboxCoordinates = {
+      "x": this.renderCoordinates.x,
+      "y": this.renderCoordinates.y+10,
+      "width": this.renderCoordinates.width,
+      "height": this.renderCoordinates.height-28
+    }
+  }
+
   move() {
     this.missileList = this.missileList.filter(
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
    
     this.missileList.forEach((missile) => missile.move());
-    if (this.hitboxCoordinates.y + this.hitboxCoordinates.height > this.canvasHeight) {
-      this.hitboxCoordinates.y = this.canvasHeight - this.hitboxCoordinates.height;
+    console.log(this.renderCoordinates.y + this.renderCoordinates.height);
+    if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
+      this.speed = -this.speed;
+    } else if (this.renderCoordinates.y < 0) {
+      this.renderCoordinates.y = 0;
+      this.speed = Math.abs(this.speed);
+    }
+    this.renderCoordinates.y += this.speed;
+    this.updateHiboxes();
+    /*
+    if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
+      this.hitboxCoordinates.y = this.canvasHeight - this.renderCoordinates.height;
+      this.renderCoordinates.y = this.canvasHeight - this.renderCoordinates.height;
       this.speed = -this.speed;
       this.compteur++;
     }
-    if (this.hitboxCoordinates.y < 0) {
+    if (this.renderCoordinates.y < 0) {
       this.speed = Math.abs(this.speed);
       this.compteur++;
     }
     if (this.compteur > 1) {
       const newX = (Math.random()* this.canvasWidth/2) + this.canvasWidth/2;
-      this.hitboxCoordinates.x = newX;
       this.renderCoordinates.x = newX;
       this.compteur = 0;
     }
-    this.hitboxCoordinates.y += this.speed;
     this.renderCoordinates.y += this.speed;
+    */
   }
+
+
 }
