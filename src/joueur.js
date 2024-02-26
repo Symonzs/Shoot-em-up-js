@@ -2,8 +2,14 @@ import Entity from "./Entity.js";
 import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
 
 export default class Joueur extends Entity {
-  constructor(image, speed, hp, renderCoordinates, hitboxCoordinates) {
-    super(image, speed, hp, renderCoordinates, hitboxCoordinates);
+  constructor(image, speed, hp, renderCoordinates) {
+    super(image, speed, hp, renderCoordinates);
+    this.hitboxCoordinates = {
+      "x": renderCoordinates.x+5,
+      "y": renderCoordinates.y+15,
+      "width": renderCoordinates.width-5,
+      "height": renderCoordinates.height-15
+    }  
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.latestCursorX = 0;
@@ -34,7 +40,6 @@ export default class Joueur extends Entity {
     this.canBeTouched;
     if (hit) {
       this.hp -= 1;
-      console.log(`hp: ${this.hp}`);
       this.canBeTouched = false;
       setTimeout(() => {
         this.canBeTouched = true;

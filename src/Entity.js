@@ -1,15 +1,9 @@
 export default class Entity {
-  constructor(image, speed,hp, renderCoordinates, hitboxCoordinates) {
+  constructor(image, speed,hp, renderCoordinates) {
     this.image = image;
     this.speed = speed;
-    if (!hitboxCoordinates) {
-      console.log("hitboxCoordinates is not defined");
-      this.renderCoordinates = {x: 1000, y: 300, width: 0, height: 0};
-      this.hitboxCoordinates = {x: 1000, y: 300, width: 0, height: 0};
-    } else {
-      this.renderCoordinates = renderCoordinates;
-      this.hitboxCoordinates = hitboxCoordinates;
-    }
+    this.hitboxCoordinates = renderCoordinates;
+    this.renderCoordinates = renderCoordinates;
     this.spawnX = this.hitboxCoordinates.x;
     this.spawnY = this.hitboxCoordinates.y; 
     this.hp = hp;

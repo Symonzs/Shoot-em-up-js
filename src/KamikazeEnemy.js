@@ -3,10 +3,8 @@ import Entity from "./Entity.js";
 
 
 export default class KamikazeEnemy extends Entity {
-  constructor(image, speed,hp, spawnX, spawnY) {
-    super(image, speed,hp, spawnX, spawnY);
-    this.x = spawnX;
-    this.y = spawnY;
+  constructor(image, speed,hp, renderCoordinates) {
+    super(image, speed,hp, renderCoordinates);
     this.missileList = [];
     this.angle = Math.random() * Math.PI * 0.25 - Math.PI * 0.125;
     this.speedX = Math.cos(this.angle) * speed;
@@ -14,19 +12,24 @@ export default class KamikazeEnemy extends Entity {
   }
 
   move() {
-    this.x -= this.speedX;
-    this.y += this.speedY;
+    this.hitboxCoordinates.x -= this.speedX;
+    this.hitboxCoordinates.y += this.speedY;
+    this.renderCoordinates.x -= this.speedX;
+    this.renderCoordinates.y += this.speedY;
 
    
-    if (this.x < 0 || this.y > this.canvasHeight) {
+    if (this.hitboxCoordinates.x < 0 || this.hitboxCoordinates.y > this.canvasHeight) {
       this.resetPosition();
     }
   }
 
   resetPosition() {
   
-    this.x = this.canvasWidth;
-    this.y = Math.random() * this.canvasHeight;
+    this.hitboxCoordinates.x = this.canvasWidth;
+    this.renderCoordinates.x = this.canvasWidth;
+    const newY = Math.random() * this.canvasHeight;
+    this.hitboxCoordinates.y = newY;
+    this.renderCoordinates.y = newY;
     this.angle = Math.random() * Math.PI * 0.25 - Math.PI * 0.125; 
     this.speedX = Math.cos(this.angle) * this.speed;
     this.speedY = Math.sin(this.angle) * this.speed;
