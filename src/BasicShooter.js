@@ -1,23 +1,25 @@
 import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
-import getInitialImageValues from "./GetInitialImage.js";
 import Entity from "./Entity.js";
 import LinearMissile from "./LinearMissile.js";
 
 
 export default class BasicShooter extends Entity {
-  constructor(image, speed,hp, spawnX, spawnY, varProjX, varProjY,imagebullet) {
-    super(image, speed,hp, spawnX, spawnY);
-    console.log(this.image);
+  constructor(image, speed,hp, renderCoordinates, hitboxCoordinates, imagebullet, renderCoordinatesProj, hitboxCoordinatesProj, varProjX, varProjY) {
+    super(image, speed,hp, renderCoordinates, hitboxCoordinates);
     this.imagebullet = imagebullet;
-    this.x = spawnX;
-    this.y = spawnY;
+    this.renderCoordinatesProj = renderCoordinatesProj;
+    this.hitboxCoordinatesProj = hitboxCoordinatesProj;
     this.varProjX = varProjX;
     this.varProjY = varProjY;
     this.compteur = 0;
     this.canFire = setInterval(() => {
       if(this.compteur === 0){
         console.log("fire");
-      this.missileList.push(new LinearMissile(this.imagebullet, 15 ,999, this.x + this.varProjX, this.y + this.varProjY));
+        hitboxCoordinatesProj.x = this.hitboxCoordinates.x + this.varProjX;
+        hitboxCoordinatesProj.y = this.hitboxCoordinates.y + this.varProjY;
+        renderCoordinatesProj.x = this.renderCoordinates.x + this.varProjX;
+        renderCoordinatesProj.y = this.renderCoordinates.y + this.varProjY;
+        this.missileList.push(new LinearMissile(this.imagebullet, 15 ,999, renderCoordinatesProj, hitboxCoordinatesProj));
         this.compteur ++;
     }
     }, 1000);
@@ -32,19 +34,22 @@ export default class BasicShooter extends Entity {
     );
    
     this.missileList.forEach((missile) => missile.move());
-    if (this.y + this.image.height > this.canvasHeight) {
-      //this.y = canvase.height - this.image.height;
+    if (this.hitboxCoordinates.y + this.hitboxCoordinates.height > this.canvasHeight) {
+      this.hitboxCoordinates.y = this.canvasHeight - this.hitboxCoordinates.height;
       this.speed = -this.speed;
       this.compteur++;
     }
-    if (this.y < 0) {
+    if (this.hitboxCoordinates.y < 0) {
       this.speed = Math.abs(this.speed);
       this.compteur++;
     }
     if (this.compteur > 1) {
-      this.x = (Math.random() * this.canvasWidth/2) + this.canvasWidth/2;
+      const newX = (Math.random()* this.canvasWidth/2) + this.canvasWidth/2;
+      this.hitboxCoordinates.x = newX;
+      this.renderCoordinates.x = newX;
       this.compteur = 0;
     }
-    //this.y += this.speed;
+    //this.hitboxCoordinates.y += this.speed;
+    //this.renderCoordinates.y += this.speed;
   }
 }

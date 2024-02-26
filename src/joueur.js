@@ -2,10 +2,8 @@ import Entity from "./Entity.js";
 import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
 
 export default class Joueur extends Entity {
-  constructor(image, speed, hp, spawnX, spawnY) {
-    super(image, speed, hp, spawnX, spawnY);
-    this.x = spawnX;
-    this.y = spawnY;
+  constructor(image, speed, hp, renderCoordinates, hitboxCoordinates) {
+    super(image, speed, hp, renderCoordinates, hitboxCoordinates);
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.latestCursorX = 0;
@@ -19,18 +17,20 @@ export default class Joueur extends Entity {
   }
  
   move() {
-    this.xSpeed = velocity(calcDistance(this.x+this.image.width/2, this.latestCursorX), this.maxSpeedX, this.time);
-    this.ySpeed = velocity(calcDistance(this.y+this.image.height/2, this.latestCursorY), this.maxSpeedY, this.time);
+    this.xSpeed = velocity(calcDistance(this.hitboxCoordinates.x+this.hitboxCoordinates.width/2, this.latestCursorX), this.maxSpeedX, this.time);
+    this.ySpeed = velocity(calcDistance(this.hitboxCoordinates.y+this.hitboxCoordinates.height/2, this.latestCursorY), this.maxSpeedY, this.time);
     
-    this.x -= this.xSpeed;
-    this.y -= this.ySpeed;
+    this.hitboxCoordinates.x -= this.xSpeed;
+    this.hitboxCoordinates.y -= this.ySpeed;
+    this.renderCoordinates.x -= this.xSpeed;
+    this.renderCoordinates.y -= this.ySpeed;
   }
 
   hit(entity) {
-    const hit = entity.x < this.x + this.image.width &&
-    entity.x + entity.image.width > this.x &&
-    entity.y < this.y + this.image.height &&
-    entity.y + entity.image.height > this.y &&
+    const hit = entity.hitboxCoordinates.x < this.hitboxCoordinates.x + this.hitboxCoordinates.width &&
+    entity.hitboxCoordinates.x + entity.hitboxCoordinates.width > this.hitboxCoordinates.x &&
+    entity.hitboxCoordinates.y < this.hitboxCoordinates.y + this.hitboxCoordinates.height &&
+    entity.hitboxCoordinates.y + entity.hitboxCoordinates.height > this.hitboxCoordinates.y &&
     this.canBeTouched;
     if (hit) {
       this.hp -= 1;

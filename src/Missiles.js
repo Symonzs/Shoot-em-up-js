@@ -1,10 +1,8 @@
 import Entity from "./Entity.js";
 
 export default class Missiles extends Entity {
-  constructor(image, speed,hp, spawnX, spawnY) {
-    super(image, speed,hp, spawnX, spawnY);
-    this.x = spawnX;
-    this.y = spawnY;
+  constructor(image, speed,hp, renderCoordinates, hitboxCoordinates) {
+    super(image, speed,hp, renderCoordinates, hitboxCoordinates);
     this.canBeHurt = false;
   }
 

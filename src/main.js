@@ -2,7 +2,7 @@ import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
-import getInitialImageValues from "./GetInitialImage.js";
+import {getInitialImageValues, getHitBoxValues, getRenderValues} from "./GetInitialValues.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -34,23 +34,23 @@ function resampleCanvas() {
 }
 let entityList = [];
 
-
-
-
-requestAnimationFrame(render);
-
 const image = new Image();
 image.src = "/images/gentil.png";
+
+
+const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, getRenderValues(image, 0, 0), getHitBoxValues(10, 18, 30, 90));
+requestAnimationFrame(render);
+
 image.addEventListener("load", (event) => {
   requestAnimationFrame(render);
 });
-const joueur = new Joueur(getInitialImageValues(image.src), 5, 10, 0, 0);
 
-const imagemechant = "/images/Sprite-0002.png";
 
-const mechantValues =  getInitialImageValues(imagemechant);
-const monster = new BasicShooter(getInitialImageValues(imagemechant), 5, 1, 1800, 500, 0, 70, getInitialImageValues("/images/basicbullet.png"));
-entityList.push(monster);
+
+const basicShooterImageValues = getInitialImageValues("/images/Sprite-0002.png");
+const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
+const basicShooter = new BasicShooter(basicShooterImageValues, 5, 1, getRenderValues(basicShooterImageValues, 1800, 500), getHitBoxValues(1800,510,112,65), basicShooterProjImageValues, getRenderValues(basicShooterProjImageValues, 1000, 1000), getHitBoxValues(1000, 1000, 10, 10), 0 , 70);
+entityList.push(basicShooter);
 
 const HPBar = new Image();
 HPBar.src = "/images/hpbar.png";
@@ -98,21 +98,29 @@ function drawEntity(entity) {
   const values = entity.render();
   const image = new Image();
   image.src = entity.image.path;
-  //console.log(values.imageInfo.width, values.imageInfo.height);
   context.drawImage(image, values.x, values.y);
-  //context.drawImage(image, values.x, values.y);
-  context.strokeRect(values.x, values.y, values.imageInfo.width, values.imageInfo.height); // display hitbox
+  context.strokeStyle = "red";
+  context.strokeRect(entity.hitboxCoordinates.x, entity.hitboxCoordinates.y, entity.hitboxCoordinates.width, entity.hitboxCoordinates.height);
+  context.strokeStyle = "blue";
+  context.strokeRect(entity.renderCoordinates.x, entity.renderCoordinates.y, entity.renderCoordinates.width, entity.renderCoordinates.height);
+  context.strokeStyle = "black";
 }
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   const playerValues = joueur.render();
   const playerImage = new Image();
-  playerImage.src = joueur.image.path;
+  playerImage.src = playerValues.imageInfo;
   context.drawImage(playerImage, playerValues.x, playerValues.y);
-  context.strokeRect(playerValues.x, playerValues.y, playerValues.imageInfo.width, playerValues.imageInfo.height); //display hitbox
+  context.strokeRect(joueur.hitboxCoordinates.x, joueur.hitboxCoordinates.y, joueur.hitboxCoordinates.width, joueur.hitboxCoordinates.height);
+  
   entityList.forEach((entity) => {
     drawEntity(entity);
+    if (entity.missileList.length > 0) {
+      entity.missileList.forEach((missile) => {
+        console.log(missile.hitboxCoordinates.x, missile.hitboxCoordinates.y, missile.hitboxCoordinates.width, missile.hitboxCoordinates.height);
+      });
+    }
     entity.missileList.forEach((missile) => {
       drawEntity(missile);
     });
