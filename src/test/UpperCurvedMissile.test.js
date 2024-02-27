@@ -18,7 +18,7 @@ describe('UpperCurvedMissile', () => {
         const initialYPosition = lmissile.renderCoordinates.y;
         lmissile.move();
         assert.strictEqual(lmissile.renderCoordinates.x, initialXPosition - lmissile.speed);
-        assert.strictEqual(lmissile.renderCoordinates.y, initialYPosition - Math.sin(this.x * this.frequency) * this.amplitude);
+        assert.strictEqual(lmissile.renderCoordinates.y, initialYPosition - Math.sin(lmissile.renderCoordinates.x * lmissile.frequency) * lmissile.amplitude);
     });
     
 });
