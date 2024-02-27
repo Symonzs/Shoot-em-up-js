@@ -1,6 +1,6 @@
 import Entity from "./Entity.js";
 import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
-import LinearMissile from "./LinearMissile.js";
+import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
 
 export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
@@ -39,7 +39,7 @@ export default class Joueur extends Entity {
       "width": 25,
       "height": 25
     }
-    this.missileList.push(new LinearMissile("/images/friendlybasicbullet.png", 10, 999, newMissileRenderCoordinates));
+    this.missileList.push(new FriendlyBasicBullet(100, 999, newMissileRenderCoordinates));
   }
 
   move() {
