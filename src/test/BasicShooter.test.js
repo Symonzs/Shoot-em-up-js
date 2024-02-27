@@ -4,7 +4,6 @@ import { describe, it } from 'node:test';
 import BasicShooter from '../BasicShooter.js';
 import { getRenderValues } from "../GetInitialValues.js";
 
-
 const artificialImageValues = {
   "path": "path",
   "width": 80,
@@ -33,11 +32,6 @@ describe('BasicShooter', () => {
     }, 5000);
     clearTimeout(testTimeout);
     clearInterval(basicShooter.canFire);
-    
-
   });
-
-
-
 
 });

@@ -51,7 +51,7 @@ const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.p
 const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues));
+const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1300, 100), getProjectileRenderValues(basicShooterProjImageValues));
 entityList.push(basicShooter);
 
 const laserShooter = new LaserShooter(2, 1, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
@@ -139,13 +139,12 @@ function drawJoueur() {
   context.strokeRect(joueur.renderCoordinates.x, joueur.renderCoordinates.y, joueur.renderCoordinates.width, joueur.renderCoordinates.height);
   context.strokeStyle = "black";
   */
-  joueur.missileList.forEach((missile) => {
-    drawEntity(missile);
-  });
 }
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
+  
+  drawJoueur();
   entityList.forEach((entity) => {
     drawEntity(entity);
     if (entity.missileList) {
@@ -154,8 +153,10 @@ function render() {
       });
     }
   });
+  joueur.missileList.forEach((missile) => {
+    drawEntity(missile);
+  });
   renderHP();
-  drawJoueur();
   requestAnimationFrame(render);
 }
 
