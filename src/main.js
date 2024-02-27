@@ -37,7 +37,9 @@ let entityList = [];
 const image = new Image();
 image.src = "/images/gentil.png";
 
-const joueur = new Joueur(5, 10, getRenderValues(image, 0, 0));
+const joueurImageValues = getInitialImageValues("/images/gentil.png");
+const joueurProjImageValues = getInitialImageValues("/images/friendlybasicbullet.png");
+const joueur = new Joueur(5, 10, getRenderValues(joueurImageValues, 0, 0), getProjectileRenderValues(joueurProjImageValues));
 requestAnimationFrame(render);
 
 
@@ -46,7 +48,7 @@ requestAnimationFrame(render);
 const basicShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , );
+const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues));
 entityList.push(basicShooter);
 
 const HPBar = new Image();
@@ -109,11 +111,14 @@ function drawEntity(entity) {
   const image = new Image();
   image.src = entity.image;
   context.drawImage(image, values.x, values.y);
+
+  /*
   context.strokeStyle = "red";
   context.strokeRect(entity.hitboxCoordinates.x, entity.hitboxCoordinates.y, entity.hitboxCoordinates.width, entity.hitboxCoordinates.height);
   context.strokeStyle = "blue";
   context.strokeRect(entity.renderCoordinates.x, entity.renderCoordinates.y, entity.renderCoordinates.width, entity.renderCoordinates.height);
   context.strokeStyle = "black";
+  */
 }
 
 function drawJoueur() {
@@ -121,11 +126,14 @@ function drawJoueur() {
   const playerImage = new Image();
   playerImage.src = playerValues.imageInfo;
   context.drawImage(playerImage, playerValues.x, playerValues.y);
+
+  /*
   context.strokeStyle = "red";
   context.strokeRect(joueur.hitboxCoordinates.x, joueur.hitboxCoordinates.y, joueur.hitboxCoordinates.width, joueur.hitboxCoordinates.height);
   context.strokeStyle = "blue";
   context.strokeRect(joueur.renderCoordinates.x, joueur.renderCoordinates.y, joueur.renderCoordinates.width, joueur.renderCoordinates.height);
   context.strokeStyle = "black";
+  */
   joueur.missileList.forEach((missile) => {
     drawEntity(missile);
   });
