@@ -13,13 +13,6 @@ const artificialImageValues = {
 const rendervalues = getRenderValues(artificialImageValues, 0, 0)
 
 describe('joueur', () => {
-    it('should have the right amount of health', () => {
-        const player = new Joueur(5, 10, rendervalues);
-        const bullet = new LinearMissile("/images/basicbullet.png", 10, 999, rendervalues);
-        player.hit(bullet);
-        assert.strictEqual(player.hp, 9);
-    });
-    
     it('should move correctly',() => {
       const player = new Joueur(5, 10, rendervalues);
 

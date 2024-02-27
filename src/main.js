@@ -4,6 +4,7 @@ import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
 import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRenderValues} from "./GetInitialValues.js";
 import LaserShooter from "./LaserShooter.js";
+import detectCollision from './hit.js';
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -168,10 +169,16 @@ function update() {
 
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
+    detectCollision(entity, joueur);
+    if (joueur.missileList) {
+      joueur.missileList.forEach((missile) => {
+        detectCollision(missile, entity);
+      });
+    }
     joueur.hit(entity);
     if (entity.missileList) {
-      entity.missileList.forEach((missile) => {
-        joueur.hit(missile);
+      entity.missileList.forEach((missile) => {  
+      joueur.hit(missile);
     });
     }
 });
