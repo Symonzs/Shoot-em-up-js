@@ -13,27 +13,28 @@ const artificialImageValues = {
 
 const rendervalues = getRenderValues(artificialImageValues, 500, 500)
 
-const varProjX = 20;
-const varProjY = 20;
+
 
 const renderValuesProj = {
   "x": rendervalues.x,
   "y": rendervalues.y,
-  "width": rendervalues.width + varProjX,
-  "height": rendervalues.height + varProjY
+  "width": rendervalues.width,
+  "height": rendervalues.height
 }
 
 
 
-describe('Tire bien !', () => {
+describe('BasicShooter', () => {
   it('should shoot a missile after 5 sec', (done) => {
-    let basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj, varProjX, varProjY);
+    let basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj);
     const testTimeout = setTimeout(() => {
       assert.strictEqual(basicShooter.missileList.length, 1);
       done();
     }, 5000);
     clearTimeout(testTimeout);
-    clearTimeout(basicShooter.canFire);
+    clearInterval(basicShooter.canFire);
+    
+
   });
 
 

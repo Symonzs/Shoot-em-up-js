@@ -17,13 +17,13 @@ const rendervalues = getRenderValues(artificialImageValues, 500, 500)
 const renderValuesProj = {
   "x": rendervalues.x,
   "y": rendervalues.y,
-  "width": rendervalues.width + varProjX,
-  "height": rendervalues.height + varProjY
+  "width": rendervalues.width,
+  "height": rendervalues.height
 }
 
 
 
-describe('Tire bien !', () => {
+describe('LaserShooter', () => {
   it('should shoot a missile after 5 sec', (done) => {
     let laserShooter = new LaserShooter(15, 10, rendervalues, renderValuesProj);
     const testTimeout = setTimeout(() => {
@@ -31,7 +31,7 @@ describe('Tire bien !', () => {
       done();
     }, 5000);
     clearTimeout(testTimeout);
-    clearTimeout(basicShooter.canFire);
+    clearTimeout(laserShooter.canFire);
   });
 
 
