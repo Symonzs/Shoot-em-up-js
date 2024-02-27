@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { velocity } from '../coordCalculator.js';
+
 import { describe, it } from 'node:test';
-import BasicShooter from '../BasicShooter.js';
+import LaserShooter from '../LaserShooter.js';
 import { getRenderValues } from "../GetInitialValues.js";
 
 
@@ -14,7 +14,6 @@ const artificialImageValues = {
 const rendervalues = getRenderValues(artificialImageValues, 500, 500)
 
 
-
 const renderValuesProj = {
   "x": rendervalues.x,
   "y": rendervalues.y,
@@ -24,17 +23,15 @@ const renderValuesProj = {
 
 
 
-describe('BasicShooter', () => {
+describe('LaserShooter', () => {
   it('should shoot a missile after 5 sec', (done) => {
-    let basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj);
+    let laserShooter = new LaserShooter(15, 10, rendervalues, renderValuesProj);
     const testTimeout = setTimeout(() => {
-      assert.strictEqual(basicShooter.missileList.length, 1);
+      assert.strictEqual(laserShooter.missileList.length, 1);
       done();
     }, 5000);
     clearTimeout(testTimeout);
-    clearInterval(basicShooter.canFire);
-    
-
+    clearTimeout(laserShooter.canFire);
   });
 
 

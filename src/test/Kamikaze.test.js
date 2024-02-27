@@ -18,13 +18,8 @@ describe('Kamikaze', () => {
         const initialXPosition = kamikaze.renderCoordinates.x;
         const initialYPosition = kamikaze.renderCoordinates.y;
         kamikaze.move();
-        const angle = kamikaze.angle;
         const speedX = kamikaze.speedX;
         const speedY = kamikaze.speedY;
-        console.log("initialXPosition:" + initialXPosition);
-        console.log("angle:" + kamikaze.angle);
-        console.log("speedX:" + kamikaze.speedX);
-        console.log("renderCoordinates.x:" + kamikaze.renderCoordinates.x);
         assert.strictEqual(kamikaze.renderCoordinates.x, initialXPosition - speedX);
         assert.strictEqual(kamikaze.renderCoordinates.y, initialYPosition + speedY);
     });

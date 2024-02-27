@@ -1,16 +1,9 @@
-import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
-import DiagonalMissile from "./DiagonalMissile.js";
+
 import Entity from "./Entity.js";
-import LinearMissile from "./LinearMissile.js";
-
-function getRandomIntInclusive(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-}
+import LaserMissile from "./LaserMissile.js";
 
 
-export default class BasicShooter extends Entity {
+export default class LaserShooter extends Entity {
   constructor(speed,hp, renderCoordinates, renderCoordinatesProj) {
     super(speed,hp, renderCoordinates);
 
@@ -21,8 +14,9 @@ export default class BasicShooter extends Entity {
     this.hitboxCoordinatesProj = renderCoordinatesProj;
     this.updateHitboxes();
 
-    this.varProjX = -20;
+    this.varProjX = -10;
     this.varProjY = 35;
+    
     
     this.canFire = setInterval(() => {
         const newMissileRenderCoordinates = {
@@ -31,7 +25,7 @@ export default class BasicShooter extends Entity {
           "width": this.renderCoordinatesProj.width,
           "height": this.renderCoordinatesProj.height
         }
-        this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
+        this.missileList.push(new LaserMissile(this.imagebullet,3, newMissileRenderCoordinates));
     }, 1000);
     
 
@@ -52,7 +46,7 @@ export default class BasicShooter extends Entity {
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
    
-    this.missileList.forEach((missile) => missile.move());
+    this.missileList.forEach((missile) => missile.move(this.renderCoordinates.x + this.varProjX, this.renderCoordinates.y + this.varProjY));
     if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
       this.speed = -this.speed;
     } else if (this.renderCoordinates.y < 0) {
@@ -61,7 +55,7 @@ export default class BasicShooter extends Entity {
     }
     this.renderCoordinates.y += this.speed;
     this.updateHitboxes();
-
+    
   }
 
 
