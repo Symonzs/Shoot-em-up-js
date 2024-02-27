@@ -7,7 +7,6 @@ export default function detectCollision(hitting, hit) {
     hitting.hitboxCoordinates.y < hit.hitboxCoordinates.y + hit.hitboxCoordinates.height &&
     hitting.hitboxCoordinates.y + hitting.hitboxCoordinates.height > hit.hitboxCoordinates.y
     if (isHit) {
-      console.log("hit");
       hit.hp -= 1;
     }
     return isHit;

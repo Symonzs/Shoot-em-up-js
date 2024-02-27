@@ -52,10 +52,10 @@ const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.p
 const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1300, 100), getProjectileRenderValues(basicShooterProjImageValues));
+const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 1300, 100), getProjectileRenderValues(basicShooterProjImageValues));
 entityList.push(basicShooter);
 
-const laserShooter = new LaserShooter(2, 1, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
+const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
 entityList.push(laserShooter)
 const HPBar = new Image();
 HPBar.src = "/images/hpbar.png";
@@ -163,6 +163,7 @@ function render() {
 
 function update() {
   joueur.move();
+  entityList = entityList.filter((entity) => entity.hp > 0);
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
 }
@@ -170,11 +171,9 @@ function update() {
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
     detectCollision(entity, joueur);
-    if (joueur.missileList) {
-      joueur.missileList.forEach((missile) => {
-        detectCollision(missile, entity);
-      });
-    }
+    joueur.missileList.forEach((missile) => {
+      detectCollision(missile, entity)
+    });
     joueur.hit(entity);
     if (entity.missileList) {
       entity.missileList.forEach((missile) => {  
