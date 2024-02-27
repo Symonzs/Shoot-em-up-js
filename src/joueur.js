@@ -39,7 +39,7 @@ export default class Joueur extends Entity {
       "width": 25,
       "height": 25
     }
-    this.missileList.push(new LinearMissile("/images/basicbullet.png", 10, 999, newMissileRenderCoordinates));
+    this.missileList.push(new LinearMissile("/images/friendlybasicbullet.png", 10, 999, newMissileRenderCoordinates));
   }
 
   move() {
