@@ -36,8 +36,8 @@ export default class Joueur extends Entity {
     const newMissileRenderCoordinates = {
       "x": this.renderCoordinates.x + this.varProjX,
       "y": this.renderCoordinates.y + this.varProjY,
-      "width": 25,
-      "height": 25
+      "width": this.renderCoordinatesProj.width,
+      "height": this.renderCoordinatesProj.height
     }
     this.missileList.push(new FriendlyBasicBullet(100, 999, newMissileRenderCoordinates));
   }
