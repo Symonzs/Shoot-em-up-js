@@ -11,34 +11,28 @@ function getRandomIntInclusive(min, max) {
 
 
 export default class BasicShooter extends Entity {
-  constructor(speed,hp, renderCoordinates, renderCoordinatesProj, varProjX, varProjY) {
+  constructor(speed,hp, renderCoordinates, renderCoordinatesProj) {
     super(speed,hp, renderCoordinates);
 
     this.missileList = [];
-    console.log(renderCoordinatesProj);
-    this.image = `/images/Sprite-0002.png`;
+    this.image = `/images/basicshooter.png`;
     this.imagebullet = "/images/basicbullet.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.hitboxCoordinatesProj = renderCoordinatesProj;
     this.updateHitboxes();
 
-    this.varProjX = varProjX;
-    this.varProjY = varProjY;
+    this.varProjX = -20;
+    this.varProjY = 35;
     this.compteur = 0;
     
     this.canFire = setInterval(() => {
-        console.log("fire");
         const newMissileRenderCoordinates = {
           "x": this.renderCoordinates.x + this.varProjX,
           "y": this.renderCoordinates.y + this.varProjY,
           "width": this.renderCoordinatesProj.width,
           "height": this.renderCoordinatesProj.height
         }
-        /*
         this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
-        this.missileList.push(new DiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-10,10), 999, newMissileRenderCoordinates));
-        */
-       this.missileList.push(new BounceDiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-30,30), 999, newMissileRenderCoordinates));
     }, 1000);
     
 
@@ -48,9 +42,9 @@ export default class BasicShooter extends Entity {
   updateHitboxes() {
     this.hitboxCoordinates = {
       "x": this.renderCoordinates.x,
-      "y": this.renderCoordinates.y+10,
+      "y": this.renderCoordinates.y,
       "width": this.renderCoordinates.width,
-      "height": this.renderCoordinates.height-28
+      "height": this.renderCoordinates.height
     }
   }
 
@@ -60,7 +54,6 @@ export default class BasicShooter extends Entity {
     );
    
     this.missileList.forEach((missile) => missile.move());
-    console.log(this.renderCoordinates.y + this.renderCoordinates.height);
     if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
       this.speed = -this.speed;
     } else if (this.renderCoordinates.y < 0) {

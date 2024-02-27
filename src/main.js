@@ -44,10 +44,10 @@ requestAnimationFrame(render);
 
 
 
-const basicShooterImageValues = getInitialImageValues("/images/Sprite-0002.png");
+const basicShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , 70);
+const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , );
 entityList.push(basicShooter);
 
 const HPBar = new Image();
@@ -81,6 +81,18 @@ canvas.addEventListener("mouseenter", (event) => {
   }
 });
 
+let shootingSequence;
+canvas.addEventListener("mousedown", (event) => {
+  joueur.shoot();
+  const shooting =setInterval(() => {
+    joueur.shoot();
+  }, 100);
+  shootingSequence = shooting;
+});
+
+canvas.addEventListener("mouseup", (event) => {
+  clearInterval(shootingSequence);
+});
 
 function renderHP() {
   const startingX = 10;
@@ -105,8 +117,7 @@ function drawEntity(entity) {
   context.strokeStyle = "black";
 }
 
-function render() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+function drawJoueur() {
   const playerValues = joueur.render();
   const playerImage = new Image();
   playerImage.src = playerValues.imageInfo;
@@ -116,7 +127,13 @@ function render() {
   context.strokeStyle = "blue";
   context.strokeRect(joueur.renderCoordinates.x, joueur.renderCoordinates.y, joueur.renderCoordinates.width, joueur.renderCoordinates.height);
   context.strokeStyle = "black";
-  
+  joueur.missileList.forEach((missile) => {
+    drawEntity(missile);
+  });
+}
+
+function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
   entityList.forEach((entity) => {
     drawEntity(entity);
     if (entity.missileList) {
@@ -126,11 +143,13 @@ function render() {
     }
   });
   renderHP();
+  drawJoueur();
   requestAnimationFrame(render);
 }
 
 function update() {
   joueur.move();
+  joueur.missileList.forEach((missile) => missile.move());
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
 }
