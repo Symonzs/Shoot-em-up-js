@@ -53,6 +53,13 @@ describe('joueur', () => {
     it('should shoot correctly',() => {
         const player = new Joueur(5, 10, rendervalues, rendervalues);
         player.shoot();
-        console.log(player.missileList[0]);
+        const initialMissilePositions= {
+            "x": player.renderCoordinates.x + player.varProjX,
+            "y": player.renderCoordinates.y + player.varProjY,
+        }
+        console.log(initialMissilePositions);
+        assert.strictEqual(player.missileList[0].renderCoordinates.x, initialMissilePositions.x);
+        player.move();
+        assert.strictEqual(player.missileList[0].renderCoordinates.x, initialMissilePositions.x + player.missileList[0].speed);
   });
 });

@@ -17,8 +17,8 @@ export default class Joueur extends Entity {
     this.maxSpeedY = this.maxSpeed;
     this.maxSpeedX = this.maxSpeed; //* (this.ratio * 1.25);
     this.canBeTouched = true;
-    this.varProjX = 0;
-    this.varProjY = 0;
+    this.varProjX = this.renderCoordinates.width;
+    this.varProjY = 20;
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.missileList = [];
   }
@@ -46,7 +46,7 @@ export default class Joueur extends Entity {
     this.missileList = this.missileList.filter(
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
-    console.log(this.missileList);
+    this.missileList.forEach((missile) => missile.move());
     this.xSpeed = velocity(calcDistance(this.renderCoordinates.x+this.renderCoordinates.width/2, this.latestCursorX), this.maxSpeedX, this.time);
     this.ySpeed = velocity(calcDistance(this.renderCoordinates.y+this.renderCoordinates.height/2, this.latestCursorY), this.maxSpeedY, this.time);
     this.renderCoordinates.x -= this.xSpeed;
