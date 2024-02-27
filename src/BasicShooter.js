@@ -34,11 +34,7 @@ export default class BasicShooter extends Entity {
           "width": this.renderCoordinatesProj.width,
           "height": this.renderCoordinatesProj.height
         }
-        /*
         this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
-        this.missileList.push(new DiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-10,10), 999, newMissileRenderCoordinates));
-        */
-       this.missileList.push(new BounceDiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-30,30), 999, newMissileRenderCoordinates));
     }, 1000);
     
 

@@ -44,12 +44,12 @@ describe('joueur', () => {
       assert.strictEqual(player.renderCoordinates.x, 26);
       assert.strictEqual(player.renderCoordinates.y, 6.7);
     });
-    /*
-    it('should shoot correctly',() => {
-          const player = new Joueur(artificialImage, 5, 10, 100, 100);
+    it('should shoot',() => {
+          const player = new Joueur(5, 10, rendervalues, rendervalues);
           player.shoot();
           assert.strictEqual(player.missileList.length, 1);
-          assert.strictEqual(player.missileList[0].x, player.renderCoordinates.x);
     });
-    */
+    if('should shoot in a line',() => {
+        
+    })
 });
