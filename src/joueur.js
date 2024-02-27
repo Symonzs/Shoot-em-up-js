@@ -5,12 +5,7 @@ export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates) {
     super(speed, hp, renderCoordinates);
     this.image = "/images/gentil.png";
-    this.hitboxCoordinates = {
-      "x": renderCoordinates.x+5,
-      "y": renderCoordinates.y+15,
-      "width": renderCoordinates.width-5,
-      "height": renderCoordinates.height-15
-    }  
+    this.updateHitboxes(); 
     this.xSpeed = 0;
     this.ySpeed = 0;
     this.latestCursorX = 0;
@@ -23,14 +18,21 @@ export default class Joueur extends Entity {
     this.canBeTouched = true;
   }
  
+  updateHitboxes() {
+    this.hitboxCoordinates = {
+      "x": this.renderCoordinates.x+5,
+      "y": this.renderCoordinates.y+15,
+      "width": this.renderCoordinates.width-5,
+      "height": this.renderCoordinates.height-15
+    }
+  }
   move() {
-    this.xSpeed = velocity(calcDistance(this.hitboxCoordinates.x+this.hitboxCoordinates.width/2, this.latestCursorX), this.maxSpeedX, this.time);
-    this.ySpeed = velocity(calcDistance(this.hitboxCoordinates.y+this.hitboxCoordinates.height/2, this.latestCursorY), this.maxSpeedY, this.time);
-    
-    this.hitboxCoordinates.x -= this.xSpeed;
-    this.hitboxCoordinates.y -= this.ySpeed;
+    this.xSpeed = velocity(calcDistance(this.renderCoordinates.x+this.renderCoordinates.width/2, this.latestCursorX), this.maxSpeedX, this.time);
+    this.ySpeed = velocity(calcDistance(this.renderCoordinates.y+this.renderCoordinates.height/2, this.latestCursorY), this.maxSpeedY, this.time);
     this.renderCoordinates.x -= this.xSpeed;
     this.renderCoordinates.y -= this.ySpeed;
+
+    this.updateHitboxes();
   }
 
   hit(entity) {

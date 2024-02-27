@@ -22,13 +22,27 @@ describe('joueur', () => {
     
     it('should move correctly',() => {
       const player = new Joueur(5, 10, rendervalues);
+
       player.latestCursorX = player.renderCoordinates.x + player.renderCoordinates.width/2;
       player.latestCursorY = player.renderCoordinates.y + player.renderCoordinates.height/2;
-      console.log(player.latestCursorX);
-      console.log(player.latestCursorY);
       player.move();
+
       assert.strictEqual(player.renderCoordinates.x, 0);
       assert.strictEqual(player.renderCoordinates.y, 0);
+
+      player.latestCursorX = 1000;
+      player.latestCursorY = 1000;
+      player.move();
+
+      assert.strictEqual(player.renderCoordinates.x, 13);
+      assert.strictEqual(player.renderCoordinates.y, 13);
+      
+      player.latestCursorX = 1000;
+      player.latestCursorY = 0;
+      player.move();
+
+      assert.strictEqual(player.renderCoordinates.x, 26);
+      assert.strictEqual(player.renderCoordinates.y, 6.7);
     });
     /*
     it('should shoot correctly',() => {

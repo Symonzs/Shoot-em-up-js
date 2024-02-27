@@ -1,6 +1,13 @@
 import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
+import DiagonalMissile from "./DiagonalMissile.js";
 import Entity from "./Entity.js";
 import LinearMissile from "./LinearMissile.js";
+
+function getRandomIntInclusive(min, max) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
+}
 
 
 export default class BasicShooter extends Entity {
@@ -13,7 +20,7 @@ export default class BasicShooter extends Entity {
     this.imagebullet = "/images/basicbullet.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.hitboxCoordinatesProj = renderCoordinatesProj;
-    this.updateHiboxes();
+    this.updateHitboxes();
 
     this.varProjX = varProjX;
     this.varProjY = varProjY;
@@ -27,14 +34,18 @@ export default class BasicShooter extends Entity {
           "width": this.renderCoordinatesProj.width,
           "height": this.renderCoordinatesProj.height
         }
+        /*
         this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
+        this.missileList.push(new DiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-10,10), 999, newMissileRenderCoordinates));
+        */
+       this.missileList.push(new BounceDiagonalMissile(this.imagebullet, 15, getRandomIntInclusive(-30,30), 999, newMissileRenderCoordinates));
     }, 1000);
     
 
   }
   
 
-  updateHiboxes() {
+  updateHitboxes() {
     this.hitboxCoordinates = {
       "x": this.renderCoordinates.x,
       "y": this.renderCoordinates.y+10,
@@ -57,7 +68,7 @@ export default class BasicShooter extends Entity {
       this.speed = Math.abs(this.speed);
     }
     this.renderCoordinates.y += this.speed;
-    this.updateHiboxes();
+    this.updateHitboxes();
     /*
     if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
       this.hitboxCoordinates.y = this.canvasHeight - this.renderCoordinates.height;

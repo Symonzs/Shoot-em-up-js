@@ -38,19 +38,16 @@ let entityList = [];
 const image = new Image();
 image.src = "/images/gentil.png";
 
-const joueur = new Joueur(5, 10, getRenderValues(image, 0, 0), getHitBoxValues(10, 18, 30, 90));
+const joueur = new Joueur(5, 10, getRenderValues(image, 0, 0));
 requestAnimationFrame(render);
 
-image.addEventListener("load", (event) => {
-  requestAnimationFrame(render);
-});
 
 
 
 const basicShooterImageValues = getInitialImageValues("/images/Sprite-0002.png");
 const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , 70);
+const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , 70);
 entityList.push(basicShooter);
 
 const HPBar = new Image();
@@ -67,6 +64,15 @@ for (let i = 0; i < 1; i++) {
   entityList.push(monster);
 }
 canvas.addEventListener("mousemove", (event) => {
+  if (event.offsetX != joueur.latestCursorX) {
+    joueur.latestCursorX = event.offsetX;
+  }
+  if (event.offsetY != joueur.latestCursorY) {
+    joueur.latestCursorY = event.offsetY;
+  }
+});
+
+canvas.addEventListener("mouseenter", (event) => {
   if (event.offsetX != joueur.latestCursorX) {
     joueur.latestCursorX = event.offsetX;
   }
@@ -105,7 +111,11 @@ function render() {
   const playerImage = new Image();
   playerImage.src = playerValues.imageInfo;
   context.drawImage(playerImage, playerValues.x, playerValues.y);
+  context.strokeStyle = "red";
   context.strokeRect(joueur.hitboxCoordinates.x, joueur.hitboxCoordinates.y, joueur.hitboxCoordinates.width, joueur.hitboxCoordinates.height);
+  context.strokeStyle = "blue";
+  context.strokeRect(joueur.renderCoordinates.x, joueur.renderCoordinates.y, joueur.renderCoordinates.width, joueur.renderCoordinates.height);
+  context.strokeStyle = "black";
   
   entityList.forEach((entity) => {
     drawEntity(entity);
@@ -135,22 +145,5 @@ function isInContact(entitylist) {
     }
 });
 }
-/*
-function hit(entity) {
-  if (
-    entity.x < joueur.x + joueur.image.width &&
-    entity.x + entity.image.width > joueur.x &&
-    entity.y < joueur.y + joueur.image.height &&
-    entity.y + entity.image.height > joueur.y &&
-    canBeTouched
-  ) {
-    console.log("collision");
-    canBeTouched = false;
-    setTimeout(() => {
-      canBeTouched = true;
-    }, 1000);
-  }
-}
-*/
 
 setInterval(update, 1000 / 60);

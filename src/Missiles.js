@@ -6,4 +6,13 @@ export default class Missiles extends Entity {
     this.canBeHurt = false;
   }
 
+  updateHitboxes() {
+    this.hitboxCoordinates = {
+      "x": this.renderCoordinates.x,
+      "y": this.renderCoordinates.y,
+      "width": this.renderCoordinates.width,
+      "height": this.renderCoordinates.height
+    }
+  }
+
 }
