@@ -3,7 +3,6 @@ import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
 import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRenderValues} from "./GetInitialValues.js";
-import LinearMissile from "./LinearMissile.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -149,7 +148,6 @@ function render() {
 
 function update() {
   joueur.move();
-  joueur.missileList.forEach((missile) => missile.move());
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
 }
