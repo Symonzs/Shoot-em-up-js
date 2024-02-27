@@ -49,7 +49,10 @@ describe('joueur', () => {
           player.shoot();
           assert.strictEqual(player.missileList.length, 1);
     });
-    if('should shoot in a line',() => {
-        
-    })
+    
+    it('should shoot correctly',() => {
+        const player = new Joueur(5, 10, rendervalues, rendervalues);
+        player.shoot();
+        console.log(player.missileList[0]);
+  });
 });

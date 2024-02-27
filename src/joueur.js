@@ -36,13 +36,17 @@ export default class Joueur extends Entity {
     const newMissileRenderCoordinates = {
       "x": this.renderCoordinates.x + this.varProjX,
       "y": this.renderCoordinates.y + this.varProjY,
-      "width": this.renderCoordinates.width,
-      "height": this.renderCoordinates.height
+      "width": 25,
+      "height": 25
     }
     this.missileList.push(new LinearMissile("/images/basicbullet.png", 10, 999, newMissileRenderCoordinates));
   }
 
   move() {
+    this.missileList = this.missileList.filter(
+      (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
+    );
+    console.log(this.missileList);
     this.xSpeed = velocity(calcDistance(this.renderCoordinates.x+this.renderCoordinates.width/2, this.latestCursorX), this.maxSpeedX, this.time);
     this.ySpeed = velocity(calcDistance(this.renderCoordinates.y+this.renderCoordinates.height/2, this.latestCursorY), this.maxSpeedY, this.time);
     this.renderCoordinates.x -= this.xSpeed;
