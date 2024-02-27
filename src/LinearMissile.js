@@ -8,7 +8,6 @@ export default class LinearMissile extends Missiles {
     } else {
       this.image = image;
     }
-    this.hp = hp;
     this.canBeHurt = false;
   }
 
