@@ -3,6 +3,7 @@ import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
 import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRenderValues} from "./GetInitialValues.js";
+import LaserShooter from "./LaserShooter.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -45,10 +46,14 @@ requestAnimationFrame(render);
 
 const basicShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
+const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
+const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
 
-const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues), 0 , );
-entityList.push(basicShooter);
+/*const basicShooter = new BasicShooter(2, 1, getRenderValues(basicShooterImageValues, 1500, 100), getProjectileRenderValues(basicShooterProjImageValues));
+entityList.push(basicShooter);*/
 
+const laserShooter = new LaserShooter(2, 1, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
+entityList.push(laserShooter)
 const HPBar = new Image();
 HPBar.src = "/images/hpbar.png";
 const HPButNormal = new Image();
