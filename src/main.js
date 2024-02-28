@@ -35,6 +35,7 @@ function resampleCanvas() {
   canvas.height = canvas.clientHeight;
 }
 let entityList = [];
+let willBeDeleteEntity = [];
 
 const image = new Image();
 image.src = "/images/gentil.png";
@@ -163,10 +164,29 @@ function render() {
 
 function update() {
   joueur.move();
-  entityList = entityList.filter((entity) => entity.hp > 0);
+
+  //entityList = entityList.filter((entity) => entity.hp > 0);
+  
   entityList.forEach((entity) => entity.move());
   isInContact(entityList);
+  removeEntity();
 }
+
+function removeEntity() {
+  entityList.forEach((entity, index) => {
+      if (entity.hp < 1) {
+          
+          
+          console.log(entity.renderCoordinates.x, entity.renderCoordinates.y)
+          entity.renderCoordinates.x = -1000; 
+          entity.renderCoordinates.y = -1000; 
+          if (entity.missileList && entity.missileList.length < 1) {
+              entityList.splice(index, 1);
+          }
+      }
+  });
+}
+
 
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {

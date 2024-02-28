@@ -48,11 +48,14 @@ export default class BasicShooter extends Entity {
   }
 
   move() {
+    console.log(this.hp);
     this.missileList = this.missileList.filter(
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
-   
     this.missileList.forEach((missile) => missile.move());
+
+    if(this.hp > 0) {
+
     if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
       this.speed = -this.speed;
     } else if (this.renderCoordinates.y < 0) {
@@ -61,7 +64,7 @@ export default class BasicShooter extends Entity {
     }
     this.renderCoordinates.y += this.speed;
     this.updateHitboxes();
-
+  }
   }
 
 
