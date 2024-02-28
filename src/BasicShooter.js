@@ -55,7 +55,6 @@ export default class BasicShooter extends Entity {
     this.missileList.forEach((missile) => missile.move());
 
     if(this.hp > 0) {
-
     if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
       this.speed = -this.speed;
     } else if (this.renderCoordinates.y < 0) {

@@ -5,6 +5,7 @@ import Joueur from "./joueur.js";
 import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRenderValues} from "./GetInitialValues.js";
 import LaserShooter from "./LaserShooter.js";
 import detectCollision from './hit.js';
+import CurvedShooter from "./CurvedShooter.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -35,7 +36,7 @@ function resampleCanvas() {
   canvas.height = canvas.clientHeight;
 }
 let entityList = [];
-let willBeDeleteEntity = [];
+
 
 const image = new Image();
 image.src = "/images/gentil.png";
@@ -58,6 +59,12 @@ entityList.push(basicShooter);
 
 const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
 entityList.push(laserShooter)
+
+const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
+entityList.push(curvedShooter)
+
+
+
 const HPBar = new Image();
 HPBar.src = "/images/hpbar.png";
 const HPButNormal = new Image();
