@@ -182,9 +182,6 @@ function update() {
 function removeEntity() {
   entityList.forEach((entity, index) => {
       if (entity.hp < 1) {
-          
-          
-          console.log(entity.renderCoordinates.x, entity.renderCoordinates.y)
           entity.renderCoordinates.x = -1000; 
           entity.renderCoordinates.y = -1000; 
           if (entity.missileList && entity.missileList.length < 1) {
@@ -199,9 +196,11 @@ function isInContact(entitylist) {
   entitylist.forEach((entity) => {
     detectCollision(entity, joueur);
     joueur.missileList.forEach((missile) => {
-      detectCollision(missile, entity)
+      const hit = detectCollision(missile, entity);
+      if (hit) {
+        joueur.missileList.pop(missile);
+      }
     });
-    joueur.hit(entity);
     if (entity.missileList) {
       entity.missileList.forEach((missile) => {  
       joueur.hit(missile);

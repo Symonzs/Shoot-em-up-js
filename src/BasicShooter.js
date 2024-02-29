@@ -48,7 +48,6 @@ export default class BasicShooter extends Entity {
   }
 
   move() {
-    console.log(this.hp);
     this.missileList = this.missileList.filter(
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
