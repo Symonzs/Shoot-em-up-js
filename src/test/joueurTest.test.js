@@ -27,15 +27,15 @@ describe('joueur', () => {
       player.latestCursorY = 1000;
       player.move();
 
-      assert.strictEqual(player.renderCoordinates.x, 13);
-      assert.strictEqual(player.renderCoordinates.y, 13);
+      assert.strictEqual(player.renderCoordinates.x, 16);
+      assert.strictEqual(player.renderCoordinates.y, 16);
       
       player.latestCursorX = 1000;
       player.latestCursorY = 0;
       player.move();
 
-      assert.strictEqual(player.renderCoordinates.x, 26);
-      assert.strictEqual(player.renderCoordinates.y, 6.7);
+      assert.strictEqual(player.renderCoordinates.x, 32);
+      assert.strictEqual(player.renderCoordinates.y, 9.4);
     });
     it('should shoot',() => {
           const player = new Joueur(5, 10, rendervalues, rendervalues);

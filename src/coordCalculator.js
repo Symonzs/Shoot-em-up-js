@@ -23,3 +23,20 @@ export function velocity(distance, maxSpeed, time) {
     return speed;
   }
 }
+
+export function Motion(entity){
+  if(!entity.secondPhase){
+    if(entity.hp > 0) {
+      entity.renderCoordinates.x -= entity.movement.xSpeed;
+      entity.renderCoordinates.y -= entity.movement.ySpeed;
+    }
+  }
+  else {
+    if(entity.transition) {
+    if(entity.hp > 0) {
+      entity.renderCoordinates.x += entity.movement.xSpeed1;
+      entity.renderCoordinates.y += entity.movement.ySpeed1;
+    }
+  }
+}
+}

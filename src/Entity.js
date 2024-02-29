@@ -1,6 +1,7 @@
 export default class Entity {
-  constructor(speed,hp, renderCoordinates) {
+  constructor(speed,hp, renderCoordinates, movement) {
     this.speed = speed;
+    this.movement = movement;
     this.hitboxCoordinates = renderCoordinates;
     this.renderCoordinates = renderCoordinates;
     this.spawnX = this.hitboxCoordinates.x;

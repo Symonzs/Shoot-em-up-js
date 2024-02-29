@@ -2,11 +2,20 @@
 import Entity from "./Entity.js";
 import LowerCurvedMissile from "./LowerCurvedMissile.js";
 import UpperCurvedMissile from "./UpperCurvedMissile.js";
+import { Motion } from "./coordCalculator.js";
 
 
 export default class CurvedShooter extends Entity {
-  constructor(speed,hp, renderCoordinates, renderCoordinatesProj) {
-    super(speed,hp, renderCoordinates);
+  constructor(speed,hp, renderCoordinates, renderCoordinatesProj,movement) {
+    super(speed,hp, renderCoordinates,movement);
+    this.secondPhase = false;
+    this.transition = false;
+    setInterval(() => {
+      this.secondPhase = true;
+      setInterval(() => {
+        this.transition = true;
+      }, this.movement.transitionTime);
+    }, this.movement.time);
     this.image = `/images/basicshooter.png`;
     this.imagebullet = "/images/basicbullet.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
@@ -59,7 +68,7 @@ export default class CurvedShooter extends Entity {
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
     this.missileList.forEach((missile) => missile.move());
-
+    Motion(this);
     
     this.updateHitboxes();
   }

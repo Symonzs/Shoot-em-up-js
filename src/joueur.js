@@ -12,7 +12,7 @@ export default class Joueur extends Entity {
     this.latestCursorX = 0;
     this.latestCursorY = 0;
     this.time = 10;
-    this.maxSpeed = 13;
+    this.maxSpeed = 16;
     this.ratio = this.canvasWidth / this.canvasHeight;
     this.maxSpeedY = this.maxSpeed;
     this.maxSpeedX = this.maxSpeed; //* (this.ratio * 1.25);

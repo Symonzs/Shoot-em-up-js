@@ -1,6 +1,7 @@
 
 import Entity from "./Entity.js";
 import LaserMissile from "./LaserMissile.js";
+import { Motion } from "./coordCalculator.js";
 
 
 export default class LaserShooter extends Entity {
@@ -50,13 +51,7 @@ export default class LaserShooter extends Entity {
     
    
     this.missileList.forEach((missile) => missile.move(this.renderCoordinates.x + this.varProjX - this.renderCoordinatesProj.width, this.renderCoordinates.y + this.varProjY));
-    if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
-      this.speed = -this.speed;
-    } else if (this.renderCoordinates.y < 0) {
-      this.renderCoordinates.y = 0;
-      this.speed = Math.abs(this.speed);
-    }
-    this.renderCoordinates.y += this.speed;
+    Motion(this);
     this.updateHitboxes();
     
   }

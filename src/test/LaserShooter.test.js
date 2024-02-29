@@ -25,7 +25,7 @@ const renderValuesProj = {
 
 describe('LaserShooter', () => {
   it('should shoot a missile after 5 sec', (done) => {
-    let laserShooter = new LaserShooter(15, 10, rendervalues, renderValuesProj);
+    let laserShooter = new LaserShooter(15, 10, rendervalues, renderValuesProj, {"xSpeed": 1, "ySpeed": 0, "time": 10, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10});
     const testTimeout = setTimeout(() => {
       assert.strictEqual(laserShooter.missileList.length, 1);
       done();

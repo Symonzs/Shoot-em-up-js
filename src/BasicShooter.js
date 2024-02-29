@@ -2,6 +2,7 @@ import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
 import DiagonalMissile from "./DiagonalMissile.js";
 import Entity from "./Entity.js";
 import LinearMissile from "./LinearMissile.js";
+import { Motion } from "./coordCalculator.js";
 
 function getRandomIntInclusive(min, max) {
   const minCeiled = Math.ceil(min);
@@ -11,9 +12,16 @@ function getRandomIntInclusive(min, max) {
 
 
 export default class BasicShooter extends Entity {
-  constructor(speed,hp, renderCoordinates, renderCoordinatesProj) {
-    super(speed,hp, renderCoordinates);
-
+  constructor(speed,hp, renderCoordinates, renderCoordinatesProj, movement) {
+    super(speed,hp, renderCoordinates, movement);
+    this.secondPhase = false;
+    this.transition = false;
+    setTimeout(() => {
+      this.secondPhase = true;
+      setTimeout(() => {
+        this.transition = true;
+      }, this.movement.transitionTime);
+    }, this.movement.time);
     this.missileList = [];
     this.image = `/images/basicshooter.png`;
     this.imagebullet = "/images/basicbullet.png";
@@ -52,18 +60,11 @@ export default class BasicShooter extends Entity {
       (missile) => missile.hitboxCoordinates.x > 0 && missile.hitboxCoordinates.x < this.canvasWidth
     );
     this.missileList.forEach((missile) => missile.move());
-
-    if(this.hp > 0) {
-    if (this.renderCoordinates.y + this.renderCoordinates.height > this.canvasHeight) {
-      this.speed = -this.speed;
-    } else if (this.renderCoordinates.y < 0) {
-      this.renderCoordinates.y = 0;
-      this.speed = Math.abs(this.speed);
-    }
-    this.renderCoordinates.y += this.speed;
+    Motion(this);
+  
     this.updateHitboxes();
   }
   }
 
 
-}
+

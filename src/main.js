@@ -54,14 +54,14 @@ const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.p
 const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
 
-const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 1300, 100), getProjectileRenderValues(basicShooterProjImageValues));
-entityList.push(basicShooter);
+const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 2000, 500), getProjectileRenderValues(basicShooterProjImageValues), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
+entityList.push(basicShooter);  
 
-const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
+/*const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
 entityList.push(laserShooter)
 
 const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
-entityList.push(curvedShooter)
+entityList.push(curvedShooter)*/
 
 
 
