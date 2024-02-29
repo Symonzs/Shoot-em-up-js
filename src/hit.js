@@ -1,4 +1,4 @@
-export default function detectCollision(hitting, hit) {
+export default function detectCollision(hitting, hit, isPlayer) {
     if (hit.canBeTouched === false) {
       return false;
     }
@@ -8,6 +8,16 @@ export default function detectCollision(hitting, hit) {
     hitting.hitboxCoordinates.y + hitting.hitboxCoordinates.height > hit.hitboxCoordinates.y
     if (isHit) {
       hit.hp -= 1;
+      hit.canBeTouched = false;
+      if (isPlayer) {
+        setTimeout(() => {
+          hit.canBeTouched = true;
+        }, 500);
+      } else {
+        setTimeout(() => {
+          hit.canBeTouched = true;
+        }, 10);
+      }
     }
     return isHit;
   }

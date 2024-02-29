@@ -64,7 +64,4 @@ export default class BasicShooter extends Entity {
   
     this.updateHitboxes();
   }
-  }
-
-
-
+}
