@@ -54,14 +54,14 @@ const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.p
 const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
 const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
 
-const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 1300, 100), getProjectileRenderValues(basicShooterProjImageValues));
-entityList.push(basicShooter);
+const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 1300, 300), getProjectileRenderValues(basicShooterProjImageValues));
+//entityList.push(basicShooter);
 
 const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
-entityList.push(laserShooter)
+//entityList.push(laserShooter)
 
 const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
-entityList.push(curvedShooter)
+//entityList.push(curvedShooter)
 
 
 
@@ -74,7 +74,7 @@ const imgkami = "/images/Sprite-first.png";
 const sharkImageValues = getInitialImageValues(imgkami);
 
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 0; i++) {
   const monster = new KamikazeEnemy(15, 999, getRenderValues(sharkImageValues, 1800, 340));
   entityList.push(monster);
 }
@@ -126,13 +126,13 @@ function drawEntity(entity) {
   image.src = entity.image;
   context.drawImage(image, values.x, values.y);
 
-  /*
+  
   context.strokeStyle = "red";
   context.strokeRect(entity.hitboxCoordinates.x, entity.hitboxCoordinates.y, entity.hitboxCoordinates.width, entity.hitboxCoordinates.height);
   context.strokeStyle = "blue";
   context.strokeRect(entity.renderCoordinates.x, entity.renderCoordinates.y, entity.renderCoordinates.width, entity.renderCoordinates.height);
   context.strokeStyle = "black";
-  */
+  
 }
 
 function drawJoueur() {
@@ -141,13 +141,13 @@ function drawJoueur() {
   playerImage.src = playerValues.imageInfo;
   context.drawImage(playerImage, playerValues.x, playerValues.y);
 
-  /*
+  
   context.strokeStyle = "red";
   context.strokeRect(joueur.hitboxCoordinates.x, joueur.hitboxCoordinates.y, joueur.hitboxCoordinates.width, joueur.hitboxCoordinates.height);
   context.strokeStyle = "blue";
   context.strokeRect(joueur.renderCoordinates.x, joueur.renderCoordinates.y, joueur.renderCoordinates.width, joueur.renderCoordinates.height);
   context.strokeStyle = "black";
-  */
+  
 }
 
 function render() {
@@ -162,9 +162,13 @@ function render() {
       });
     }
   });
+  const imgTest = new Image();
+  imgTest.src = "../images/test.png";
+  context.drawImage(imgTest, 1500-imgTest.width/2, 500-imgTest.height/2);
   joueur.missileList.forEach((missile) => {
     drawEntity(missile);
   });
+
   renderHP();
   requestAnimationFrame(render);
 }
@@ -194,16 +198,16 @@ function removeEntity() {
 
 function isInContact(entitylist) {
   entitylist.forEach((entity) => {
-    detectCollision(entity, joueur);
+    detectCollision(entity, joueur, true);
     joueur.missileList.forEach((missile) => {
       const hit = detectCollision(missile, entity);
       if (hit) {
-        joueur.missileList.pop(missile);
+        missile.renderCoordinates.x = -1000;
       }
     });
     if (entity.missileList) {
       entity.missileList.forEach((missile) => {  
-      joueur.hit(missile);
+        detectCollision(missile, joueur, true);
     });
     }
 });

@@ -54,20 +54,4 @@ export default class Joueur extends Entity {
 
     this.updateHitboxes();
   }
-
-  hit(entity) {
-    const hit = entity.hitboxCoordinates.x < this.hitboxCoordinates.x + this.hitboxCoordinates.width &&
-    entity.hitboxCoordinates.x + entity.hitboxCoordinates.width > this.hitboxCoordinates.x &&
-    entity.hitboxCoordinates.y < this.hitboxCoordinates.y + this.hitboxCoordinates.height &&
-    entity.hitboxCoordinates.y + entity.hitboxCoordinates.height > this.hitboxCoordinates.y &&
-    this.canBeTouched;
-    if (hit) {
-      this.hp -= 1;
-      this.canBeTouched = false;
-      setTimeout(() => {
-        this.canBeTouched = true;
-      }, 500);
-    }
-    return hit;
-  }
 }
