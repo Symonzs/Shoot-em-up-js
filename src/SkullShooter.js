@@ -1,5 +1,6 @@
 import Entity from "./Entity.js";
 import { Motion } from "./coordCalculator.js";
+import LinearMissile from "./LinearMissile.js";
 
 export default class SkullShooter extends Entity {
     constructor(speed,hp, renderCoordinates, renderCoordinatesProj, movement) {
@@ -14,7 +15,9 @@ export default class SkullShooter extends Entity {
         }, this.movement.time);
         this.missileList = [];
         this.imageNumber = 1;
-        this.changeImage(this.imageNumber);
+        this.changeImage(this.imageNumber); 
+        this.renderCoordinatesProj = renderCoordinatesProj;
+        this.hitboxCoordinatesProj = renderCoordinatesProj;
         this.imagebullet = `/images/bullets/skull-projectile.png`;
         this.varProjX = 0;
         this.varProjY = 0;
@@ -77,5 +80,15 @@ export default class SkullShooter extends Entity {
     changeImage(imageID) {
         this.image = `/images/ships/skull-${imageID}.png`;
         this.updateHitboxes();
+    }
+    
+    shoot() {
+        const newMissileRenderCoordinates = {
+            "x": this.renderCoordinates.x + this.varProjX,
+            "y": this.renderCoordinates.y + this.varProjY,
+            "width": this.renderCoordinatesProj.width,
+          "height": this.renderCoordinatesProj.height
+        }
+        this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
     }
 }
