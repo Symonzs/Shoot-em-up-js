@@ -22,16 +22,16 @@ const renderValuesProj = {
 describe('SkullShooter', () => {
     it('should be initalized', () => {
         let skullShooter = new SkullShooter(
-            "speed": 15,
-            "hp": 10,
-            "renderCoordinates": rendervalues, 
-            "renderCoordinatesProj": renderValuesProj, 
-            "movement": {
-                "xSpeed": 1, 
-                "ySpeed": 0, 
-                "time": 10, 
-                "xSpeed1" : 0, 
-                "ySpeed1" : 1, 
-                "transitionTime" : 10});          
-    })
+            15,
+            10,
+            rendervalues, 
+            renderValuesProj, 
+            {"xSpeed": 1, 
+            "ySpeed": 0, 
+            "time": 10, 
+            "xSpeed1" : 0, 
+            "ySpeed1" : 1, 
+            "transitionTime" : 10});
+        assert.strictEqual(skullShooter.speed, 15);          
+    });
 });
