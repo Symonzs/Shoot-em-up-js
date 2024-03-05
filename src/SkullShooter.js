@@ -20,7 +20,12 @@ export default class SkullShooter extends Entity {
         this.hitboxCoordinatesProj = renderCoordinatesProj;
         this.imagebullet = `/images/bullets/skull-projectile.png`;
         this.varProjX = 0;
-        this.varProjY = 0;
+        this.varProjY = 90;
+        this.canFire = setInterval(() => {
+            if (this.incrementImage()) {
+                this.shoot();
+            }
+        }, 1000);
     }
     
   updateHitboxes() {
@@ -57,6 +62,14 @@ export default class SkullShooter extends Entity {
                 "height": this.renderCoordinates.height-20
               }
             break;
+        case 5:
+                this.hitboxCoordinates = {
+                    "x": this.renderCoordinates.x,
+                    "y": this.renderCoordinates.y+15,
+                    "width": this.renderCoordinates.width,
+                    "height": this.renderCoordinates.height-20
+                  }
+                  break;
         default:
             this.hitboxCoordinates = {
                 "x": this.renderCoordinates.x,
@@ -90,5 +103,17 @@ export default class SkullShooter extends Entity {
           "height": this.renderCoordinatesProj.height
         }
         this.missileList.push(new LinearMissile(this.imagebullet, 10 ,999, newMissileRenderCoordinates));
+    }
+
+    incrementImage() {
+        if (this.imageNumber > 4) {
+            console.log("shouldShoot");
+            this.imageNumber = 1;
+        } else {
+            this.imageNumber++;
+        }
+        this.changeImage(this.imageNumber);
+        console.log(this.image);
+        return this.imageNumber === 5;
     }
 }

@@ -56,7 +56,7 @@ const laserShooterImageValues = getInitialImageValues("/images/ships/basicshoote
 const laserShooterProjImageValues = getInitialImageValues("/images/bullets/redlaser.png");
 
 const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 2000, 500), getProjectileRenderValues(basicShooterProjImageValues), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
-entityList.push(basicShooter);  
+//entityList.push(basicShooter);  
 
 /*const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
 entityList.push(laserShooter)
@@ -64,7 +64,7 @@ entityList.push(laserShooter)
 const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
 entityList.push(curvedShooter)*/
 
-const skullShooter = new SkullShooter(2, 10, getRenderValues(getInitialImageValues("images/ships/skull-1.png"), 1600, 500), getProjectileRenderValues(getInitialImageValues("images/bullets/skull-projectile.png")), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
+const skullShooter = new SkullShooter(2, 100, getRenderValues(getInitialImageValues("images/ships/skull-1.png"), 1600, 500), getProjectileRenderValues(getInitialImageValues("/images/bullets/skull-projectile.png")), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
 entityList.push(skullShooter);
 
 const HPBar = new Image();
