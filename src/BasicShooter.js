@@ -23,8 +23,8 @@ export default class BasicShooter extends Entity {
       }, this.movement.transitionTime);
     }, this.movement.time);
     this.missileList = [];
-    this.image = `/images/basicshooter.png`;
-    this.imagebullet = "/images/basicbullet.png";
+    this.image = `/images/ships/basicshooter.png`;
+    this.imagebullet = `/images/bullets/basicbullet.png`;
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.hitboxCoordinatesProj = renderCoordinatesProj;
     this.updateHitboxes();

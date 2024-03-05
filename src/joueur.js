@@ -5,7 +5,7 @@ import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
 export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
     super(speed, hp, renderCoordinates);
-    this.image = "/images/gentil.png";
+    this.image = "/images/ships/allyship.png";
     this.updateHitboxes(); 
     this.xSpeed = 0;
     this.ySpeed = 0;

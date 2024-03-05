@@ -9,8 +9,8 @@ export default class LaserShooter extends Entity {
     super(speed,hp, renderCoordinates);
     this.initialSpeed = speed;
     this.missileList = [];
-    this.image = `/images/basicshooter.png`;
-    this.imagebullet = "/images/redlaser.png";
+    this.image = `/images/ships/basicshooter.png`;
+    this.imagebullet = "/images/bullets/redlaser.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.hitboxCoordinatesProj = renderCoordinatesProj;
     this.updateHitboxes();

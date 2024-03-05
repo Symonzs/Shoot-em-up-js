@@ -12,6 +12,6 @@ export default class SkullShooter extends Entity {
             }, this.movement.transitionTime);
         }, this.movement.time);
         this.missileList = [];
-        this.image = `/images/skullshooter.png`;
+        this.image = `/images/ships/skullshooter.png`;
     }
 }

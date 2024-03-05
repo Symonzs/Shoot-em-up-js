@@ -4,7 +4,7 @@ export default class LinearMissile extends Missiles {
   constructor(image, speed,hp, renderCoordinates) {
     super(speed, hp, renderCoordinates);
     if (!image) {
-      this.image = "/images/basicbullet.png";
+      this.image = "/images/bullets/basicbullet.png";
     } else {
       this.image = image;
     }

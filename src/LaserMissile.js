@@ -4,7 +4,7 @@ export default class LaserMissile extends Missiles {
   constructor(image,hp, renderCoordinates) {
     super(0, hp, renderCoordinates);
     if (!image) {
-      this.image = "/images/basicbullet.png";
+      this.image = "/images/bullets/basicbullet.png";
     } else {
       this.image = image;
     }

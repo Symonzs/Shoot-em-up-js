@@ -16,8 +16,8 @@ export default class CurvedShooter extends Entity {
         this.transition = true;
       }, this.movement.transitionTime);
     }, this.movement.time);
-    this.image = `/images/basicshooter.png`;
-    this.imagebullet = "/images/basicbullet.png";
+    this.image = `/images/ships/basicshooter.png`;
+    this.imagebullet = "/images/bullets/basicbullet.png";
     this.renderCoordinatesProj = renderCoordinatesProj;
     this.hitboxCoordinatesProj = renderCoordinatesProj;
     this.doSinuosidalatk = true;

@@ -39,20 +39,20 @@ let entityList = [];
 
 
 const image = new Image();
-image.src = "/images/gentil.png";
+image.src = "/images/ships/allyship.png";
 
-const joueurImageValues = getInitialImageValues("/images/gentil.png");
-const joueurProjImageValues = getInitialImageValues("/images/friendlybasicbullet.png");
+const joueurImageValues = getInitialImageValues("/images/ships/allyship.png");
+const joueurProjImageValues = getInitialImageValues("/images/bullets/friendlybasicbullet.png");
 const joueur = new Joueur(5, 10, getRenderValues(joueurImageValues, 0, 0), getProjectileRenderValues(joueurProjImageValues));
 requestAnimationFrame(render);
 
 
 
 
-const basicShooterImageValues = getInitialImageValues("/images/basicshooter.png");
-const basicShooterProjImageValues = getInitialImageValues("/images/basicbullet.png");
-const laserShooterImageValues = getInitialImageValues("/images/basicshooter.png");
-const laserShooterProjImageValues = getInitialImageValues("/images/redlaser.png");
+const basicShooterImageValues = getInitialImageValues("/images/ships/basicshooter.png");
+const basicShooterProjImageValues = getInitialImageValues("/images/bullets/basicbullet.png");
+const laserShooterImageValues = getInitialImageValues("/images/ships/basicshooter.png");
+const laserShooterProjImageValues = getInitialImageValues("/images/bullets/redlaser.png");
 
 const basicShooter = new BasicShooter(2, 10, getRenderValues(basicShooterImageValues, 2000, 500), getProjectileRenderValues(basicShooterProjImageValues), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
 entityList.push(basicShooter);  
@@ -66,11 +66,11 @@ entityList.push(curvedShooter)*/
 
 
 const HPBar = new Image();
-HPBar.src = "/images/hpbar.png";
+HPBar.src = "/images/HUD/hpbar.png";
 const HPButNormal = new Image();
-HPButNormal.src = "/images/hp.png";
+HPButNormal.src = "/images/HUD/hp.png";
 
-const imgkami = "/images/Sprite-first.png";
+const imgkami = "/images/ships/shark.png";
 const sharkImageValues = getInitialImageValues(imgkami);
 
 
