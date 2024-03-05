@@ -6,6 +6,7 @@ import {getInitialImageValues, getHitBoxValues, getRenderValues, getProjectileRe
 import LaserShooter from "./LaserShooter.js";
 import detectCollision from './hit.js';
 import CurvedShooter from "./CurvedShooter.js";
+import SkullShooter from "./SkullShooter.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -63,7 +64,8 @@ entityList.push(laserShooter)
 const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
 entityList.push(curvedShooter)*/
 
-
+const skullShooter = new SkullShooter(2, 10, getRenderValues(getInitialImageValues("images/ships/skull-1.png"), 1600, 500), getProjectileRenderValues(getInitialImageValues("images/bullets/skull-projectile.png")), {"xSpeed": 1, "ySpeed": 0, "time": 10000, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10000});
+entityList.push(skullShooter);
 
 const HPBar = new Image();
 HPBar.src = "/images/HUD/hpbar.png";
