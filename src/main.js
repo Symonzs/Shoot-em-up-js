@@ -162,9 +162,6 @@ function render() {
       });
     }
   });
-  const imgTest = new Image();
-  imgTest.src = "../images/test.png";
-  context.drawImage(imgTest, 1500-imgTest.width/2, 500-imgTest.height/2);
   joueur.missileList.forEach((missile) => {
     drawEntity(missile);
   });

@@ -33,7 +33,7 @@ describe("hit", () => {
         "height": 100
         }
         const friendlyRenderValues = getRenderValues(artificialImageValues, 500, 500)
-        const basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj);
+        let basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj, {"xSpeed": 1, "ySpeed": 0, "time": 10, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10});
         assert.strictEqual(basicShooter.hp, 10);
         const lmissile = new FriendlyBasicBullet(5, 5, friendlyRenderValues);
         detectCollision(lmissile, basicShooter)
@@ -46,7 +46,7 @@ describe("hit", () => {
             "height": 100
             }
             const friendlyRenderValues = getRenderValues(artificialImageValues, 100, 100)
-            const basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj);
+            let basicShooter = new BasicShooter(15, 10, rendervalues, renderValuesProj, {"xSpeed": 1, "ySpeed": 0, "time": 10, "xSpeed1" : 0, "ySpeed1" : 1, "transitionTime" : 10});
             assert.strictEqual(basicShooter.hp, 10);
             const lmissile = new FriendlyBasicBullet(5, 5, friendlyRenderValues);
             detectCollision(lmissile, basicShooter)
