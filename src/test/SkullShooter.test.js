@@ -51,4 +51,38 @@ describe('SkullShooter', () => {
         skullShooter.changeImage(2);
         assert.strictEqual(skullShooter.image, "/images/ships/skull-2.png");
     })
+
+    it ('should update the hitboxes accordingly', () => {
+        let skullShooter = new SkullShooter(
+            15,
+            10,
+            rendervalues, 
+            renderValuesProj, 
+            {"xSpeed": 1, 
+            "ySpeed": 0, 
+            "time": 10, 
+            "xSpeed1" : 0, 
+            "ySpeed1" : 1, 
+            "transitionTime" : 10});
+        const hitBoxImage1 = skullShooter.hitboxCoordinates;
+        skullShooter.changeImage(2);
+        assert.notStrictEqual(hitBoxImage1, skullShooter.hitboxCoordinates);
+    });
+
+    it('should be able to shoot', () => {
+        let skullShooter = new SkullShooter(
+            15,
+            10,
+            rendervalues, 
+            renderValuesProj, 
+            {"xSpeed": 1, 
+            "ySpeed": 0, 
+            "time": 10, 
+            "xSpeed1" : 0, 
+            "ySpeed1" : 1, 
+            "transitionTime" : 10});
+        assert.strictEqual(skullShooter.missileList.length, 0);
+        skullShooter.shoot();
+        assert.strictEqual(skullShooter.missileList.length, 1);
+    });
 });
