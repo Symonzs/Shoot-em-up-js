@@ -1,9 +1,10 @@
 import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
 
 export default class Weapon {
-  constructor(speed, dmg, renderCoordinatesProj) {
+  constructor(speed, dmg, fireRate, renderCoordinatesProj) {
     this.speed = speed;
     this.dmg = dmg;
+    this.fireRate = fireRate;
     this.renderCoordinatesProj = renderCoordinatesProj;
   }
 

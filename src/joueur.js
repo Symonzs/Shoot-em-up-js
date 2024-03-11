@@ -6,7 +6,7 @@ import Weapon from "./Weapon.js";
 export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
     super(speed, hp, renderCoordinates);
-    this.weapon = new Weapon(75, 1, renderCoordinatesProj);
+    this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
     this.image = "/images/ships/allyship.png";
     this.updateHitboxes();
     this.xSpeed = 0;
