@@ -3,6 +3,7 @@ import { velocity } from "../coordCalculator.js";
 import { describe, it } from "node:test";
 import BasicShooter from "../BasicShooter.js";
 import { getRenderValues } from "../GetInitialValues.js";
+import Joueur from "../joueur.js";
 
 const artificialImageValues = {
   path: "path",
@@ -21,10 +22,8 @@ const renderValuesProj = {
 
 describe("BasicWeapon", () => {
   it("should fire", (done) => {
-    const player = new Joueur(5, 10, rendervalues);
+    const player = new Joueur(5, 10, rendervalues, renderValuesProj);
     player.shoot();
-
     assert.strictEqual(player.missileList.length, 1);
-    done();
   });
 });
