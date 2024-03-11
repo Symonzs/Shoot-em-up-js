@@ -197,7 +197,7 @@ function drawEntity(entity) {
   const values = entity.render();
   const image = new Image();
   image.src = entity.image;
-  drawRotated(image, values, 45);
+  drawRotated(image, values);
 
   context.strokeStyle = "red";
   context.strokeRect(
