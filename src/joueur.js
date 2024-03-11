@@ -2,11 +2,13 @@ import Entity from "./Entity.js";
 import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
 import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
 import Weapon from "./Weapon.js";
+import BurstWeapon from "./BurstWeapon.js";
 
 export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
     super(speed, hp, renderCoordinates);
-    this.weapon = new Weapon(75, 1, renderCoordinatesProj);
+    this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
+    //this.weapon = new BurstWeapon(75, 1, 500, renderCoordinatesProj, 300, 3);
     this.image = "/images/ships/allyship.png";
     this.updateHitboxes();
     this.xSpeed = 0;
@@ -44,7 +46,16 @@ export default class Joueur extends Entity {
     this.missileList.push(
       new FriendlyBasicBullet(75, 999, newMissileRenderCoordinates)
     );*/
-    this.missileList.push(this.weapon.shoot(this.renderCoordinates));
+    if (this.weapon.missileNumber) {
+      for (let i = 0; i < this.weapon.missileNumber; i++) {
+        setTimeout(() => {
+          this.missileList.push(this.weapon.shoot(this.renderCoordinates));
+          console.log("Raph c'est ta faute");
+        }, this.weapon.burstInterval * i);
+      }
+    } else {
+      this.missileList.push(this.weapon.shoot(this.renderCoordinates));
+    }
   }
 
   changeWeapon(weapon) {

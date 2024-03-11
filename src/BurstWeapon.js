@@ -1,11 +1,18 @@
 import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
+import Weapon from "./Weapon.js";
 
-export default class Weapon {
-  constructor(speed, dmg, fireRate, renderCoordinatesProj) {
-    this.speed = speed;
-    this.dmg = dmg;
-    this.fireRate = fireRate;
-    this.renderCoordinatesProj = renderCoordinatesProj;
+export default class BurstWeapon extends Weapon {
+  constructor(
+    speed,
+    dmg,
+    fireRate,
+    renderCoordinatesProj,
+    burstInterval,
+    missileNumber
+  ) {
+    super(speed, dmg, fireRate, renderCoordinatesProj);
+    this.burstInterval = burstInterval;
+    this.missileNumber = missileNumber;
   }
 
   shoot(renderCoordinates) {

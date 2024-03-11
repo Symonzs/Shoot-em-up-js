@@ -161,7 +161,7 @@ canvas.addEventListener("mousedown", (event) => {
   joueur.shoot();
   const shooting = setInterval(() => {
     joueur.shoot();
-  }, 100);
+  }, joueur.weapon.fireRate);
   shootingSequence = shooting;
 });
 

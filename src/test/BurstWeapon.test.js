@@ -1,9 +1,8 @@
 import assert from "node:assert/strict";
-import { velocity } from "../coordCalculator.js";
 import { describe, it } from "node:test";
-import BasicShooter from "../BasicShooter.js";
 import { getRenderValues } from "../GetInitialValues.js";
 import Joueur from "../joueur.js";
+import BurstWeapon from "../BurstWeapon.js";
 
 const artificialImageValues = {
   path: "path",
@@ -20,10 +19,14 @@ const renderValuesProj = {
   height: rendervalues.height,
 };
 
-describe("BasicWeapon", () => {
+describe("BurstWeapon", () => {
   it("should fire", (done) => {
     const player = new Joueur(5, 10, rendervalues, renderValuesProj);
+    let weapon = new BurstWeapon(75, 1, 1000, renderValuesProj, 300, 3);
+    player.changeWeapon(weapon);
     player.shoot();
-    assert.strictEqual(player.missileList.length, 1);
+    setTimeout(() => {
+      assert.strictEqual(player.missileList.length, 3);
+    }, 4000);
   });
 });
