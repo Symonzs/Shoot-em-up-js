@@ -12,6 +12,7 @@ import LaserShooter from "./LaserShooter.js";
 import detectCollision from "./hit.js";
 import CurvedShooter from "./CurvedShooter.js";
 import SkullShooter from "./SkullShooter.js";
+import { getRandomIntInclusive } from "./coordCalculator.js";
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -86,23 +87,36 @@ const basicShooter = new BasicShooter(
 
 /*const laserShooter = new LaserShooter(2, 10, getRenderValues(laserShooterImageValues, 1500, 100), getProjectileRenderValues(laserShooterProjImageValues));
 entityList.push(laserShooter)
-
-const curvedShooter = new CurvedShooter(2, 10, getRenderValues(laserShooterImageValues, 1600, 500), getProjectileRenderValues(basicShooterProjImageValues));
-entityList.push(curvedShooter)*/
-
-const skullShooter = new SkullShooter(
+*/
+const curvedShooter = new CurvedShooter(
   2,
-  100,
-  getRenderValues(getInitialImageValues("images/ships/skull-1.png"), 1600, 500),
-  getProjectileRenderValues(
-    getInitialImageValues("/images/bullets/skull-projectile.png")
-  ),
+  10,
+  getRenderValues(laserShooterImageValues, 1600, 500),
+  getProjectileRenderValues(basicShooterProjImageValues),
   {
     xSpeed: 1,
     ySpeed: 0,
     time: 10000,
     xSpeed1: 0,
     ySpeed1: 1,
+    transitionTime: 10000,
+  }
+);
+entityList.push(curvedShooter);
+
+const skullShooter = new SkullShooter(
+  2,
+  100,
+  getRenderValues(getInitialImageValues("images/ships/skull-1.png"), 500, 500),
+  getProjectileRenderValues(
+    getInitialImageValues("/images/bullets/skull-projectile.png")
+  ),
+  {
+    xSpeed: 0,
+    ySpeed: 0,
+    time: 10000,
+    xSpeed1: 0,
+    ySpeed1: 0,
     transitionTime: 10000,
   }
 );
@@ -170,11 +184,20 @@ function renderHP() {
   }
 }
 
+function drawRotated(image, values, degrees) {
+  const rotation = (degrees * Math.PI) / 180;
+  context.save();
+  context.translate(values.x + values.width / 2, values.y + values.height / 2);
+  context.rotate(degrees);
+  context.drawImage(image, -values.width / 2, -values.height / 2);
+  context.restore();
+}
+
 function drawEntity(entity) {
   const values = entity.render();
   const image = new Image();
   image.src = entity.image;
-  context.drawImage(image, values.x, values.y);
+  drawRotated(image, values, 45);
 
   context.strokeStyle = "red";
   context.strokeRect(

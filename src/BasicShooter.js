@@ -4,12 +4,6 @@ import Entity from "./Entity.js";
 import LinearMissile from "./LinearMissile.js";
 import { Motion } from "./coordCalculator.js";
 
-function getRandomIntInclusive(min, max) {
-  const minCeiled = Math.ceil(min);
-  const maxFloored = Math.floor(max);
-  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-}
-
 export default class BasicShooter extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj, movement) {
     super(speed, hp, renderCoordinates, movement);
