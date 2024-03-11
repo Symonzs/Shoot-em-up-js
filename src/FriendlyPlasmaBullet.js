@@ -18,5 +18,6 @@ export default class FriendlyPlasmaBullet extends DiagonalMissile {
 
   move() {
     this.renderCoordinates.x += this.speedX;
+    this.renderCoordinates.y += this.speedY;
   }
 }
