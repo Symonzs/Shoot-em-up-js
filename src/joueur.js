@@ -8,7 +8,7 @@ export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
     super(speed, hp, renderCoordinates);
     this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
-    //this.weapon = new BurstWeapon(75, 1, 500, renderCoordinatesProj, 300, 3);
+    //this.weapon = new BurstWeapon(75, 1, 1500, renderCoordinatesProj, 80, 5);
     this.image = "/images/ships/allyship.png";
     this.updateHitboxes();
     this.xSpeed = 0;

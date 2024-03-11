@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import FriendlyBasicBullet from "../FriendlyBasicBullet.js";
+import FriendlyPlasmaBullet from "../FriendlyPlasmaBullet.js";
 import { getRenderValues } from "../GetInitialValues.js";
 
 const artificialImageValues = {
@@ -11,16 +12,16 @@ const artificialImageValues = {
 
 const rendervalues = getRenderValues(artificialImageValues, 500, 500);
 
-describe("FriendlyBasicBullet", () => {
+describe("FriendlyPlasmaBullet", () => {
   it("should move correctly", () => {
-    const lmissile = new FriendlyBasicBullet(5, 5, rendervalues);
+    const lmissile = new FriendlyPlasmaBullet(5, 5, rendervalues);
     const initialXPosition = lmissile.renderCoordinates.x;
     const initialYPosition = lmissile.renderCoordinates.y;
     lmissile.move();
     assert.strictEqual(
       lmissile.renderCoordinates.x,
-      initialXPosition + lmissile.speed
+      initialXPosition + lmissile.speedX
     );
-    assert.strictEqual(lmissile.renderCoordinates.y, initialYPosition);
+    assert.notEqual(lmissile.renderCoordinates.y, initialYPosition);
   });
 });

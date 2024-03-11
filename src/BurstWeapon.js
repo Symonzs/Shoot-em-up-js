@@ -1,4 +1,5 @@
 import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
+import FriendlyPlasmaBullet from "./FriendlyPlasmaBullet.js";
 import Weapon from "./Weapon.js";
 
 export default class BurstWeapon extends Weapon {
@@ -23,6 +24,6 @@ export default class BurstWeapon extends Weapon {
       height: this.renderCoordinatesProj.height,
     };
 
-    return new FriendlyBasicBullet(this.speed, 1, newMissileRenderCoordinates);
+    return new FriendlyPlasmaBullet(this.speed, 1, newMissileRenderCoordinates);
   }
 }
