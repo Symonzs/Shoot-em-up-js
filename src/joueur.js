@@ -7,16 +7,18 @@ import BurstWeapon from "./BurstWeapon.js";
 export default class Joueur extends Entity {
   constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
     super(speed, hp, renderCoordinates);
-    this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
-    //this.weapon = new BurstWeapon(75, 1, 1500, renderCoordinatesProj, 80, 5);
+    //this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
+    this.weapon = new BurstWeapon(10, 1, 3000, renderCoordinatesProj, 80, 5);
     this.image = "/images/ships/allyship.png";
     this.updateHitboxes();
     this.xSpeed = 0;
     this.ySpeed = 0;
+    this.canFire = false;
     this.latestCursorX = 0;
     this.latestCursorY = 0;
     this.time = 10;
     this.maxSpeed = 16;
+    this.hasShooted = false;
     this.ratio = this.canvasWidth / this.canvasHeight;
     this.maxSpeedY = this.maxSpeed;
     this.maxSpeedX = this.maxSpeed; //* (this.ratio * 1.25);
@@ -46,20 +48,32 @@ export default class Joueur extends Entity {
     this.missileList.push(
       new FriendlyBasicBullet(75, 999, newMissileRenderCoordinates)
     );*/
-    if (this.weapon.missileNumber) {
+    if (this.weapon.missileNumber && !this.hasShooted) {
+      this.hasShooted = true;
       for (let i = 0; i < this.weapon.missileNumber; i++) {
         setTimeout(() => {
           this.missileList.push(this.weapon.shoot(this.renderCoordinates));
-          console.log("Raph c'est ta faute");
         }, this.weapon.burstInterval * i);
       }
+      setTimeout(() => {
+        this.hasShooted = false;
+      }, this.weapon.fireRate);
     } else {
-      this.missileList.push(this.weapon.shoot(this.renderCoordinates));
+      if (!this.hasShooted) {
+        this.hasShooted = true;
+        this.missileList.push(this.weapon.shoot(this.renderCoordinates));
+        setTimeout(() => {
+          this.hasShooted = false;
+        }, this.weapon.fireRate);
+      }
     }
   }
 
   changeWeapon(weapon) {
     this.weapon = weapon;
+    this.Fire = setInterval(() => {
+      this.canFire = true;
+    }, this.weapon.fireRate);
   }
 
   move() {
