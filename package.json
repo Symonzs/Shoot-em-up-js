@@ -2,14 +2,16 @@
   "name": "jsae",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "type": "module",
   "scripts": {
-    "build": "webpack --mode=production",
-    "watch": "webpack --mode=development --watch",
-    "start": "webpack serve --mode=development",
+    "client:build": "webpack --mode=production",
+    "client:watch": "webpack --mode=development --watch",
+    "client:start": "webpack serve --mode=development",
     "test": "node --test",
-    "test:watch": "node --test --watch"
+    "test:watch": "node --test --watch",
+    "server": "node .",
+    "server:watch": "node --watch ."
   },
   "author": "Thomas Fritsch <thomas.fritsch@univ-lille.fr> (https://gitlab.univ-lille.fr/thomas.fritsch)",
   "homepage": "https://gitlab.univ-lille.fr/jsae",
@@ -25,6 +27,14 @@
     "sinon": "^17.0.1",
     "webpack": "^5.90.2",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.2"
+    "webpack-dev-middleware": "^7.0.0",
+    "webpack-dev-server": "^5.0.2",
+    "webpack-hot-middleware": "^2.26.1"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "image-size": "^1.1.1",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4"
   }
 }

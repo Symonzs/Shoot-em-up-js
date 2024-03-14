@@ -13,6 +13,9 @@ import detectCollision from "./hit.js";
 import CurvedShooter from "./CurvedShooter.js";
 import SkullShooter from "./SkullShooter.js";
 import { getRandomIntInclusive } from "./coordCalculator.js";
+import { io } from "socket.io-client";
+
+const socket = io();
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
