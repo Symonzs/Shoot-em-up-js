@@ -9,14 +9,16 @@ export default class LowerCurvedMissile extends Missiles {
       this.image = image;
     }
     this.canBeHurt = false;
-    this.amplitude = 10; //variation amx de la courbe en hauteur
+    this.amplitude = 100; //variation amx de la courbe en hauteur
     this.frequency = 0.005; //longueur de la courbe en largeur
     this.initialY = renderCoordinates.y;
   }
 
   move() {
     this.renderCoordinates.x -= this.speed;
-    this.renderCoordinates.y +=
+    this.renderCoordinates.y =
+      this.initialY +
       Math.sin(this.renderCoordinates.x * this.frequency) * this.amplitude;
+    //this.renderCoordinatesy
   }
 }

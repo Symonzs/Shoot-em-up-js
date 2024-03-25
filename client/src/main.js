@@ -96,11 +96,11 @@ const curvedShooter = new CurvedShooter(
   getRenderValues(laserShooterImageValues, 1600, 500),
   getProjectileRenderValues(basicShooterProjImageValues),
   {
-    xSpeed: 1,
+    xSpeed: 5,
     ySpeed: 0,
-    time: 10000,
+    time: 1000,
     xSpeed1: 0,
-    ySpeed1: 1,
+    ySpeed1: 0,
     transitionTime: 10000,
   }
 );
