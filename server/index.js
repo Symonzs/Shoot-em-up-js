@@ -10,7 +10,9 @@ import {
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import BasicShooter from "./entities/BasicShooter.js";
 import { getValuesFromFile } from "./utils/EntityInitialValues.js";
+import { getJSONValues } from "./utils/getImageValues.js";
 
+updateImageValues();
 /**
  * Magie Noir
  */
@@ -41,12 +43,11 @@ io.on("connection", (socket) => {
  */
 
 let entityList = [];
-/*
 const basicShooter = new BasicShooter(
   2,
   10,
-  getRenderValues(basicShooterImageValues, 2000, 500),
-  getProjectileRenderValues(basicShooterProjImageValues),
+  "client/public/images/extra/mechant.png",
+  "",
   {
     xSpeed: 1,
     ySpeed: 0,
@@ -57,7 +58,6 @@ const basicShooter = new BasicShooter(
   }
 );
 entityList.push(basicShooter);
-*/
 /*
  * Update de toutes les hitbox
  */
@@ -80,5 +80,3 @@ setInterval(function () {
   io.emit("update", entityList);
   //console.log(getImageValue("client/public/images/HUD/background.png"));
 }, 1000 / 60);
-
-updateImageValues();

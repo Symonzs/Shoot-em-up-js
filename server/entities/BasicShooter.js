@@ -3,10 +3,12 @@ import DiagonalMissile from "./DiagonalMissile.js";
 import Entity from "../Entity.js";
 import LinearMissile from "./LinearMissile.js";
 import { Motion } from "../coordCalculator.js";
+import { getJSONValues } from "../utils/getImageValues.js";
 
 export default class BasicShooter extends Entity {
-  constructor(speed, hp, renderCoordinates, renderCoordinatesProj, movement) {
+  constructor(speed, hp, path, renderCoordinatesProj, movement) {
     super(speed, hp, renderCoordinates, movement);
+    this.renderCoordinates = getJSONValues(path);
     this.secondPhase = false;
     this.transition = false;
     setTimeout(() => {
