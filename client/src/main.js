@@ -1,4 +1,3 @@
-import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
 import BasicShooter from "./BasicShooter.js";
 import Joueur from "./joueur.js";
@@ -42,7 +41,7 @@ function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 }
-let entityList = [];
+//let entityList = [];
 
 const image = new Image();
 image.src = "/images/ships/allyship.png";
@@ -105,7 +104,7 @@ const curvedShooter = new CurvedShooter(
     transitionTime: 10000,
   }
 );
-entityList.push(curvedShooter);
+//entityList.push(curvedShooter);
 
 const skullShooter = new SkullShooter(
   2,
@@ -123,7 +122,7 @@ const skullShooter = new SkullShooter(
     transitionTime: 10000,
   }
 );
-entityList.push(skullShooter);
+//entityList.push(skullShooter);
 
 const HPBar = new Image();
 HPBar.src = "/images/HUD/hpbar.png";
@@ -139,7 +138,7 @@ for (let i = 0; i < 0; i++) {
     999,
     getRenderValues(sharkImageValues, 1800, 340)
   );
-  entityList.push(monster);
+  //entityList.push(monster);
 }
 canvas.addEventListener("mousemove", (event) => {
   if (event.offsetX != joueur.latestCursorX) {
@@ -302,3 +301,8 @@ function isInContact(entitylist) {
 }
 
 setInterval(update, 1000 / 60);
+
+socket.on("update", () => {
+  console.log("update");
+  render();
+});

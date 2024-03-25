@@ -29,9 +29,6 @@ export function updateImageValues() {
       );
     });
   });
-  writeFileSync(
-    `${pathToImage}/res/images.json`,
-    JSON.stringify(allValues, null, 2)
-  );
+  writeFileSync(`server/res/images.json`, JSON.stringify(allValues, null, 2));
   console.log("Images values updated");
 }
