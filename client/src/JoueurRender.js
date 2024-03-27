@@ -1,4 +1,5 @@
 import renderEntity from "./EntityRender.js";
+import renderMissile from "./MissileRender.js";
 
 const playerImage = new Image();
 
@@ -27,7 +28,7 @@ export default function renderPlayer(player, context) {
   context.strokeStyle = "black";
   if (player.missileList) {
     player.missileList.forEach((missile) => {
-      renderEntity(missile, context);
+      renderMissile(missile, context);
     });
   }
 }

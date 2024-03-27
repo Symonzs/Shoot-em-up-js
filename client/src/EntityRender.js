@@ -1,3 +1,5 @@
+import renderMissile from "./MissileRender.js";
+
 export default function renderEntity(entity, context) {
   const image = new Image();
   image.src = entity.path;
@@ -5,7 +7,7 @@ export default function renderEntity(entity, context) {
 
   if (entity.missileList) {
     entity.missileList.forEach((missile) => {
-      renderEntity(missile, context);
+      renderMissile(missile, context);
     });
   }
 }
