@@ -41,7 +41,7 @@ function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 }
-//let entityList = [];
+let entityList = [];
 
 const image = new Image();
 image.src = "/images/ships/allyship.png";
@@ -190,16 +190,16 @@ function drawRotated(image, values, degrees) {
   const rotation = (degrees * Math.PI) / 180;
   context.save();
   context.translate(values.x + values.width / 2, values.y + values.height / 2);
-  context.rotate(degrees);
+  // context.rotate(degrees);
   context.drawImage(image, -values.width / 2, -values.height / 2);
   context.restore();
 }
 
+const imageMechantLOL = new Image();
+imageMechantLOL.src = "/images/extra/mechant.png";
 function drawEntity(entity) {
-  const values = entity.render();
-  const image = new Image();
-  image.src = entity.image;
-  drawRotated(image, values);
+  const values = entity.renderCoordinates;
+  drawRotated(imageMechantLOL, values);
 
   context.strokeStyle = "red";
   context.strokeRect(
@@ -240,12 +240,15 @@ function drawJoueur() {
   );
   context.strokeStyle = "black";
 }
-
+/*
+ * si t'appelles ça, c'est pas normal
+ */
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  drawJoueur();
+  // drawJoueur();
   entityList.forEach((entity) => {
+    // console.log("aa");
     drawEntity(entity);
     if (entity.missileList) {
       entity.missileList.forEach((missile) => {
@@ -300,9 +303,7 @@ function isInContact(entitylist) {
   });
 }
 
-setInterval(update, 1000 / 60);
-
-socket.on("update", () => {
-  console.log("update");
-  render();
+render();
+socket.on("update", (receivedValue) => {
+  entityList = receivedValue;
 });

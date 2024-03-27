@@ -1,14 +1,15 @@
 import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
 import DiagonalMissile from "./DiagonalMissile.js";
-import Entity from "../Entity.js";
+import Entity from "./Entity.js";
 import LinearMissile from "./LinearMissile.js";
 import { Motion } from "../coordCalculator.js";
-import { getJSONValues } from "../utils/getImageValues.js";
+import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
 
 export default class BasicShooter extends Entity {
-  constructor(speed, hp, path, renderCoordinatesProj, movement) {
-    super(speed, hp, renderCoordinates, movement);
-    this.renderCoordinates = getJSONValues(path);
+  constructor(speed, hp, path, x, y, projPath, movement) {
+    super(speed, hp, path, x, y, movement);
+    this.renderCoordinatesProj = getRenderValues(projPath, x, y);
+    this.hitboxCoordinatesProj = getJSONValues(projPath, 0, 0);
     this.secondPhase = false;
     this.transition = false;
     setTimeout(() => {
@@ -18,18 +19,18 @@ export default class BasicShooter extends Entity {
       }, this.movement.transitionTime);
     }, this.movement.time);
     this.missileList = [];
-    this.image = `/images/ships/basicshooter.png`;
-    this.imagebullet = `/images/bullets/basicbullet.png`;
-    this.renderCoordinatesProj = renderCoordinatesProj;
-    this.hitboxCoordinatesProj = renderCoordinatesProj;
+    this.image = path;
+    this.imagebullet = projPath;
     this.updateHitboxes();
 
     this.varProjX = -20;
     this.varProjY = 35;
 
+    /*
     this.canFire = setInterval(() => {
       this.shoot();
     }, 1000);
+    */
   }
 
   updateHitboxes() {

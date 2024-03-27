@@ -1,112 +1,112 @@
 {
   "image": [
     {
-      "path": "client/public/images/HUD/background.png",
+      "path": "/images/HUD/background.png",
       "width": 2100,
       "height": 1080
     },
     {
-      "path": "client/public/images/HUD/hp.png",
+      "path": "/images/HUD/hp.png",
       "width": 61,
       "height": 40
     },
     {
-      "path": "client/public/images/HUD/hpbar.png",
+      "path": "/images/HUD/hpbar.png",
       "width": 500,
       "height": 50
     },
     {
-      "path": "client/public/images/bullets/basicbullet.png",
+      "path": "/images/bullets/basicbullet.png",
       "width": 25,
       "height": 25
     },
     {
-      "path": "client/public/images/bullets/friendlybasicbullet.png",
+      "path": "/images/bullets/friendlybasicbullet.png",
       "width": 30,
       "height": 18
     },
     {
-      "path": "client/public/images/bullets/friendlyplasmabullet.png",
+      "path": "/images/bullets/friendlyplasmabullet.png",
       "width": 75,
       "height": 45
     },
     {
-      "path": "client/public/images/bullets/friendlyplasmabulletsmall.png",
+      "path": "/images/bullets/friendlyplasmabulletsmall.png",
       "width": 25,
       "height": 15
     },
     {
-      "path": "client/public/images/bullets/redlaser.png",
+      "path": "/images/bullets/redlaser.png",
       "width": 2000,
       "height": 60
     },
     {
-      "path": "client/public/images/bullets/skull-projectile.png",
+      "path": "/images/bullets/skull-projectile.png",
       "width": 40,
       "height": 40
     },
     {
-      "path": "client/public/images/extra/mechant.png",
+      "path": "/images/extra/mechant.png",
       "width": 56,
       "height": 52
     },
     {
-      "path": "client/public/images/extra/monster.gif",
+      "path": "/images/extra/monster.gif",
       "width": 64,
       "height": 64
     },
     {
-      "path": "client/public/images/extra/monster.png",
+      "path": "/images/extra/monster.png",
       "width": 56,
       "height": 52
     },
     {
-      "path": "client/public/images/extra/testing.png",
+      "path": "/images/extra/testing.png",
       "width": 300,
       "height": 300
     },
     {
-      "path": "client/public/images/ships/allyship.png",
+      "path": "/images/ships/allyship.png",
       "width": 100,
       "height": 50
     },
     {
-      "path": "client/public/images/ships/basicshooter.png",
+      "path": "/images/ships/basicshooter.png",
       "width": 79,
       "height": 60
     },
     {
-      "path": "client/public/images/ships/cr1m.png",
+      "path": "/images/ships/cr1m.png",
       "width": 1000,
       "height": 571
     },
     {
-      "path": "client/public/images/ships/shark.png",
+      "path": "/images/ships/shark.png",
       "width": 50,
       "height": 50
     },
     {
-      "path": "client/public/images/ships/skull-1.png",
+      "path": "/images/ships/skull-1.png",
       "width": 75,
       "height": 150
     },
     {
-      "path": "client/public/images/ships/skull-2.png",
+      "path": "/images/ships/skull-2.png",
       "width": 75,
       "height": 150
     },
     {
-      "path": "client/public/images/ships/skull-3.png",
+      "path": "/images/ships/skull-3.png",
       "width": 75,
       "height": 150
     },
     {
-      "path": "client/public/images/ships/skull-4.png",
+      "path": "/images/ships/skull-4.png",
       "width": 75,
       "height": 150
     },
     {
-      "path": "client/public/images/ships/skull-5.png",
+      "path": "/images/ships/skull-5.png",
       "width": 75,
       "height": 150
     }

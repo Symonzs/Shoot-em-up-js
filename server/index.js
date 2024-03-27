@@ -12,7 +12,7 @@ import BasicShooter from "./entities/BasicShooter.js";
 import { getValuesFromFile } from "./utils/EntityInitialValues.js";
 import { getJSONValues } from "./utils/getImageValues.js";
 
-updateImageValues();
+// updateImageValues();
 /**
  * Magie Noir
  */
@@ -35,8 +35,10 @@ const io = new IOServer(httpServer, {
 
 app.use(express.static("client/public"));
 
+let player = [];
+
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  player.push(socket.id);
 });
 /*
  * Fin Magie Noir
@@ -46,15 +48,17 @@ let entityList = [];
 const basicShooter = new BasicShooter(
   2,
   10,
-  "client/public/images/extra/mechant.png",
-  "",
+  "/images/extra/mechant.png",
+  2,
+  2,
+  "/images/bullets/basicbullet.png",
   {
-    xSpeed: 1,
+    xSpeed: 0.05,
     ySpeed: 0,
-    time: 10000,
-    xSpeed1: 0,
-    ySpeed1: 1,
-    transitionTime: 10000,
+    time: 0,
+    xSpeed1: -0.05,
+    ySpeed1: 0,
+    transitionTime: 0,
   }
 );
 entityList.push(basicShooter);
@@ -63,6 +67,7 @@ entityList.push(basicShooter);
  */
 function updateHitboxes() {
   entityList.forEach((entity) => {
+    //console.log(getJSONValues("/images/ships/basicshooter.png"));
     entity.move();
   });
 }
@@ -70,13 +75,12 @@ function updateHitboxes() {
 /*
  * Envois l'entityList a tous joueur a chaque frame afin qu'ils puissent le render.
  */
-setInterval(function () {
+setInterval(() => {
   /**
    * faire les calcul et tt ici juste avant de l'envoyer aux joueurs
    */
-
   // move de chaque entité de entityList
   updateHitboxes();
   io.emit("update", entityList);
-  //console.log(getImageValue("client/public/images/HUD/background.png"));
+  //console.log(getImageValue("/images/HUD/background.png"));
 }, 1000 / 60);
