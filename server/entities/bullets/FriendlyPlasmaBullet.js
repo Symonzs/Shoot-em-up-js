@@ -11,7 +11,6 @@ export default class FriendlyPlasmaBullet extends DiagonalMissile {
       x,
       y
     );
-
     this.canBeHurt = false;
     this.VarProjX = 20;
     this.VarProjY = -10;
@@ -20,5 +19,6 @@ export default class FriendlyPlasmaBullet extends DiagonalMissile {
   move() {
     this.renderCoordinates.x += this.speedX;
     this.renderCoordinates.y += this.speedY;
+    this.updateHitboxes();
   }
 }

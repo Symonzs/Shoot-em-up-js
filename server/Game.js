@@ -1,3 +1,5 @@
+import Entity from "./entities/Entity.js";
+
 export default class Game {
   constructor(player) {
     this.entities = [];
@@ -14,7 +16,23 @@ export default class Game {
   }
 
   removeEntity() {
+    this.players.forEach((player) => {
+      if (player.missileList) {
+        player.missileList = player.missileList.filter((missile) => {
+          /* missile.hitboxCoordinates.x > 0 */ true &&
+            missile.hitboxCoordinates.x < player.canvasWidth;
+        });
+      }
+    });
+
     this.entities.forEach((entity, index) => {
+      if (entity.missileList) {
+        entity.missileList = entity.missileList.filter(
+          (missile) =>
+            missile.hitboxCoordinates.x > 0 &&
+            missile.hitboxCoordinates.x < entity.canvasWidth
+        );
+      }
       if (entity.hp < 1) {
         entity.renderCoordinates.x = -1000;
         entity.renderCoordinates.y = -1000;
@@ -51,9 +69,21 @@ export default class Game {
   updateGame() {
     this.players.forEach((player) => {
       player.move();
+      if (player.missileList.lenght != 0) {
+        player.missileList.forEach((missile) => {
+          missile.move();
+        });
+      }
     });
     this.entities.forEach((entity) => {
       entity.move();
+      console.log("je bouge une entitée");
+      if (entity.missileList.length != 0) {
+        entity.missileList.forEach((missile) => {
+          missile.move();
+          console.log("je bouge un missile");
+        });
+      }
     });
     this.isInContact();
     this.removeEntity();
