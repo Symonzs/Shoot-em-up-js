@@ -1,5 +1,5 @@
 import Entity from "./Entity.js";
-import LaserMissile from "./LaserMissile.js";
+import LaserMissile from "./entities/bullets/LaserMissile.js";
 import { Motion } from "./coordCalculator.js";
 
 export default class LaserShooter extends Entity {

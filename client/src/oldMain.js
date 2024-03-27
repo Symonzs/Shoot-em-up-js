@@ -1,19 +1,18 @@
-import KamikazeEnemy from "./KamikazeEnemy.js";
-import BasicShooter from "../client/src/BasicShooter.js";
-import Joueur from "./joueur.js";
+import KamikazeEnemy from "../../server/KamikazeEnemy.js";
+import BasicShooter from "./BasicShooter.js";
+import Joueur from "../../server/entities/joueur.js";
 import {
   getInitialImageValues,
   getHitBoxValues,
   getRenderValues,
   getProjectileRenderValues,
-} from "./GetInitialValues.js";
-import LaserShooter from "./LaserShooter.js";
-import detectCollision from "./hit.js";
-import CurvedShooter from "./CurvedShooter.js";
-import SkullShooter from "./SkullShooter.js";
-import { getRandomIntInclusive } from "./coordCalculator.js";
+} from "../../server/GetInitialValues.js";
+import LaserShooter from "../../server/LaserShooter.js";
+import detectCollision from "../../server/hit.js";
+import CurvedShooter from "../../server/CurvedShooter.js";
+import SkullShooter from "../../server/SkullShooter.js";
+import { getRandomIntInclusive } from "../../server/coordCalculator.js";
 import { io } from "socket.io-client";
-
 const socket = io();
 
 const canvas = document.querySelector(".gameCanvas"),

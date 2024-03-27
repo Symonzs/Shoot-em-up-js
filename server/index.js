@@ -1,16 +1,10 @@
 import http from "http";
 import express from "express";
-import { readFileSync } from "node:fs";
 import { Server as IOServer } from "socket.io";
-import {
-  getValues,
-  getImageValue,
-  updateImageValues,
-} from "./utils/getValues.js";
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import BasicShooter from "./entities/BasicShooter.js";
-import { getValuesFromFile } from "./utils/EntityInitialValues.js";
-import { getJSONValues } from "./utils/getImageValues.js";
+import Joueur from "./entities/joueur.js";
+import Game from "./Game.js";
 
 // updateImageValues();
 /**
@@ -35,10 +29,23 @@ const io = new IOServer(httpServer, {
 
 app.use(express.static("client/public"));
 
-let player = [];
-
+let players = [];
+let game = new Game(new Joueur());
 io.on("connection", (socket) => {
-  player.push(socket.id);
+  // a changer afin d'identifier les reuf par leur login
+  let newPlayer = new Joueur();
+  players.push(newPlayer);
+  game = new Game(newPlayer);
+  socket.on("mousemove", (mouseCords) => {
+    console.log("mouseCords");
+    console.log(mouseCords);
+    game.players[0].latestCursorX = mouseCords.x;
+    game.players[0].latestCursorY = mouseCords.y;
+    console.log("game.players[0].renderCoordinates");
+    console.log(game.players[0].renderCoordinates);
+    console.log("game.players[0].hitboxCoordinates");
+    console.log(game.players[0].hitboxCoordinates);
+  });
 });
 /*
  * Fin Magie Noir
@@ -62,15 +69,6 @@ const basicShooter = new BasicShooter(
   }
 );
 entityList.push(basicShooter);
-/*
- * Update de toutes les hitbox
- */
-function updateHitboxes() {
-  entityList.forEach((entity) => {
-    //console.log(getJSONValues("/images/ships/basicshooter.png"));
-    entity.move();
-  });
-}
 
 /*
  * Envois l'entityList a tous joueur a chaque frame afin qu'ils puissent le render.
@@ -80,7 +78,7 @@ setInterval(() => {
    * faire les calcul et tt ici juste avant de l'envoyer aux joueurs
    */
   // move de chaque entité de entityList
-  updateHitboxes();
-  io.emit("update", entityList);
+  game.updateGame();
+  io.emit("updatedGame", game);
   //console.log(getImageValue("/images/HUD/background.png"));
 }, 1000 / 60);

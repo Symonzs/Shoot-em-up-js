@@ -1,7 +1,7 @@
-import BounceDiagonalMissile from "./BounceDiagonalMissile.js";
-import DiagonalMissile from "./DiagonalMissile.js";
+import BounceDiagonalMissile from "./bullets/BounceDiagonalMissile.js";
+import DiagonalMissile from "./bullets/DiagonalMissile.js";
 import Entity from "./Entity.js";
-import LinearMissile from "./LinearMissile.js";
+import LinearMissile from "./bullets/LinearMissile.js";
 import { Motion } from "../coordCalculator.js";
 import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
 

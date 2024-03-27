@@ -1,4 +1,4 @@
-import Entity from "./Entity.js";
+import Entity from "../Entity.js";
 
 export default class Missiles extends Entity {
   constructor(speed, hp, renderCoordinates, hitboxCoordinates) {

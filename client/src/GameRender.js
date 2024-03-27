@@ -1,5 +1,4 @@
-import renderMissiles from "./MissileRender.js";
-import renderPlayer from "./PlayerRender.js";
+import renderPlayer from "./JoueurRender.js";
 import renderEntity from "./EntityRender.js";
 
 export default function renderGame(game, context) {
@@ -9,8 +8,5 @@ export default function renderGame(game, context) {
   });
   game.players.forEach((player) => {
     renderPlayer(player, context);
-  });
-  game.missiles.forEach((missile) => {
-    renderMissiles(missile, context);
   });
 }

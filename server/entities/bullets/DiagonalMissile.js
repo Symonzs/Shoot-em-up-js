@@ -12,6 +12,5 @@ export default class DiagonalMissile extends Missiles {
   move() {
     this.renderCoordinates.x -= this.speedX;
     this.renderCoordinates.y += this.speedY;
-   
   }
 }

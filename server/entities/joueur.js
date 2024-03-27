@@ -1,15 +1,24 @@
 import Entity from "./Entity.js";
-import { calcCoord, calcDistance, velocity } from "./coordCalculator.js";
-import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
-import Weapon from "./Weapon.js";
-import BurstWeapon from "./BurstWeapon.js";
+import { calcCoord, calcDistance, velocity } from "../coordCalculator.js";
+import Weapon from "../weapons/Weapon.js";
+import BurstWeapon from "../weapons/BurstWeapon.js";
+import { getRenderValues } from "../utils/getImageValues.js";
 
 export default class Joueur extends Entity {
-  constructor(speed, hp, renderCoordinates, renderCoordinatesProj) {
-    super(speed, hp, renderCoordinates);
+  constructor() {
+    super(5, 10, "/images/ships/allyship.png", 500, 500);
     //this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
-    this.weapon = new BurstWeapon(10, 1, 3000, renderCoordinatesProj, 80, 5);
-    this.image = "/images/ships/allyship.png";
+    this.renderCoordinatesProj = getRenderValues(
+      "/images/bullets/friendlyplasmabullet.png"
+    );
+    this.weapon = new BurstWeapon(
+      10,
+      1,
+      3000,
+      this.renderCoordinatesProj,
+      80,
+      5
+    );
     this.updateHitboxes();
     this.xSpeed = 0;
     this.ySpeed = 0;
@@ -25,7 +34,7 @@ export default class Joueur extends Entity {
     this.canBeTouched = true;
     this.varProjX = this.renderCoordinates.width;
     this.varProjY = 20;
-    this.renderCoordinatesProj = renderCoordinatesProj;
+    this.renderCoordinatesProj = this.renderCoordinatesProj;
     this.missileList = [];
   }
 
@@ -77,12 +86,14 @@ export default class Joueur extends Entity {
   }
 
   move() {
+    /*
     this.missileList = this.missileList.filter(
       (missile) =>
         missile.hitboxCoordinates.x > 0 &&
         missile.hitboxCoordinates.x < this.canvasWidth
     );
     this.missileList.forEach((missile) => missile.move());
+    */
     this.xSpeed = velocity(
       calcDistance(
         this.renderCoordinates.x + this.renderCoordinates.width / 2,

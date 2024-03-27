@@ -1,5 +1,5 @@
-import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
-import FriendlyPlasmaBullet from "./FriendlyPlasmaBullet.js";
+import FriendlyBasicBullet from "../entities/bullets/FriendlyBasicBullet.js";
+import FriendlyPlasmaBullet from "../entities/bullets/FriendlyPlasmaBullet.js";
 import Weapon from "./Weapon.js";
 
 export default class BurstWeapon extends Weapon {

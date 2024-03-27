@@ -1,4 +1,4 @@
-import FriendlyBasicBullet from "./FriendlyBasicBullet.js";
+import FriendlyBasicBullet from "../entities/bullets/FriendlyBasicBullet.js";
 
 export default class Weapon {
   constructor(speed, dmg, fireRate, renderCoordinatesProj) {

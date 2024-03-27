@@ -30,7 +30,7 @@ export default class Game {
   }
 
   isInContact() {
-    this.joueurs.forEach((joueur) => {
+    this.players.forEach((joueur) => {
       this.entities.forEach((entity) => {
         detectCollision(entity, joueur, true);
         joueur.missileList.forEach((missile) => {
