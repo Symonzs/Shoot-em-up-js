@@ -38,8 +38,8 @@ io.on("connection", (socket) => {
   players.push(newPlayer);
   game = new Game(newPlayer);
   game.addEntity(
-    new CurvedShooter(5, 10, 500, 500, {
-      xSpeed: 5,
+    new CurvedShooter(5, 600, 10, 1500, 500, {
+      xSpeed: 0,
       ySpeed: 0,
       time: 1000,
       xSpeed1: 0,
@@ -53,7 +53,6 @@ io.on("connection", (socket) => {
     game.players[0].latestCursorY = mouseCords.y;
   });
   socket.on("mousedown", () => {
-    console.log("server -> mousedown");
     game.players[0].shoot();
   });
 });

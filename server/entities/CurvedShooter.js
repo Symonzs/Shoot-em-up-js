@@ -5,72 +5,50 @@ import { Motion } from "../coordCalculator.js";
 import { getRenderValues, getJSONValues } from "../utils/getImageValues.js";
 
 export default class CurvedShooter extends Entity {
-  constructor(speed, hp, x, y, movement) {
-    super(speed, hp, "/images/ships/basicshooter.png", x, y, movement);
-    this.renderCoordinatesProj = getRenderValues(
-      "/images/bullets/basicbullet.png",
+  constructor(speed, atkspeed, hp, x, y, movement) {
+    super(
+      speed,
+      atkspeed,
+      hp,
+      "/images/ships/basicshooter.png",
       x,
-      y
+      y,
+      movement
     );
-    this.hitboxCoordinatesProj = getJSONValues(
-      "/images/bullets/basicbullet.png",
-      x,
-      y
-    );
+    this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;
-    /*
-    setInterval(() => {
+    /*setInterval(() => {
       this.secondPhase = true;
       setInterval(() => {
         this.transition = true;
       }, this.movement.transitionTime);
-    }, this.movement.time);
-    this.doSinuosidalatk = true;
-    this.isAttacking = false;
-    setInterval(() => {
-      this.doSinuosidalatk = !this.doSinuosidalatk;
-      setTimeout(() => {
-        this.isAttacking = true;
-      }, 1);
-      setTimeout(() => {
-        this.isAttacking = false;
-      }, 4000);
-    }, 5000);
-    this.canFire = setInterval(() => {
-      if (this.isAttacking) {
-        const newMissileRenderCoordinatesUp = {
-          x: this.renderCoordinates.x,
-          y: this.renderCoordinates.y,
-          width: this.renderCoordinatesProj.width,
-          height: this.renderCoordinatesProj.height,
-        };
-        const newMissileRenderCoordinatesDo = {
-          x: this.renderCoordinates.x,
-          y: this.renderCoordinates.y,
-          width: this.renderCoordinatesProj.width,
-          height: this.renderCoordinatesProj.height,
-        };
-        this.missileList.push(
-          new UpperCurvedMissile(
-            this.imagebullet,
-            25,
-            999,
-            newMissileRenderCoordinatesUp
-          )
-        );
-        this.missileList.push(
-          new LowerCurvedMissile(
-            this.imagebullet,
-            25,
-            999,
-            newMissileRenderCoordinatesDo
-          )
-        );
-      }
-    }, 100);
-    */
+    }, this.movement.time);*/
+
     this.missileList = [];
+  }
+
+  shoot() {
+    if (this.tickBeforeShooting < this.atkspd) {
+      return;
+    }
+    if (this.tickBeforeShooting == this.atkspd) {
+      this.tickBeforeShooting = 0;
+      this.isShooting = true;
+      for (let i = 0; i < 200; i++) {
+        setTimeout(() => {
+          this.missileList.push(
+            new UpperCurvedMissile(10, 999, this.renderCoordinates)
+          );
+          this.missileList.push(
+            new LowerCurvedMissile(10, 999, this.renderCoordinates)
+          );
+          if (i == 199) {
+            this.isShooting = false;
+          }
+        }, 200 * i);
+      }
+    }
   }
 
   updateHitboxes() {
@@ -83,6 +61,11 @@ export default class CurvedShooter extends Entity {
   }
 
   move() {
+    console.log("son tickBeforeShooting est a :" + this.tickBeforeShooting);
+    if (!this.isShooting) {
+      this.tickBeforeShooting++;
+    }
+
     this.missileList = this.missileList.filter(
       (missile) =>
         missile.hitboxCoordinates.x > 0 &&

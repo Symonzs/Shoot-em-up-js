@@ -1,8 +1,10 @@
 import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
 
 export default class Entity {
-  constructor(speed, hp, path, x, y, movement) {
+  constructor(speed, atkspd, hp, path, x, y, movement) {
     this.speed = speed;
+    this.atkspd = atkspd;
+    this.tickBeforeShooting = 0;
     this.movement = movement;
     this.hitboxCoordinates = getRenderValues(path, x, y);
     this.renderCoordinates = getRenderValues(path, x, y);

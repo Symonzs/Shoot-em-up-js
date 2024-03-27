@@ -17,7 +17,7 @@ export default class Game {
   }
 
   removeEntity() {
-    console.log(this.entities.length);
+    //console.log(this.entities.length);
     this.players.forEach((player) => {
       // TODO: changer l'implémentation, le filter ne marchait plus pour une raison inconnue et étrange et chiante
       if (player.missileList) {
@@ -43,18 +43,20 @@ export default class Game {
         entity.missileList.forEach((missile) => {
           if (
             missile.hitboxCoordinates.x > 0 &&
-            missile.hitboxCoordinates.x < missile.canvasWidth
+            missile.hitboxCoordinates.x < entity.canvasWidth
           ) {
             newList.push(missile);
           }
         });
+        console.log(newList.length);
         entity.missileList = newList;
+        console.log(entity.missileList.length);
       }
       if (entity.hp < 1) {
         entity.renderCoordinates.x = -1000;
         entity.renderCoordinates.y = -1000;
         if (entity.missileList && entity.missileList.length < 1) {
-          entityList.splice(index, 1);
+          this.entities.splice(index, 1);
         }
       }
     });
@@ -93,6 +95,7 @@ export default class Game {
       }
     });
     this.entities.forEach((entity) => {
+      entity.shoot();
       entity.move();
       if (entity.missileList.length != 0) {
         entity.missileList.forEach((missile) => {

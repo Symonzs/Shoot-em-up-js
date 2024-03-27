@@ -6,7 +6,7 @@ import { getRenderValues } from "../utils/getImageValues.js";
 
 export default class Joueur extends Entity {
   constructor() {
-    super(5, 10, "/images/ships/allyship.png", 500, 500);
+    super(5, 9999, 10, "/images/ships/allyship.png", 500, 500);
     //this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
     this.renderCoordinatesProj = getRenderValues(
       "/images/bullets/friendlyplasmabullet.png"
@@ -19,6 +19,7 @@ export default class Joueur extends Entity {
       80,
       5
     );
+    this.atkspd = this.weapon.fireRate;
     this.updateHitboxes();
     this.xSpeed = 0;
     this.ySpeed = 0;
