@@ -5,6 +5,7 @@ import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import BasicShooter from "./entities/BasicShooter.js";
 import Joueur from "./entities/joueur.js";
 import Game from "./Game.js";
+import CurvedShooter from "./entities/CurvedShooter.js";
 
 // updateImageValues();
 /**
@@ -36,6 +37,17 @@ io.on("connection", (socket) => {
   let newPlayer = new Joueur();
   players.push(newPlayer);
   game = new Game(newPlayer);
+  game.addEntity(
+    new CurvedShooter(5, 10, 500, 500, {
+      xSpeed: 5,
+      ySpeed: 0,
+      time: 1000,
+      xSpeed1: 0,
+      ySpeed1: 0,
+      transitionTime: 10000,
+    })
+  );
+
   socket.on("mousemove", (mouseCords) => {
     game.players[0].latestCursorX = mouseCords.x;
     game.players[0].latestCursorY = mouseCords.y;
@@ -48,25 +60,6 @@ io.on("connection", (socket) => {
 /*
  * Fin Magie Noir
  */
-
-let entityList = [];
-const basicShooter = new BasicShooter(
-  2,
-  10,
-  "/images/extra/mechant.png",
-  2,
-  2,
-  "/images/bullets/basicbullet.png",
-  {
-    xSpeed: 0.05,
-    ySpeed: 0,
-    time: 0,
-    xSpeed1: -0.05,
-    ySpeed1: 0,
-    transitionTime: 0,
-  }
-);
-entityList.push(basicShooter);
 
 /*
  * Envois l'entityList a tous joueur a chaque frame afin qu'ils puissent le render.

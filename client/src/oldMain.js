@@ -9,7 +9,7 @@ import {
 } from "../../server/GetInitialValues.js";
 import LaserShooter from "../../server/LaserShooter.js";
 import detectCollision from "../../server/hit.js";
-import CurvedShooter from "../../server/CurvedShooter.js";
+import CurvedShooter from "../../server/entities/CurvedShooter.js";
 import SkullShooter from "../../server/SkullShooter.js";
 import { getRandomIntInclusive } from "../../server/coordCalculator.js";
 import { io } from "socket.io-client";

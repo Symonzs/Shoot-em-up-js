@@ -6,10 +6,18 @@ import { Motion } from "../coordCalculator.js";
 import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
 
 export default class BasicShooter extends Entity {
-  constructor(speed, hp, path, x, y, projPath, movement) {
-    super(speed, hp, path, x, y, movement);
-    this.renderCoordinatesProj = getRenderValues(projPath, x, y);
-    this.hitboxCoordinatesProj = getJSONValues(projPath, 0, 0);
+  constructor(speed, hp, x, y, movement) {
+    super(speed, hp, "/images/ships/basicshooter.png", x, y, movement);
+    this.renderCoordinatesProj = getRenderValues(
+      "/images/bullets/basicbullet.png",
+      x,
+      y
+    );
+    this.hitboxCoordinatesProj = getJSONValues(
+      "/images/bullets/basicbullet.png",
+      0,
+      0
+    );
     this.secondPhase = false;
     this.transition = false;
     setTimeout(() => {

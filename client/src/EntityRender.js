@@ -2,9 +2,9 @@ import renderMissile from "./MissileRender.js";
 
 export default function renderEntity(entity, context) {
   const image = new Image();
-  image.src = entity.path;
+  image.src = entity.renderCoordinates.path;
   context.drawImage(
-    entity.renderCoordinates.path,
+    image,
     entity.renderCoordinates.x,
     entity.renderCoordinates.y
   );

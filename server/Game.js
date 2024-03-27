@@ -1,4 +1,5 @@
 import Entity from "./entities/Entity.js";
+import detectCollision from "./utils/hit.js";
 
 export default class Game {
   constructor(player) {
@@ -16,22 +17,38 @@ export default class Game {
   }
 
   removeEntity() {
+    console.log(this.entities.length);
     this.players.forEach((player) => {
+      // TODO: changer l'implémentation, le filter ne marchait plus pour une raison inconnue et étrange et chiante
       if (player.missileList) {
-        player.missileList = player.missileList.filter((missile) => {
-          /* missile.hitboxCoordinates.x > 0 */ true &&
-            missile.hitboxCoordinates.x < player.canvasWidth;
+        let newList = [];
+        player.missileList.forEach((missile) => {
+          if (
+            missile.hitboxCoordinates.x > 0 &&
+            missile.hitboxCoordinates.x < player.canvasWidth
+          ) {
+            newList.push(missile);
+          }
         });
+        player.missileList = newList;
       }
     });
 
     this.entities.forEach((entity, index) => {
+      if (entity.hitboxCoordinates.x < 0) {
+        this.entities.splice(index, 1);
+      }
       if (entity.missileList) {
-        entity.missileList = entity.missileList.filter(
-          (missile) =>
+        let newList = [];
+        entity.missileList.forEach((missile) => {
+          if (
             missile.hitboxCoordinates.x > 0 &&
-            missile.hitboxCoordinates.x < entity.canvasWidth
-        );
+            missile.hitboxCoordinates.x < missile.canvasWidth
+          ) {
+            newList.push(missile);
+          }
+        });
+        entity.missileList = newList;
       }
       if (entity.hp < 1) {
         entity.renderCoordinates.x = -1000;
@@ -69,7 +86,7 @@ export default class Game {
   updateGame() {
     this.players.forEach((player) => {
       player.move();
-      if (player.missileList.lenght != 0) {
+      if (player.missileList.length != 0) {
         player.missileList.forEach((missile) => {
           missile.move();
         });
@@ -77,11 +94,9 @@ export default class Game {
     });
     this.entities.forEach((entity) => {
       entity.move();
-      console.log("je bouge une entitée");
       if (entity.missileList.length != 0) {
         entity.missileList.forEach((missile) => {
           missile.move();
-          console.log("je bouge un missile");
         });
       }
     });
