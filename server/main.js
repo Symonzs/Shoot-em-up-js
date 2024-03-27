@@ -1,6 +1,6 @@
 import Entity from "./Entity.js";
 import KamikazeEnemy from "./KamikazeEnemy.js";
-import BasicShooter from "./BasicShooter.js";
+import BasicShooter from "../client/src/BasicShooter.js";
 import Joueur from "./joueur.js";
 import {
   getInitialImageValues,
@@ -123,7 +123,7 @@ const skullShooter = new SkullShooter(
     transitionTime: 10000,
   }
 );
-entityList.push(skullShooter);
+//entityList.push(skullShooter);
 
 const HPBar = new Image();
 HPBar.src = "/images/HUD/hpbar.png";
@@ -133,7 +133,7 @@ HPButNormal.src = "/images/HUD/hp.png";
 const imgkami = "/images/ships/shark.png";
 const sharkImageValues = getInitialImageValues(imgkami);
 
-for (let i = 0; i < 0; i++) {
+for (let i = 0; i < 1; i++) {
   const monster = new KamikazeEnemy(
     15,
     999,
