@@ -8,9 +8,6 @@ export default class Joueur extends Entity {
   constructor() {
     super(5, 9999, 10, "/images/ships/allyship.png", 500, 500);
     //this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
-    this.renderCoordinatesProj = getRenderValues(
-      "/images/bullets/friendlyplasmabullet.png"
-    );
     this.weapon = new BurstWeapon(
       10,
       1,
@@ -35,7 +32,6 @@ export default class Joueur extends Entity {
     this.canBeTouched = true;
     this.varProjX = this.renderCoordinates.width;
     this.varProjY = 20;
-    this.renderCoordinatesProj = this.renderCoordinatesProj;
     this.missileList = [];
   }
 
