@@ -37,14 +37,12 @@ io.on("connection", (socket) => {
   players.push(newPlayer);
   game = new Game(newPlayer);
   socket.on("mousemove", (mouseCords) => {
-    console.log("mouseCords");
-    console.log(mouseCords);
     game.players[0].latestCursorX = mouseCords.x;
     game.players[0].latestCursorY = mouseCords.y;
-    console.log("game.players[0].renderCoordinates");
-    console.log(game.players[0].renderCoordinates);
-    console.log("game.players[0].hitboxCoordinates");
-    console.log(game.players[0].hitboxCoordinates);
+  });
+  socket.on("mousedown", () => {
+    console.log("server -> mousedown");
+    game.players[0].shoot();
   });
 });
 /*

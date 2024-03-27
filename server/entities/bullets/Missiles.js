@@ -1,8 +1,8 @@
 import Entity from "../Entity.js";
 
 export default class Missiles extends Entity {
-  constructor(speed, hp, renderCoordinates, hitboxCoordinates) {
-    super(speed, hp, renderCoordinates, hitboxCoordinates);
+  constructor(speed, hp, path, x, y) {
+    super(speed, hp, path, x, y);
     this.canBeHurt = false;
   }
 

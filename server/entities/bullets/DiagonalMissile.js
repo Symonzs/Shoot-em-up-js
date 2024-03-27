@@ -1,9 +1,8 @@
 import Missiles from "./Missiles.js";
 
 export default class DiagonalMissile extends Missiles {
-  constructor(image, speedX, speedY, hp, renderCoordinates) {
-    super(0, hp, renderCoordinates);
-    this.image = image;
+  constructor(path, speedX, speedY, hp, x, y) {
+    super(0, hp, path, x, y);
     this.speedX = speedX;
     this.speedY = speedY;
     this.canBeHurt = false;

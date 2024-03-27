@@ -27,6 +27,11 @@ canvas.addEventListener("mousemove", (event) => {
   socket.emit("mousemove", mouseCoord);
 });
 
+canvas.addEventListener("mousedown", (event) => {
+  console.log("client -> mousedown");
+  socket.emit("mousedown");
+});
+
 function render() {
   if (game) {
     renderGame(game, context);

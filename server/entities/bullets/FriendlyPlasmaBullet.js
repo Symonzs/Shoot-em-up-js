@@ -2,13 +2,14 @@ import DiagonalMissile from "./DiagonalMissile.js";
 import LinearMissile from "./LinearMissile.js";
 
 export default class FriendlyPlasmaBullet extends DiagonalMissile {
-  constructor(speed, hp, renderCoordinates) {
+  constructor(speed, hp, x, y) {
     super(
       "/images/bullets/friendlyplasmabullet.png",
       speed,
       Math.random() * 10 - 5,
       hp,
-      renderCoordinates
+      x,
+      y
     );
 
     this.canBeHurt = false;

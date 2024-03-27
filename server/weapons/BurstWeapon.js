@@ -17,13 +17,15 @@ export default class BurstWeapon extends Weapon {
   }
 
   shoot(renderCoordinates) {
-    const newMissileRenderCoordinates = {
-      x: renderCoordinates.x + renderCoordinates.width,
-      y: renderCoordinates.y + renderCoordinates.height / 2,
-      width: this.renderCoordinatesProj.width,
-      height: this.renderCoordinatesProj.height,
-    };
+    // const newMissileRenderCoordinates = {
+    //   x: renderCoordinates.x + renderCoordinates.width,
+    //   y: renderCoordinates.y + renderCoordinates.height / 2,
+    //   width: this.renderCoordinatesProj.width,
+    //   height: this.renderCoordinatesProj.height,
+    // };
+    const x = renderCoordinates.x + renderCoordinates.width;
+    const y = renderCoordinates.y + renderCoordinates.height / 2;
 
-    return new FriendlyPlasmaBullet(this.speed, 1, newMissileRenderCoordinates);
+    return new FriendlyPlasmaBullet(this.speed, 1, x, y);
   }
 }
