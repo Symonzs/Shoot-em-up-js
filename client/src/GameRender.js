@@ -6,7 +6,9 @@ export default function renderGame(game, context, socketID) {
   game.entities.forEach((entity) => {
     renderEntity(entity, context);
   });
+  let additionalY = 0;
   game.players.forEach((player) => {
-    renderPlayer(player, context, socketID);
+    renderPlayer(player, context, socketID, additionalY);
+    additionalY += 20;
   });
 }

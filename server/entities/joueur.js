@@ -6,7 +6,7 @@ import { getRenderValues } from "../utils/getImageValues.js";
 
 const x = 500;
 const y = 500;
-const hp = 10;
+const hp = 100;
 
 export default class Joueur extends Entity {
   constructor(id) {
@@ -16,7 +16,7 @@ export default class Joueur extends Entity {
     } else {
       this.id = Math.random() * 1000;
     }
-    this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
+    this.weapon = new Weapon(75, 1000, 100, this.renderCoordinatesProj);
     this.pseudo = "Steredeux";
     // this.weapon = new BurstWeapon(
     //   10,

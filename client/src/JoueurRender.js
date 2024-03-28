@@ -24,8 +24,10 @@ function renderMainHP(player, context) {
     );
   }
 }
-
-function renderSecondaryHP(player, context) {}
+function renderSecondaryHP(player, context, secondaryX, secondaryY) {
+  console.log(secondaryX + " " + secondaryY);
+  context.drawImage(HPBar, secondaryX, secondaryY);
+}
 
 function renderHitbox(player, context) {
   context.strokeStyle = "red";
@@ -45,7 +47,9 @@ function renderHitbox(player, context) {
   context.strokeStyle = "black";
 }
 
-export function renderPlayer(player, context, socketID) {
+export function renderPlayer(player, context, socketID, additionalY) {
+  const secondaryX = player.canvasWidth;
+  const secondaryY = player.canvasHeight;
   if (player.health <= 0) return;
   playerImage.src = player.renderCoordinates.path;
   context.textAlign = "center";
@@ -68,6 +72,11 @@ export function renderPlayer(player, context, socketID) {
   if (player.id === socketID) {
     renderMainHP(player, context);
   } else {
-    renderSecondaryHP(player, context);
+    renderSecondaryHP(
+      player,
+      context,
+      secondaryX,
+      secondaryY - additionalY * 10
+    );
   }
 }
