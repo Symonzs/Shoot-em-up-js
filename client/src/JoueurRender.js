@@ -2,15 +2,32 @@ import renderEntity from "./EntityRender.js";
 import renderMissile from "./MissileRender.js";
 
 const playerImage = new Image();
+const HPBar = new Image();
+HPBar.src = "/images/HUD/hpbar.png";
+const HP = new Image();
+HP.src = "/images/HUD/hp.png";
 
-export default function renderPlayer(player, context) {
-  if (player.health <= 0) return;
-  playerImage.src = player.renderCoordinates.path;
-  context.drawImage(
-    playerImage,
-    player.renderCoordinates.x,
-    player.renderCoordinates.y
-  );
+function renderMainHP(player, context) {
+  if (!player) {
+    return;
+  }
+  const startingX = 10;
+  const startingY = 10;
+  context.drawImage(HPBar, startingX, startingY);
+  const borderWidth = 7;
+  const borderHeight = 5;
+  for (let i = 0; i < player.hp; i++) {
+    context.drawImage(
+      HP,
+      startingX + (borderWidth + i * 47),
+      startingY + borderHeight
+    );
+  }
+}
+
+function renderSecondaryHP(player, context) {}
+
+function renderHitbox(player, context) {
   context.strokeStyle = "red";
   context.strokeRect(
     player.hitboxCoordinates.x,
@@ -26,9 +43,31 @@ export default function renderPlayer(player, context) {
     player.renderCoordinates.height
   );
   context.strokeStyle = "black";
+}
+
+export function renderPlayer(player, context, socketID) {
+  if (player.health <= 0) return;
+  playerImage.src = player.renderCoordinates.path;
+  context.textAlign = "center";
+  context.fillText(
+    player.pseudo,
+    player.renderCoordinates.x + player.renderCoordinates.width / 2,
+    player.renderCoordinates.y - 5
+  );
+  context.drawImage(
+    playerImage,
+    player.renderCoordinates.x,
+    player.renderCoordinates.y
+  );
   if (player.missileList) {
     player.missileList.forEach((missile) => {
       renderMissile(missile, context);
     });
+  }
+  //renderHitbox(player, context);
+  if (player.id === socketID) {
+    renderMainHP(player, context);
+  } else {
+    renderSecondaryHP(player, context);
   }
 }

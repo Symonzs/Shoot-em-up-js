@@ -6,24 +6,26 @@ import { getRenderValues } from "../utils/getImageValues.js";
 
 const x = 500;
 const y = 500;
+const hp = 10;
 
 export default class Joueur extends Entity {
   constructor(id) {
-    super(5, 9999, 10, "/images/ships/allyship.png", x, y);
+    super(5, 9999, hp, "/images/ships/allyship.png", 0, y);
     if (id) {
       this.id = id;
     } else {
       this.id = Math.random() * 1000;
     }
-    // this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
-    this.weapon = new BurstWeapon(
-      10,
-      1,
-      3000,
-      this.renderCoordinatesProj,
-      80,
-      5
-    );
+    this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
+    this.pseudo = "Steredeux";
+    // this.weapon = new BurstWeapon(
+    //   10,
+    //   1,
+    //   3000,
+    //   this.renderCoordinatesProj,
+    //   80,
+    //   5
+    // );
     this.atkspd = this.weapon.fireRate;
     this.updateHitboxes();
     this.xSpeed = 0;

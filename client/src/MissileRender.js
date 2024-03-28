@@ -1,11 +1,4 @@
-export default function renderMissile(entity, context) {
-  const image = new Image();
-  image.src = entity.renderCoordinates.path;
-  context.drawImage(
-    image,
-    entity.renderCoordinates.x,
-    entity.renderCoordinates.y
-  );
+function renderHitbox(entity, context) {
   context.strokeStyle = "red";
   context.strokeRect(
     entity.hitboxCoordinates.x,
@@ -21,4 +14,15 @@ export default function renderMissile(entity, context) {
     entity.renderCoordinates.height
   );
   context.strokeStyle = "black";
+}
+
+export default function renderMissile(entity, context) {
+  const image = new Image();
+  image.src = entity.renderCoordinates.path;
+  context.drawImage(
+    image,
+    entity.renderCoordinates.x,
+    entity.renderCoordinates.y
+  );
+  renderHitbox(entity, context);
 }

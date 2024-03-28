@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
-import renderPlayer from "./JoueurRender.js";
+import { renderHP } from "./JoueurRender.js";
 const socket = io();
 function resampleCanvas() {
   canvas.width = canvas.clientWidth;
@@ -27,17 +27,17 @@ canvas.addEventListener("mousemove", (event) => {
 let mouseIsDown = false;
 canvas.addEventListener("mousedown", (event) => {
   mouseIsDown = true;
-  console.log("client -> mousedown");
+  // console.log("client -> mousedown");
 });
 
 canvas.addEventListener("mouseup", (event) => {
   mouseIsDown = false;
-  console.log("client -> mouseup");
+  // console.log("client -> mouseup");
 });
 
 function render() {
   if (game) {
-    renderGame(game, context);
+    renderGame(game, context, socket.id);
     if (mouseIsDown) {
       socket.emit("mousedown", socket.id);
     }
