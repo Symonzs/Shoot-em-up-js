@@ -5,17 +5,22 @@ import BurstWeapon from "../weapons/BurstWeapon.js";
 import { getRenderValues } from "../utils/getImageValues.js";
 
 export default class Joueur extends Entity {
-  constructor() {
+  constructor(id) {
     super(5, 9999, 10, "/images/ships/allyship.png", 500, 500);
-    //this.weapon = new Weapon(75, 1, 500, renderCoordinatesProj);
-    this.weapon = new BurstWeapon(
-      10,
-      1,
-      3000,
-      this.renderCoordinatesProj,
-      80,
-      5
-    );
+    if (id) {
+      this.id = id;
+    } else {
+      this.id = Math.random() * 1000;
+    }
+    this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
+    // this.weapon = new BurstWeapon(
+    //   10,
+    //   1,
+    //   3000,
+    //   this.renderCoordinatesProj,
+    //   80,
+    //   5
+    // );
     this.atkspd = this.weapon.fireRate;
     this.updateHitboxes();
     this.xSpeed = 0;

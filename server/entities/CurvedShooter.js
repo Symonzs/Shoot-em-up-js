@@ -61,7 +61,7 @@ export default class CurvedShooter extends Entity {
   }
 
   move() {
-    console.log("son tickBeforeShooting est a :" + this.tickBeforeShooting);
+    //console.log("son tickBeforeShooting est a :" + this.tickBeforeShooting);
     if (!this.isShooting) {
       this.tickBeforeShooting++;
     }

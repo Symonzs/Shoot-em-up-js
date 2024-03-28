@@ -5,7 +5,9 @@ export default class Game {
   constructor(player) {
     this.entities = [];
     this.players = [];
-    this.players.push(player);
+    if (player) {
+      this.players.push(player);
+    }
   }
 
   addEntity(entity) {
@@ -48,9 +50,9 @@ export default class Game {
             newList.push(missile);
           }
         });
-        console.log(newList.length);
+        // console.log(newList.length);
         entity.missileList = newList;
-        console.log(entity.missileList.length);
+        // console.log(entity.missileList.length);
       }
       if (entity.hp < 1) {
         entity.renderCoordinates.x = -1000;
@@ -86,14 +88,16 @@ export default class Game {
   }
 
   updateGame() {
-    this.players.forEach((player) => {
-      player.move();
-      if (player.missileList.length != 0) {
-        player.missileList.forEach((missile) => {
-          missile.move();
-        });
-      }
-    });
+    if (this.players) {
+      this.players.forEach((player) => {
+        player.move();
+        if (player.missileList.length != 0) {
+          player.missileList.forEach((missile) => {
+            missile.move();
+          });
+        }
+      });
+    }
     this.entities.forEach((entity) => {
       entity.shoot();
       entity.move();

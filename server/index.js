@@ -31,29 +31,44 @@ const io = new IOServer(httpServer, {
 app.use(express.static("client/public"));
 
 let players = [];
-let game = new Game(new Joueur());
+let game = new Game();
+game.addEntity(
+  new CurvedShooter(5, 600, 10, 1500, 500, {
+    xSpeed: 0,
+    ySpeed: 0,
+    time: 1000,
+    xSpeed1: 0,
+    ySpeed1: 0,
+    transitionTime: 10000,
+  })
+);
 io.on("connection", (socket) => {
+  console.log("CONNEXION -> ID:" + socket.id);
   // a changer afin d'identifier les reuf par leur login
-  let newPlayer = new Joueur();
-  players.push(newPlayer);
-  game = new Game(newPlayer);
-  game.addEntity(
-    new CurvedShooter(5, 600, 10, 1500, 500, {
-      xSpeed: 0,
-      ySpeed: 0,
-      time: 1000,
-      xSpeed1: 0,
-      ySpeed1: 0,
-      transitionTime: 10000,
-    })
-  );
-
-  socket.on("mousemove", (mouseCords) => {
-    game.players[0].latestCursorX = mouseCords.x;
-    game.players[0].latestCursorY = mouseCords.y;
+  let newPlayer = new Joueur(socket.id);
+  game.addPlayer(newPlayer);
+  socket.on("mousemove", (mouseInfo) => {
+    const correspondingPlayer = game.players.find(
+      (player) => player.id === mouseInfo.id
+    );
+    console.log(correspondingPlayer);
+    if (correspondingPlayer) {
+      console.log(
+        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
+      );
+      correspondingPlayer.latestCursorX = mouseInfo.x;
+      correspondingPlayer.latestCursorY = mouseInfo.y;
+    }
   });
-  socket.on("mousedown", () => {
-    game.players[0].shoot();
+  socket.on("mousedown", (id) => {
+    const correspondingPlayer = game.players.find((player) => player.id === id);
+    console.log(correspondingPlayer);
+    if (correspondingPlayer) {
+      console.log(
+        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
+      );
+      correspondingPlayer.shoot();
+    }
   });
 });
 /*

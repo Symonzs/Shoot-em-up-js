@@ -9,13 +9,8 @@ export default class Weapon {
   }
 
   shoot(renderCoordinates) {
-    const newMissileRenderCoordinates = {
-      x: renderCoordinates.x + renderCoordinates.width,
-      y: renderCoordinates.y + renderCoordinates.height / 2,
-      width: this.renderCoordinatesProj.width,
-      height: this.renderCoordinatesProj.height,
-    };
-
-    return new FriendlyBasicBullet(this.speed, 1, newMissileRenderCoordinates);
+    const x = renderCoordinates.x + renderCoordinates.width;
+    const y = renderCoordinates.y + renderCoordinates.height / 2;
+    return new FriendlyBasicBullet(this.speed, 1, x, y);
   }
 }

@@ -1,13 +1,8 @@
 import Missiles from "./Missiles.js";
 
 export default class LinearMissile extends Missiles {
-  constructor(image, speed, hp, renderCoordinates) {
-    super(speed, hp, renderCoordinates);
-    if (!image) {
-      this.image = "/images/bullets/bullet.png";
-    } else {
-      this.image = image;
-    }
+  constructor(path, speed, hp, x, y) {
+    super(speed, hp, path, x, y);
     this.canBeHurt = false;
   }
 

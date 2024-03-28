@@ -21,20 +21,30 @@ let game;
 canvas.addEventListener("mousemove", (event) => {
   //console.log(`${event.offsetX}, ${event.offsetY}`);
   const mouseCoord = {
+    id: socket.id,
     x: event.offsetX,
     y: event.offsetY,
   };
   socket.emit("mousemove", mouseCoord);
 });
-
+let mouseIsDown = false;
 canvas.addEventListener("mousedown", (event) => {
+  mouseIsDown = true;
   console.log("client -> mousedown");
-  socket.emit("mousedown");
+});
+
+canvas.addEventListener("mouseup", (event) => {
+  mouseIsDown = false;
+  console.log("client -> mouseup");
 });
 
 function render() {
   if (game) {
     renderGame(game, context);
+    if (mouseIsDown) {
+      console.log("TIRE BATARD");
+      socket.emit("mousedown", socket.id);
+    }
   }
   requestAnimationFrame(render);
 }
