@@ -6,7 +6,7 @@ export default class FriendlyPlasmaBullet extends DiagonalMissile {
     super(
       "/images/bullets/friendlyplasmabullet.png",
       speed,
-      Math.random() * 10 - 5,
+      Math.random() * 6 - 3,
       hp,
       x,
       y

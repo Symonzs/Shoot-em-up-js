@@ -2,7 +2,6 @@ import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
 import renderPlayer from "./JoueurRender.js";
 const socket = io();
-
 function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
@@ -17,9 +16,7 @@ export const contexte = context;
 
 canvasResizeObserver.observe(canvas);
 let game;
-
 canvas.addEventListener("mousemove", (event) => {
-  //console.log(`${event.offsetX}, ${event.offsetY}`);
   const mouseCoord = {
     id: socket.id,
     x: event.offsetX,
@@ -42,7 +39,6 @@ function render() {
   if (game) {
     renderGame(game, context);
     if (mouseIsDown) {
-      console.log("TIRE BATARD");
       socket.emit("mousedown", socket.id);
     }
   }
@@ -53,3 +49,11 @@ render();
 socket.on("updatedGame", (receivedGame) => {
   game = receivedGame;
 });
+socket.on("connect", () => {
+  console.log("connected");
+});
+
+// socket.on("disconnect", () => {
+//   console.log("a");
+//   socket.emit("leaving", "a");
+// });

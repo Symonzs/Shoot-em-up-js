@@ -8,6 +8,7 @@ import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 
 // updateImageValues();
+
 /**
  * Magie Noir
  */
@@ -43,32 +44,32 @@ game.addEntity(
   })
 );
 io.on("connection", (socket) => {
-  console.log("CONNEXION -> ID:" + socket.id);
+  //console.log("CONNEXION -> ID:" + socket.id);
   // a changer afin d'identifier les reuf par leur login
   let newPlayer = new Joueur(socket.id);
   game.addPlayer(newPlayer);
+  game.players.forEach((player) => {
+    //console.log(player.id);
+  });
   socket.on("mousemove", (mouseInfo) => {
     const correspondingPlayer = game.players.find(
       (player) => player.id === mouseInfo.id
     );
-    console.log(correspondingPlayer);
     if (correspondingPlayer) {
-      console.log(
-        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      );
       correspondingPlayer.latestCursorX = mouseInfo.x;
       correspondingPlayer.latestCursorY = mouseInfo.y;
     }
   });
   socket.on("mousedown", (id) => {
     const correspondingPlayer = game.players.find((player) => player.id === id);
-    console.log(correspondingPlayer);
     if (correspondingPlayer) {
-      console.log(
-        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      );
       correspondingPlayer.shoot();
     }
+  });
+  socket.on("disconnect", () => {
+    console.log(`leave ${socket.id}`);
+    const toDelete = game.players.find((player) => player.id === socket.id);
+    game.removePlayer(toDelete);
   });
 });
 /*
