@@ -7,8 +7,9 @@ export default class Missiles {
     this.canBeHurt = false;
   }*/
 
-  constructor(speed, damage, path, x, y) {
-    this.speed = speed;
+  constructor(speedX, speedY, damage, path, x, y) {
+    this.speedX = speedX;
+    this.speedY = speedY;
     this.hitboxCoordinates = getRenderValues(path, x, y);
     this.renderCoordinates = getRenderValues(path, x, y);
     this.spawnX = this.hitboxCoordinates.x;
@@ -16,6 +17,7 @@ export default class Missiles {
     this.damage = damage;
     this.canBeHurt = false;
     this.canvasWidth = 1920;
+
     this.canvasHeight = 1000;
   }
 

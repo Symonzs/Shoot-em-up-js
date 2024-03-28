@@ -96,6 +96,7 @@ export default class Joueur extends Entity {
     );
     this.missileList.forEach((missile) => missile.move());
     */
+
     this.xSpeed = velocity(
       calcDistance(
         this.renderCoordinates.x + this.renderCoordinates.width / 2,

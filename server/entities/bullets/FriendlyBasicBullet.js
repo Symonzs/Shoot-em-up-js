@@ -1,15 +1,12 @@
 import LinearMissile from "./LinearMissile.js";
 
 export default class FriendlyBasicBullet extends LinearMissile {
-  constructor(speed, hp, x, y) {
-    super("/images/bullets/friendlybasicbullet.png", speed, hp, x, y);
-    this.canBeHurt = false;
-    this.VarProjX = 20;
-    this.VarProjY = -10;
+  constructor(speedX, damage, x, y) {
+    super(speedX, damage, x, y, "/images/bullets/friendlybasicbullet.png");
   }
 
   move() {
-    this.renderCoordinates.x += this.speed;
+    this.renderCoordinates.x += this.speedX;
     this.updateHitboxes();
   }
 }

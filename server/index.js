@@ -43,7 +43,7 @@ game.addEntity(
   })
 );
 io.on("connection", (socket) => {
-  console.log("CONNEXION -> ID:" + socket.id);
+  //console.log("CONNEXION -> ID:" + socket.id);
   // a changer afin d'identifier les reuf par leur login
   let newPlayer = new Joueur(socket.id);
   game.addPlayer(newPlayer);
@@ -51,22 +51,22 @@ io.on("connection", (socket) => {
     const correspondingPlayer = game.players.find(
       (player) => player.id === mouseInfo.id
     );
-    console.log(correspondingPlayer);
+    //console.log(correspondingPlayer);
     if (correspondingPlayer) {
-      console.log(
-        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      );
+      // console.log(
+      //   `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
+      // );
       correspondingPlayer.latestCursorX = mouseInfo.x;
       correspondingPlayer.latestCursorY = mouseInfo.y;
     }
   });
   socket.on("mousedown", (id) => {
     const correspondingPlayer = game.players.find((player) => player.id === id);
-    console.log(correspondingPlayer);
+    // console.log(correspondingPlayer);
     if (correspondingPlayer) {
-      console.log(
-        `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      );
+      // console.log(
+      //   `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
+      // );
       correspondingPlayer.shoot();
     }
   });

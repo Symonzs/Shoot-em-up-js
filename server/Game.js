@@ -55,9 +55,11 @@ export default class Game {
         // console.log(entity.missileList.length);
       }
       if (entity.hp < 1) {
-        entity.renderCoordinates.x = -1000;
-        entity.renderCoordinates.y = -1000;
+        entity.renderCoordinates.x = 5000;
+        entity.renderCoordinates.y = 5000;
+        console.log("je suis tp un moment en -1000 -1000");
         if (entity.missileList && entity.missileList.length < 1) {
+          console.log("ma liste est vide ???");
           this.entities.splice(index, 1);
         }
       }

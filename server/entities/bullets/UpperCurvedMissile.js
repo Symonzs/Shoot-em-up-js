@@ -1,22 +1,15 @@
 import Missiles from "./Missiles.js";
 
 export default class UpperCurvedMissile extends Missiles {
-  constructor(speed, damage, renderCoordinates) {
-    super(
-      speed,
-      damage,
-      "/images/bullets/basicbullet.png",
-      renderCoordinates.x,
-      renderCoordinates.y
-    );
-    this.canBeHurt = false;
+  constructor(speedX, damage, x, y) {
+    super(speedX, 0, damage, "/images/bullets/basicbullet.png", x, y);
     this.amplitude = 100; //variation amx de la courbe en hauteur
     this.frequency = 0.005; //longueur de la courbe en largeur
-    this.initialY = renderCoordinates.y;
+    this.initialY = y;
   }
 
   move() {
-    this.renderCoordinates.x -= this.speed;
+    this.renderCoordinates.x -= this.speedX;
     this.renderCoordinates.y =
       this.initialY -
       Math.sin(this.renderCoordinates.x * this.frequency) * this.amplitude;

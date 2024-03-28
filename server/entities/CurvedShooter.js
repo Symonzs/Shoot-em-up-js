@@ -38,10 +38,20 @@ export default class CurvedShooter extends Entity {
       for (let i = 0; i < 200; i++) {
         setTimeout(() => {
           this.missileList.push(
-            new UpperCurvedMissile(10, 999, this.renderCoordinates)
+            new UpperCurvedMissile(
+              10,
+              2,
+              this.renderCoordinates.x,
+              this.renderCoordinates.y
+            )
           );
           this.missileList.push(
-            new LowerCurvedMissile(10, 999, this.renderCoordinates)
+            new LowerCurvedMissile(
+              10,
+              2,
+              this.renderCoordinates.x,
+              this.renderCoordinates.y
+            )
           );
           if (i == 199) {
             this.isShooting = false;
@@ -61,7 +71,6 @@ export default class CurvedShooter extends Entity {
   }
 
   move() {
-    //console.log("son tickBeforeShooting est a :" + this.tickBeforeShooting);
     if (!this.isShooting) {
       this.tickBeforeShooting++;
     }

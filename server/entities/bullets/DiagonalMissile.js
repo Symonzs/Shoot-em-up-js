@@ -1,15 +1,24 @@
 import Missiles from "./Missiles.js";
 
 export default class DiagonalMissile extends Missiles {
-  constructor(path, speedX, speedY, hp, x, y) {
-    super(1, hp, path, x, y);
-    this.speedX = speedX;
-    this.speedY = speedY;
-    this.canBeHurt = false;
+  constructor(speedX, speedY, damage, x, y, path) {
+    if (path) {
+      super(speedX, speedY, damage, path, x, y);
+    } else {
+      super(
+        speedX,
+        speedY,
+        damage,
+        "client/public/images/bullets/basicbullet.png",
+        x,
+        y
+      );
+    }
   }
 
   move() {
     this.renderCoordinates.x -= this.speedX;
     this.renderCoordinates.y += this.speedY;
+    this.updateHitboxes();
   }
 }
