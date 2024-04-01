@@ -10,7 +10,7 @@ export default class LinearMissile extends Missiles {
   }
 
   move() {
-    this.renderCoordinates.x -= this.speed;
+    this.renderCoordinates.x -= this.speedX;
     this.updateHitboxes();
   }
 }

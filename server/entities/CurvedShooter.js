@@ -80,7 +80,7 @@ export default class CurvedShooter extends Entity {
         missile.hitboxCoordinates.x > 0 &&
         missile.hitboxCoordinates.x < this.canvasWidth
     );
-    this.missileList.forEach((missile) => missile.move());
+    //this.missileList.forEach((missile) => missile.move());
     Motion(this);
 
     this.updateHitboxes();

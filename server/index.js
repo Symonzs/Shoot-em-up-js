@@ -6,6 +6,7 @@ import BasicShooter from "./entities/BasicShooter.js";
 import Joueur from "./entities/joueur.js";
 import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
+import SniperShooter from "./entities/SniperShooter.js";
 
 // updateImageValues();
 
@@ -34,7 +35,7 @@ app.use(express.static("client/public"));
 let players = [];
 let game = new Game();
 game.addEntity(
-  new CurvedShooter(5, 600, 10, 1500, 500, {
+  /*new CurvedShooter(5, 600, 10, 1500, 500, {
     xSpeed: 0,
     ySpeed: 0,
     time: 1000,
@@ -42,6 +43,23 @@ game.addEntity(
     ySpeed1: 0,
     transitionTime: 10000,
   })
+  new BasicShooter(5, 60, 10, 1500, 500, {
+    xSpeed: 0,
+    ySpeed: 0,
+    time: 1000,
+    xSpeed1: 0,
+    ySpeed1: 0,
+    transitionTime: 10000,
+  })
+);*/
+new SniperShooter(5, 60, 10, 1500, 500, {
+  xSpeed: 0,
+  ySpeed: 0,
+  time: 1000,
+  xSpeed1: 0,
+  ySpeed1: 0,
+  transitionTime: 10000,
+})
 );
 io.on("connection", (socket) => {
   //console.log("CONNEXION -> ID:" + socket.id);

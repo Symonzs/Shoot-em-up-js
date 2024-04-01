@@ -1,3 +1,4 @@
+import { getPlayerById } from "./coordCalculator.js";
 import Entity from "./entities/Entity.js";
 import detectCollision from "./utils/hit.js";
 
@@ -101,11 +102,19 @@ export default class Game {
       });
     }
     this.entities.forEach((entity) => {
-      entity.shoot();
+      entity.shoot(this.players[Math.floor(Math.random() * this.players.length)]);
       entity.move();
       if (entity.missileList.length != 0) {
         entity.missileList.forEach((missile) => {
+          //console.log(missile.target);
+
+          //console.log(getPlayerById(this.players,missile.target));
+          if(missile.target){
+            missile.move(getPlayerById(this.players,missile.target.id));
+          }
+          else{
           missile.move();
+          }
         });
       }
     });

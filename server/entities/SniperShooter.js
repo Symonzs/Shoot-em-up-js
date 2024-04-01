@@ -5,8 +5,9 @@ import LinearMissile from "./bullets/LinearMissile.js";
 import { Motion } from "../coordCalculator.js";
 import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
 import HomingMissile from "./bullets/HomingMissile.js";
+import SniperMissile from "./bullets/SniperMissile.js";
 
-export default class BasicShooter extends Entity {
+export default class SniperShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {
     super(
       speed,
@@ -40,7 +41,7 @@ export default class BasicShooter extends Entity {
 
   shoot(player) {
     if(this.tickBeforeShooting == this.atkspd) {
-      this.missileList.push(new LinearMissile(10,2,this.renderCoordinates.x, this.renderCoordinates.y));
+      this.missileList.push(new SniperMissile(10,2,this.renderCoordinates.x, this.renderCoordinates.y,player));
       this.tickBeforeShooting = 0;
     }
   }
