@@ -13,7 +13,7 @@ export default class SniperShooter extends Entity {
       speed,
       atkspeed,
       hp,
-      "/images/ships/basicshooter.png",
+      "/images/ships/sniperShooter.png",
       x,
       y,
       movement
@@ -40,14 +40,22 @@ export default class SniperShooter extends Entity {
   }
 
   shoot(player) {
-    if(this.tickBeforeShooting == this.atkspd) {
-      this.missileList.push(new SniperMissile(10,2,this.renderCoordinates.x, this.renderCoordinates.y,player));
+    if (this.tickBeforeShooting == this.atkspd) {
+      this.missileList.push(
+        new SniperMissile(
+          10,
+          4,
+          this.renderCoordinates.x - 10,
+          this.renderCoordinates.y + 13,
+          player
+        )
+      );
       this.tickBeforeShooting = 0;
     }
   }
 
   move() {
-    if(this.tickBeforeShooting < this.atkspd) {
+    if (this.tickBeforeShooting < this.atkspd) {
       this.tickBeforeShooting++;
     }
     this.missileList = this.missileList.filter(

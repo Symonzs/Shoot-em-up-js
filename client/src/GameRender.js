@@ -1,8 +1,20 @@
 import { renderPlayer } from "./JoueurRender.js";
 import renderEntity from "./EntityRender.js";
+const bg = new Image();
+bg.src = "images/HUD/backgroundGreen.png";
+let xOffSet = 0;
 
+function renderBackground(context) {
+  xOffSet = xOffSet - 0.1;
+  console.log(`${xOffSet} // ${-bg.width + context.canvas.width}`);
+  if (xOffSet === -bg.width + context.canvas.width) {
+    xOffSet = 0;
+  }
+  context.drawImage(bg, xOffSet, 0);
+}
 export default function renderGame(game, context, socketID) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  renderBackground(context);
   game.entities.forEach((entity) => {
     renderEntity(entity, context);
   });

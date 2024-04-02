@@ -39,14 +39,22 @@ export default class BasicShooter extends Entity {
   }
 
   shoot(player) {
-    if(this.tickBeforeShooting == this.atkspd) {
-      this.missileList.push(new LinearMissile(10,2,this.renderCoordinates.x, this.renderCoordinates.y));
+    if (this.tickBeforeShooting == this.atkspd) {
+      this.missileList.push(
+        new HomingMissile(
+          10,
+          2,
+          this.renderCoordinates.x,
+          this.renderCoordinates.y,
+          player
+        )
+      );
       this.tickBeforeShooting = 0;
     }
   }
 
   move() {
-    if(this.tickBeforeShooting < this.atkspd) {
+    if (this.tickBeforeShooting < this.atkspd) {
       this.tickBeforeShooting++;
     }
     this.missileList = this.missileList.filter(
