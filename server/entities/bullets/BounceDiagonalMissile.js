@@ -2,14 +2,7 @@ import DiagonalMissile from "./DiagonalMissile.js";
 
 export default class BounceDiagonalMissile extends DiagonalMissile {
   constructor(speedX, speedY, damage, x, y) {
-    super(
-      speedX,
-      speedY,
-      damage,
-      x,
-      y,
-      "/images/bullets/bouncediagonalmissile.png"
-    );
+    super(speedX, speedY, damage, x, y, "/images/bullets/basicbullet.png");
   }
 
   move() {
