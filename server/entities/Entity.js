@@ -12,7 +12,7 @@ export default class Entity {
     this.spawnY = this.hitboxCoordinates.y;
     this.hp = hp;
     this.canBeHurt = true;
-    this.canvasWidth = 1920;
-    this.canvasHeight = 1000;
+    this.canvasWidth = 1580;
+    this.canvasHeight = 880;
   }
 }

@@ -9,9 +9,6 @@ export default class SniperMissile extends Missiles {
 
       this.speedY =
         (player.hitboxCoordinates.y - this.renderCoordinates.y) / this.time;
-      console.log(player.hitboxCoordinates.y - this.renderCoordinates.y);
-      console.log(this.time);
-      console.log(this.speedY);
     } else {
       super(speedX, 0, damage, "/images/bullets/basicbullet.png", x, y);
     }

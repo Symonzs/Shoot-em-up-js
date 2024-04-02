@@ -16,9 +16,9 @@ export default class Missiles {
     this.spawnY = this.hitboxCoordinates.y;
     this.damage = damage;
     this.canBeHurt = false;
-    this.canvasWidth = 1920;
+    this.canvasWidth = 1580;
 
-    this.canvasHeight = 1000;
+    this.canvasHeight = 880;
   }
 
   updateHitboxes() {
