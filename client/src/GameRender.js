@@ -6,7 +6,6 @@ let xOffSet = 0;
 
 function renderBackground(context) {
   xOffSet = xOffSet - 0.1;
-  console.log(`${xOffSet} // ${-bg.width + context.canvas.width}`);
   if (xOffSet === -bg.width + context.canvas.width) {
     xOffSet = 0;
   }

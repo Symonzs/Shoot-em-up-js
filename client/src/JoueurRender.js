@@ -25,7 +25,7 @@ function renderMainHP(player, context) {
   }
 }
 function renderSecondaryHP(player, context, secondaryX, secondaryY) {
-  console.log(secondaryX + " " + secondaryY);
+  //console.log(secondaryX + " " + secondaryY);
   context.drawImage(HPBar, secondaryX, secondaryY);
 }
 

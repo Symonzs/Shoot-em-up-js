@@ -1,11 +1,29 @@
 import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
 import { renderHP } from "./JoueurRender.js";
+import $ from "jquery";
+import Router from "./Router.js";
+
 const socket = io();
 function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 }
+
+const routes = [
+  { path: "/", view: $(".menu") },
+  { path: "/game", view: $(".game") },
+];
+
+Router.routes = routes;
+Router.titleElement = $(".viewTitle");
+Router.setInnerLinks(document.body);
+
+// chargement de la vue initiale selon l'URL demandée par l'utilisateur.rice (Deep linking)
+Router.navigate(window.location.pathname);
+
+// gestion des boutons précédent/suivant du navigateur (History API)
+window.onpopstate = () => Router.navigate(document.location.pathname, true);
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),

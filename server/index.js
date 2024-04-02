@@ -13,6 +13,7 @@ import SniperShooter from "./entities/SniperShooter.js";
 /**
  * Magie Noir
  */
+const fileOptions = { root: process.cwd() };
 const app = express();
 const httpServer = http.createServer(app);
 
@@ -31,6 +32,10 @@ const io = new IOServer(httpServer, {
 });
 
 app.use(express.static("client/public"));
+
+app.get("/*", (req, res) => {
+  res.sendFile("client/public/index.html", fileOptions);
+});
 
 let players = [];
 let game = new Game();

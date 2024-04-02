@@ -9,7 +9,7 @@ body {
 }
 body {
 	min-height: 100vh;
-	/* max-height: 100vh; */
+	max-height: 100vh;
 	background: rgba(14, 16, 20, 1);
 	background: #d6d6d6;
 	color: #acb2b8;
@@ -31,7 +31,39 @@ h1 em {
 }
 
 canvas {
-	display: block;
-	margin: 0 auto;
+	width: 1500px;
+	height: 800px;
+	position: relative;
 	border: 4px dotted #000;
+	background-color: white;
+}
+
+
+
+body {
+	background-position:center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+body > div {
+	display: none;
+}
+
+.menu {
+	background-color: #212121;
+	background-image: url('../images/HUD/backgroundGreen.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100dvw;
+	height: 100dvh;
+}
+.login {
+	flex-direction: column;
+	color: white;
+	width: 100%;
+	background-color: rgba(14, 16, 20, 0.4);
+	text-align: center;
+	padding: 5vh 5vh;
 }
