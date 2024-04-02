@@ -2,13 +2,16 @@ import Missiles from "./Missiles.js";
 
 export default class SniperMissile extends Missiles {
   constructor(speedX, damage, x, y, player) {
-    console.log(player);
     if (player) {
       super(speedX, 0, damage, "/images/bullets/basicbullet.png", x, y);
+      this.time =
+        (this.hitboxCoordinates.x - player.hitboxCoordinates.x) / speedX;
+
       this.speedY =
-        (player.hitboxCoordinates.y - this.renderCoordinates.y) /
-        this.speedX /
-        2;
+        (player.hitboxCoordinates.y - this.renderCoordinates.y) / this.time;
+      console.log(player.hitboxCoordinates.y - this.renderCoordinates.y);
+      console.log(this.time);
+      console.log(this.speedY);
     } else {
       super(speedX, 0, damage, "/images/bullets/basicbullet.png", x, y);
     }
