@@ -13,7 +13,7 @@ export default class SniperShooter extends Entity {
       speed,
       atkspeed,
       hp,
-      "/images/ships/basicshooter.png",
+      "/images/ships/sniperShooter.png",
       x,
       y,
       movement

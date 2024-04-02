@@ -52,6 +52,8 @@ game.addEntity(
     ySpeed1: 0,
     transitionTime: 10000,
   })
+  */
+  /*
   new BasicShooter(5, 60, 10, 1500, 500, {
     xSpeed: 0,
     ySpeed: 0,
@@ -70,6 +72,7 @@ game.addEntity(
     transitionTime: 10000,
   })*/
 );
+
 io.on("connection", (socket) => {
   //console.log("CONNEXION -> ID:" + socket.id);
   //console.log("CONNEXION -> ID:" + socket.id);
