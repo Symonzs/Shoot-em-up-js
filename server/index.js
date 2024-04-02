@@ -73,6 +73,9 @@ game.addEntity(
   })*/
 );
 
+io.on("gameStart", ({ object1, object2}) => {
+  { "object1":object1, "object2":object2 }
+
 io.on("connection", (socket) => {
   //console.log("CONNEXION -> ID:" + socket.id);
   //console.log("CONNEXION -> ID:" + socket.id);
