@@ -5,20 +5,42 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 
-	<title>JSAÉ - TP Canvas</title>
+	<title>JSAÉ - Steredeux</title>
 
 	<link rel="stylesheet" href="css/main.css" />
 	<script src="build/main.bundle.js" defer></script>
 </head>
 <body>
 	<div class="menu">
-	<div class="login">
-		<h1>Login to Steredeux</h1>
-		<form class="loginForm">
-			Name <input type="text" name="name">
-		</form>
-		<a href="/game" class="innerLink launchButton"> game</a>
+		<div class="login">
+			<h1>Login to Steredeux</h1>
+			<form class="loginForm">
+				Name <input type="text" name="name">
+			</form>
+			<a href="/menu" class="innerLink launchButton"> game</a>
+		</div>
 	</div>
+	<div class="mainMenu">
+        <h1>Menu</h1>
+        <div>
+            <p>
+                <a href="/game" class="innerLink createGame"> Créer une partie</a>
+            </p>
+            <p>
+                <a href="/joinGame" class="innerLink"> Rejoindre une partie </a>
+            </p>
+        </div>
+    </div>
+	<div class="joinMenu">
+		<h1>Rejoindre une partie</h1>
+        <div>
+            <p>
+                AAAAAAA
+            </p>
+            <p>
+                BBBBBBB
+            </p>
+        </div>
 	</div>
 	<div class="game">
 		<canvas class="gameCanvas" width="1580" height="880"></canvas>

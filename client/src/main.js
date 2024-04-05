@@ -14,10 +14,11 @@ function resampleCanvas() {
 const routes = [
   { path: "/", view: $(".menu") },
   { path: "/game", view: $(".game") },
+  { path: "/menu", view: $(".mainMenu") },
+  { path: "/joinGame", view: $(".joinMenu") },
 ];
 
 Router.routes = routes;
-Router.titleElement = $(".viewTitle");
 Router.setInnerLinks(document.body);
 
 // chargement de la vue initiale selon l'URL demandée par l'utilisateur.rice (Deep linking)
@@ -27,14 +28,17 @@ Router.navigate(window.location.pathname);
 window.onpopstate = () => Router.navigate(document.location.pathname, true);
 
 // gestion du formulaire
-
+let text;
 const $form = $(".loginForm");
 $form.on("submit", function (event) {
   event.preventDefault();
-  const text = $("input[name=name]").val();
-  console.log(text);
-  socket.emit("startGame", text);
+  text = $("input[name=name]").val();
+  Router.navigate("/menu");
+});
+
+$(".createGame").on("click", () => {
   Router.navigate("/game");
+  socket.emit("startGame", text);
 });
 
 $form.on("");

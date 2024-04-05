@@ -84,9 +84,9 @@ io.on("connection", (socket) => {
       }
     }
   });
-
-  socket.on("disconnect", () => {
+  socket.on("disconnect", (data) => {
     console.log(`leave ${socket.id}`);
+    console.log(data);
     if (playerGame) {
       const toDelete = playerGame.players.find(
         (player) => player.id === socket.id
