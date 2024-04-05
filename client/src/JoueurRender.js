@@ -53,11 +53,13 @@ export function renderPlayer(player, context, socketID, additionalY) {
   if (player.health <= 0) return;
   playerImage.src = player.renderCoordinates.path;
   context.textAlign = "center";
+  context.fillStyle = "white";
   context.fillText(
     player.pseudo,
     player.renderCoordinates.x + player.renderCoordinates.width / 2,
     player.renderCoordinates.y - 5
   );
+  context.fillStyle = "black";
   context.drawImage(
     playerImage,
     player.renderCoordinates.x,

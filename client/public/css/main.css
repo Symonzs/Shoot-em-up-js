@@ -67,3 +67,7 @@ body > div {
 	text-align: center;
 	padding: 5vh 5vh;
 }
+
+.launchButton {
+	display: none;
+}

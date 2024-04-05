@@ -4,7 +4,8 @@ import { renderHP } from "./JoueurRender.js";
 import $ from "jquery";
 import Router from "./Router.js";
 
-const socket = io();
+export const socket = io();
+let mouseIsDown;
 function resampleCanvas() {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
@@ -25,6 +26,20 @@ Router.navigate(window.location.pathname);
 // gestion des boutons précédent/suivant du navigateur (History API)
 window.onpopstate = () => Router.navigate(document.location.pathname, true);
 
+// gestion du formulaire
+
+const $form = $(".loginForm");
+$form.on("submit", function (event) {
+  event.preventDefault();
+  const text = $("input[name=name]").val();
+  console.log(text);
+  socket.emit("startGame", text);
+  Router.navigate("/game");
+});
+
+$form.on("");
+console.log($form);
+
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
   canvasResizeObserver = new ResizeObserver(() => resampleCanvas());
@@ -42,7 +57,6 @@ canvas.addEventListener("mousemove", (event) => {
   };
   socket.emit("mousemove", mouseCoord);
 });
-let mouseIsDown = false;
 canvas.addEventListener("mousedown", (event) => {
   mouseIsDown = true;
   // console.log("client -> mousedown");
@@ -64,11 +78,16 @@ function render() {
 }
 
 render();
-socket.on("updatedGame", (receivedGame) => {
+socket.on("updateGame", (receivedGame) => {
   game = receivedGame;
+  console.log(receivedGame.players);
 });
 socket.on("connect", () => {
   console.log("connected");
+});
+
+socket.on("begone", () => {
+  Router.navigate("/");
 });
 
 // socket.on("disconnect", () => {

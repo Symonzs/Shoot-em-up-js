@@ -8,7 +8,6 @@ import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
 import BounceShooter from "./entities/BounceShooter.js";
-
 // updateImageValues();
 
 /**
@@ -26,7 +25,7 @@ httpServer.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
 
-const io = new IOServer(httpServer, {
+export const io = new IOServer(httpServer, {
   // pour permettre à express-status-monitor de fonctionner
   // cf. https://github.com/RafalWilinski/express-status-monitor/issues/181#issuecomment-1086649762
   allowEIO3: true,
@@ -38,97 +37,70 @@ app.get("/*", (req, res) => {
   res.sendFile("client/public/index.html", fileOptions);
 });
 
-let players = [];
-let game = new Game();
-game.addEntity(
-  new BounceShooter(5, 60, 10, 1500, 500, {
-    xSpeed: 0,
-    ySpeed: 0,
-    time: 1000,
-    xSpeed1: 0,
-    ySpeed1: 0,
-    transitionTime: 10000,
-  })
-  /*new CurvedShooter(5, 600, 10, 1500, 500, {
-    xSpeed: 0,
-    ySpeed: 0,
-    time: 1000,
-    xSpeed1: 0,
-    ySpeed1: 0,
-    transitionTime: 10000,
-  })
-  */
-  /*
-  new BasicShooter(5, 60, 10, 1500, 500, {
-    xSpeed: 0,
-    ySpeed: 0,
-    time: 1000,
-    xSpeed1: 0,
-    ySpeed1: 0,
-    transitionTime: 10000,
-  })
-);*/
-  /*new SniperShooter(5, 60, 10, 1500, 500, {
-    xSpeed: 0,
-    ySpeed: 0,
-    time: 1000,
-    xSpeed1: 0,
-    ySpeed1: 0,
-    transitionTime: 10000,
-  })*/
-);
+let games = [];
 
 io.on("connection", (socket) => {
-  //console.log("CONNEXION -> ID:" + socket.id);
-  //console.log("CONNEXION -> ID:" + socket.id);
-  // a changer afin d'identifier les reuf par leur login
-  let newPlayer = new Joueur(socket.id);
-  game.addPlayer(newPlayer);
-  game.players.forEach((player) => {
-    //console.log(player.id);
+  socket.emit("begone");
+  let playerGame;
+  let firstConnection = true;
+  socket.on("startGame", (data) => {
+    if (firstConnection) {
+      let newPlayer = new Joueur(socket.id, data);
+      console.log(data);
+      const newGame = new Game(newPlayer);
+      newGame.addEntity(
+        new BounceShooter(5, 60, 10, 500, 500, {
+          xSpeed: 0,
+          ySpeed: 0,
+          time: 1000,
+          xSpeed1: 0,
+          ySpeed1: 0,
+          transitionTime: 10000,
+        })
+      );
+      games.push(newGame);
+      playerGame = newGame;
+      firstConnection = false;
+    }
   });
   socket.on("mousemove", (mouseInfo) => {
-    const correspondingPlayer = game.players.find(
-      (player) => player.id === mouseInfo.id
-    );
-    //console.log(correspondingPlayer);
-    if (correspondingPlayer) {
-      // console.log(
-      //   `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      // );
-      correspondingPlayer.latestCursorX = mouseInfo.x;
-      correspondingPlayer.latestCursorY = mouseInfo.y;
+    if (!firstConnection && playerGame) {
+      const correspondingPlayer = playerGame.players.find(
+        (player) => player.id === mouseInfo.id
+      );
+      if (correspondingPlayer) {
+        correspondingPlayer.latestCursorX = mouseInfo.x;
+        correspondingPlayer.latestCursorY = mouseInfo.y;
+      }
     }
   });
   socket.on("mousedown", (id) => {
-    const correspondingPlayer = game.players.find((player) => player.id === id);
-    // console.log(correspondingPlayer);
-    if (correspondingPlayer) {
-      // console.log(
-      //   `list of players -> ${game.players}\ngoodPlayer.id -> ${correspondingPlayer.id}`
-      // );
-      correspondingPlayer.shoot();
+    if (!firstConnection && playerGame) {
+      const correspondingPlayer = playerGame.players.find(
+        (player) => player.id === id
+      );
+      if (correspondingPlayer) {
+        correspondingPlayer.shoot();
+      }
     }
   });
+
   socket.on("disconnect", () => {
     console.log(`leave ${socket.id}`);
-    const toDelete = game.players.find((player) => player.id === socket.id);
-    game.removePlayer(toDelete);
+    if (playerGame) {
+      const toDelete = playerGame.players.find(
+        (player) => player.id === socket.id
+      );
+      playerGame.removePlayer(toDelete);
+    }
   });
 });
 /*
  * Fin Magie Noir
  */
 
-/*
- * Envois l'entityList a tous joueur a chaque frame afin qu'ils puissent le render.
- */
 setInterval(() => {
-  /**
-   * faire les calcul et tt ici juste avant de l'envoyer aux joueurs
-   */
-  // move de chaque entité de entityList
-  game.updateGame();
-  io.emit("updatedGame", game);
-  //console.log(getImageValue("/images/HUD/background.png"));
+  games.forEach((game) => {
+    game.updateGame();
+  });
 }, 1000 / 60);

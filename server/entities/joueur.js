@@ -9,7 +9,7 @@ const y = 500;
 const hp = 10;
 
 export default class Joueur extends Entity {
-  constructor(id) {
+  constructor(id, pseudo) {
     super(5, 9999, hp, "/images/ships/allyship.png", 0, y);
     if (id) {
       this.id = id;
@@ -17,7 +17,7 @@ export default class Joueur extends Entity {
       this.id = Math.random() * 1000;
     }
     this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
-    this.pseudo = "Steredeux";
+    this.pseudo = pseudo;
     // this.weapon = new BurstWeapon(
     //   10,
     //   1,
