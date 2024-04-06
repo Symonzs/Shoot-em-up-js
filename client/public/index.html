@@ -11,7 +11,7 @@
 	<script src="build/main.bundle.js" defer></script>
 </head>
 <body>
-	<div class="menu">
+	<div class="loginMenu menu">
 		<div class="login">
 			<h1>Login to Steredeux</h1>
 			<form class="loginForm">
@@ -20,18 +20,17 @@
 			<a href="/menu" class="innerLink launchButton"> game</a>
 		</div>
 	</div>
-	<div class="mainMenu">
-        <h1>Menu</h1>
-        <div>
-            <p>
-                <a href="/game" class="innerLink createGame"> Créer une partie</a>
-            </p>
-            <p>
-                <a href="/joinGame" class="innerLink"> Rejoindre une partie </a>
-            </p>
-        </div>
-    </div>
-	<div class="joinMenu">
+	<div class="mainMenu menu">
+		<p class="title">Menu</p>
+	<div class="boutons">
+		<ul>
+			<li> <a href="/game" class="innerLink createGame"> Créer une partie</a> </li>
+			<li> <a href="/joinGame" class="innerLink"> Rejoindre une partie </a> </li>
+		</ul>
+		<a href="/login" class="innerLink retour"> Retour</a>
+	</div> 
+</div>
+	<div class="joinMenu menu">
 		<h1>Rejoindre une partie</h1>
         <div>
             <p>
@@ -42,7 +41,7 @@
             </p>
         </div>
 	</div>
-	<div class="game">
+	<div class="game menu">
 		<canvas class="gameCanvas" width="1580" height="880"></canvas>
 	</div>
 </body>

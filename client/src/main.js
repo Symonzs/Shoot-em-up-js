@@ -12,7 +12,8 @@ function resampleCanvas() {
 }
 
 const routes = [
-  { path: "/", view: $(".menu") },
+  { path: "/", view: $(".loginMenu") },
+  { path: "/login", view: $(".loginMenu") },
   { path: "/game", view: $(".game") },
   { path: "/menu", view: $(".mainMenu") },
   { path: "/joinGame", view: $(".joinMenu") },
@@ -84,14 +85,13 @@ function render() {
 render();
 socket.on("updateGame", (receivedGame) => {
   game = receivedGame;
-  console.log(receivedGame.players);
 });
 socket.on("connect", () => {
   console.log("connected");
 });
 
 socket.on("begone", () => {
-  Router.navigate("/");
+  //Router.navigate("/");
 });
 
 // socket.on("disconnect", () => {
