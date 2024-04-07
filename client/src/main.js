@@ -17,6 +17,7 @@ const routes = [
   { path: "/game", view: $(".game") },
   { path: "/menu", view: $(".mainMenu") },
   { path: "/joinGame", view: $(".joinMenu") },
+  { path: "/credit", view: $(".credit") },
 ];
 
 Router.routes = routes;
