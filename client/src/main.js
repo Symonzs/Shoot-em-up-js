@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
-import { renderJoinGame } from "./renderGameList.js";
 import $ from "jquery";
 import Router from "./Router.js";
 
@@ -11,6 +10,8 @@ function resampleCanvas() {
   canvas.height = canvas.clientHeight;
 }
 
+socket.login = undefined;
+socket.gameToJoin = undefined;
 const routes = [
   { path: "/", view: $(".loginMenu") },
   { path: "/login", view: $(".loginMenu") },
@@ -23,13 +24,10 @@ const routes = [
 Router.routes = routes;
 Router.setInnerLinks(document.body);
 
-// chargement de la vue initiale selon l'URL demandée par l'utilisateur.rice (Deep linking)
-Router.navigate(window.location.pathname);
-
 // gestion des boutons précédent/suivant du navigateur (History API)
 window.onpopstate = () => Router.navigate(document.location.pathname, true);
 
-// gestion du formulaire
+// gestion du formulaire de login
 let text;
 const $form = $(".loginForm");
 $form.on("submit", function (event) {
@@ -39,7 +37,13 @@ $form.on("submit", function (event) {
   Router.navigate("/menu");
 });
 
-$(".createGame").on("click", () => {
+// gestion du formulaire de join de game
+let gameID;
+const $gameJoinForm = $(".gameJoinForm");
+$gameJoinForm.on("submit", function (event) {
+  event.preventDefault();
+  gameID = $("input[name=gameID]").val();
+  socket.gameToJoin = gameID;
   Router.navigate("/game");
 });
 
@@ -91,13 +95,4 @@ socket.on("connect", () => {
 
 socket.on("begone", () => {
   Router.navigate("/login");
-});
-
-socket.on("list", (games) => {
-  console.log("je suis bien dans le socket.on('list')");
-  const joinGameRoute = routes.find((route) => route.path === "/joinGame");
-  const htmlGameList = $(joinGameRoute.view.find(".gameList"));
-  console.log(htmlGameList.html);
-  //console.log(renderJoinGame(games));
-  htmlGameList.html = renderJoinGame(games);
 });

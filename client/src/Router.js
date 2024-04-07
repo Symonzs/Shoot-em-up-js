@@ -21,7 +21,6 @@ export default class Router {
     const route = this.routes.find((route) => {
       return route.path === path;
     });
-    console.log(`route2 ${route}`);
     if (route) {
       if (this.currentRoute) {
         this.currentRoute.view.hide();
@@ -29,10 +28,13 @@ export default class Router {
       this.currentRoute = route;
       route.view.show();
       if (route.path === "/game") {
-        socket.emit("startGame", socket.login);
-      } else if (route.path === "/joinGame") {
-        socket.emit("gameList");
-        console.log("aaa");
+        socket.emit("startGame", {
+          login: socket.login,
+          gameToJoin: socket.gameToJoin,
+        });
+      } else {
+        console.log("pas partie");
+        socket.emit("noGame");
       }
       if (!skipPushState) {
         window.history.pushState(null, null, path);

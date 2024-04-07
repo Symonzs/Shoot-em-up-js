@@ -69,8 +69,8 @@ export default class Game {
     });
   }
 
-  removePlayer(player) {
-    this.players = this.players.filter((p) => p !== player);
+  removePlayer(id) {
+    this.players = this.players.filter((p) => p.id !== id);
   }
 
   isInContact() {

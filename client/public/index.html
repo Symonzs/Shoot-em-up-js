@@ -17,23 +17,25 @@
 			<form class="loginForm">
 				Name <input type="text" name="name">
 			</form>
-			<a href="/menu" class="innerLink launchButton"> game</a>
 		</div>
 	</div>
 	<div class="mainMenu menu">
 		<p class="title">Menu</p>
 	<div class="boutons">
 		<ul>
-			<li> <a href="/game" class="innerLink createGame"> Créer une partie</a> </li>
+			<li> <a href="/game" class="innerLink"> Créer une partie</a> </li>
 			<li> <a href="/joinGame" class="innerLink"> Rejoindre une partie </a> </li>
 		</ul>
 		<a href="/login" class="innerLink retour"> Retour</a>
+        <a href="/credit" class="innerLink credit"> Crédits</a>
 	</div> 
 </div>
 	<div class="joinMenu menu">
 		<h1>Rejoindre une partie</h1>
-        <div class="gameList">
-			
+        <div>
+            <form class="gameJoinForm">
+				Game ID <input type="text" name="gameID">
+			</form>
 		</div>
 	</div>
 	<div class="game menu">
