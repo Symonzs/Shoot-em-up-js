@@ -1,4 +1,4 @@
-import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
+import { getJSONValues, getRenderValues } from "../utils/GetImageValues.js";
 
 export default class Entity {
   constructor(speed, atkspd, hp, path, x, y, movement) {

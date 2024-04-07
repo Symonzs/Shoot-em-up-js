@@ -6,6 +6,16 @@
       "height": 1080
     },
     {
+      "path": "/images/HUD/bulletIcon1.png",
+      "width": 50,
+      "height": 50
+    },
+    {
+      "path": "/images/HUD/bulletIcon2.png",
+      "width": 50,
+      "height": 50
+    },
+    {
       "path": "/images/HUD/hp.png",
       "width": 61,
       "height": 40

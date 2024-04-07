@@ -5,6 +5,7 @@ export default class Weapon {
     this.speed = speed;
     this.dmg = dmg;
     this.fireRate = fireRate;
+    this.missileNumber = 1;
   }
 
   shoot(renderCoordinates) {

@@ -1,6 +1,6 @@
-import { getPlayerById } from "./coordCalculator.js";
+import { getPlayerById } from "./utils/CoordCalculator.js";
 import Entity from "./entities/Entity.js";
-import detectCollision from "./utils/hit.js";
+import detectCollision from "./utils/Hit.js";
 import { io } from "./index.js";
 
 export default class Game {
@@ -69,14 +69,16 @@ export default class Game {
     });
   }
 
-  removePlayer(player) {
-    this.players = this.players.filter((p) => p !== player);
+  removePlayer(id) {
+    this.players = this.players.filter((p) => p.id !== id);
   }
 
   isInContact() {
     this.players.forEach((joueur) => {
       this.entities.forEach((entity) => {
-        detectCollision(entity, joueur, true);
+        if (detectCollision(entity, joueur, true)) {
+          entity.hp = 0;
+        }
         joueur.missileList.forEach((missile) => {
           const hit = detectCollision(missile, entity);
           if (hit) {
@@ -91,9 +93,17 @@ export default class Game {
       });
     });
   }
+  endGame() {
+    this.players.forEach((player) => {
+      io.to(player.id).emit("endGame", this);
+    });
+  }
 
   updateGame() {
     if (this.players) {
+      if (this.players.filter((player) => player.hp >= 0).length > 0) {
+        //TODO make the game end :p
+      }
       this.players.forEach((player) => {
         player.move();
         if (player.missileList.length != 0) {

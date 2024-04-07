@@ -3,7 +3,7 @@ import express from "express";
 import { Server as IOServer } from "socket.io";
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import BasicShooter from "./entities/BasicShooter.js";
-import Joueur from "./entities/joueur.js";
+import Joueur from "./entities/Joueur.js";
 import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
@@ -39,15 +39,25 @@ app.get("/*", (req, res) => {
 
 let games = [];
 
+function removeDuplicatePlayers(id) {
+  games.forEach((game) => {
+    game.removePlayer(id);
+  });
+}
+
+function findGameByID(id) {
+  return games.find((game) => game.id == id);
+}
+
 io.on("connection", (socket) => {
+  console.log(`join ${socket.id}`);
   socket.emit("begone");
   let playerGame;
-  let firstConnection = true;
   socket.on("startGame", (data) => {
-    if (firstConnection) {
-      let newPlayer = new Joueur(socket.id, data);
-      console.log(data);
-      const newGame = new Game(newPlayer, games.length);
+    removeDuplicatePlayers(socket.id);
+    let newPlayer = new Joueur(socket.id, data.login);
+    if (!data.gameToJoin) {
+      const newGame = new Game(newPlayer, games.length + 1);
       newGame.addEntity(
         new BounceShooter(5, 60, 10, 800, 500, {
           xSpeed: 0,
@@ -60,14 +70,18 @@ io.on("connection", (socket) => {
       );
       games.push(newGame);
       playerGame = newGame;
-      firstConnection = false;
+    } else {
+      console.log(data);
+      playerGame = findGameByID(data.gameToJoin);
+      if (playerGame) {
+        console.log(playerGame);
+        playerGame.addPlayer(newPlayer);
+      } else {
+      }
     }
   });
-  socket.on("gameList", () => {
-    socket.emit("list", games);
-  });
   socket.on("mousemove", (mouseInfo) => {
-    if (!firstConnection && playerGame) {
+    if (playerGame) {
       const correspondingPlayer = playerGame.players.find(
         (player) => player.id === mouseInfo.id
       );
@@ -78,7 +92,7 @@ io.on("connection", (socket) => {
     }
   });
   socket.on("mousedown", (id) => {
-    if (!firstConnection && playerGame) {
+    if (playerGame) {
       const correspondingPlayer = playerGame.players.find(
         (player) => player.id === id
       );
@@ -87,15 +101,23 @@ io.on("connection", (socket) => {
       }
     }
   });
-  socket.on("disconnect", (data) => {
-    console.log(`leave ${socket.id}`);
-    console.log(data);
+  socket.on("changeWeapons", () => {
+    const goodPlayer = playerGame.players.find(
+      (player) => (player.id = socket.id)
+    );
+    goodPlayer.cycleWeapon();
+  });
+  socket.on("noGame", () => {
+    console.log("not in a game");
     if (playerGame) {
-      const toDelete = playerGame.players.find(
-        (player) => player.id === socket.id
-      );
-      playerGame.removePlayer(toDelete);
+      playerGame.removePlayer(socket.id);
     }
+  });
+  socket.on("disconnect", (data) => {
+    if (playerGame) {
+      playerGame.removePlayer(socket.id);
+    }
+    console.log(`leave ${socket.id}`);
   });
 });
 /*

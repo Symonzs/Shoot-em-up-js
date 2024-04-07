@@ -16,6 +16,17 @@ function renderBackground(context) {
   context.drawImage(bg, secondBackgroundOffSet, 0);
   context.setTransform(1, 0, 0, 1, 0, 0);
 }
+
+function renderUI(context, id) {
+  context.textAlign = "right";
+  context.fillStyle = "white";
+  const oldFont = context.font;
+  context.font = "small-caps bold 38px arial";
+  context.fillText(`ID - ${id}`, context.canvas.width - 10, 50);
+  context.strokeText(`ID - ${id}`, context.canvas.width - 10, 50);
+  context.fillStyle = "black";
+  context.font = oldFont;
+}
 export default function renderGame(game, context, socketID) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   renderBackground(context);
@@ -27,4 +38,5 @@ export default function renderGame(game, context, socketID) {
     renderPlayer(player, context, socketID, additionalY);
     additionalY += 20;
   });
+  renderUI(context, game.id);
 }

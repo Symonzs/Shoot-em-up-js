@@ -1,8 +1,8 @@
 import Entity from "./Entity.js";
 import LowerCurvedMissile from "./bullets/LowerCurvedMissile.js";
 import UpperCurvedMissile from "./bullets/UpperCurvedMissile.js";
-import { Motion } from "../coordCalculator.js";
-import { getRenderValues, getJSONValues } from "../utils/getImageValues.js";
+import { Motion } from "../utils/CoordCalculator.js";
+import { getRenderValues, getJSONValues } from "../utils/GetImageValues.js";
 
 export default class CurvedShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {

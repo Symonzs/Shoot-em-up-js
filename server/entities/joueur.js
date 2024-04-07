@@ -1,12 +1,13 @@
 import Entity from "./Entity.js";
-import { calcCoord, calcDistance, velocity } from "../coordCalculator.js";
+import { calcCoord, calcDistance, velocity } from "../utils/CoordCalculator.js";
 import Weapon from "../weapons/Weapon.js";
 import BurstWeapon from "../weapons/BurstWeapon.js";
-import { getRenderValues } from "../utils/getImageValues.js";
+import { getRenderValues } from "../utils/GetImageValues.js";
 
 const x = 500;
 const y = 500;
 const hp = 10;
+const weapons = [];
 
 export default class Joueur extends Entity {
   constructor(id, pseudo) {
@@ -16,16 +17,13 @@ export default class Joueur extends Entity {
     } else {
       this.id = Math.random() * 1000;
     }
-    this.weapon = new Weapon(75, 1, 100, this.renderCoordinatesProj);
     this.pseudo = pseudo;
-    // this.weapon = new BurstWeapon(
-    //   10,
-    //   1,
-    //   3000,
-    //   this.renderCoordinatesProj,
-    //   80,
-    //   5
-    // );
+    weapons.push(new Weapon(75, 1, 100, this.renderCoordinatesProj));
+    weapons.push(
+      new BurstWeapon(10, 1, 3000, this.renderCoordinatesProj, 80, 5)
+    );
+    this.weaponIndex = 0;
+    this.weapon = weapons[this.weaponIndex];
     this.atkspd = this.weapon.fireRate;
     this.updateHitboxes();
     this.xSpeed = 0;
@@ -53,17 +51,7 @@ export default class Joueur extends Entity {
       height: this.renderCoordinates.height - 15,
     };
   }
-
   shoot() {
-    /*const newMissileRenderCoordinates = {
-      x: this.renderCoordinates.x + this.varProjX,
-      y: this.renderCoordinates.y + this.varProjY,
-      width: this.renderCoordinatesProj.width,
-      height: this.renderCoordinatesProj.height,
-    };
-    this.missileList.push(
-      new FriendlyBasicBullet(75, 999, newMissileRenderCoordinates)
-    );*/
     if (this.weapon.missileNumber && !this.hasShooted) {
       this.hasShooted = true;
       for (let i = 0; i < this.weapon.missileNumber; i++) {
@@ -85,11 +73,13 @@ export default class Joueur extends Entity {
     }
   }
 
-  changeWeapon(weapon) {
-    this.weapon = weapon;
-    this.Fire = setInterval(() => {
-      this.canFire = true;
-    }, this.weapon.fireRate);
+  cycleWeapon() {
+    if (this.weaponIndex == 1) {
+      this.weaponIndex = 0;
+    } else {
+      this.weaponIndex++;
+    }
+    this.weapon = weapons[this.weaponIndex];
   }
 
   move() {
