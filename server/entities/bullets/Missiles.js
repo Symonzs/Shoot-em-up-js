@@ -1,5 +1,5 @@
 import Entity from "../Entity.js";
-import { getRenderValues } from "../../utils/getImageValues.js";
+import { getRenderValues } from "../../utils/GetImageValues.js";
 
 export default class Missiles {
   /*onstructor(speed, hp, path, x, y) {

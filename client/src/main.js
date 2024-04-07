@@ -75,6 +75,14 @@ canvas.addEventListener("mouseup", (event) => {
   mouseIsDown = false;
 });
 
+document.addEventListener("keydown", (event) => {
+  if (Router.currentRoute.path === "/game") {
+    if (event.key === "x") {
+      socket.emit("changeWeapons");
+    }
+  }
+});
+
 function render() {
   if (game) {
     renderGame(game, context, socket.id);
@@ -89,6 +97,10 @@ render();
 socket.on("updateGame", (receivedGame) => {
   game = receivedGame;
 });
+socket.on("endGame", (receivedGame) => {
+  Router.navigate("/login");
+});
+
 socket.on("connect", () => {
   console.log("connected");
 });

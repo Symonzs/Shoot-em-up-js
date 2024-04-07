@@ -6,6 +6,7 @@ const HPBar = new Image();
 HPBar.src = "/images/HUD/hpbar.png";
 const HP = new Image();
 HP.src = "/images/HUD/hp.png";
+const bulletIcon = new Image();
 
 function renderMainHP(player, context) {
   if (!player) {
@@ -23,6 +24,13 @@ function renderMainHP(player, context) {
       startingY + borderHeight
     );
   }
+  console.log(player.weaponIndex);
+  if (player.weaponIndex === 1) {
+    bulletIcon.src = "/images/HUD/bulletIcon2.png";
+  } else {
+    bulletIcon.src = "/images/HUD/bulletIcon1.png";
+  }
+  context.drawImage(bulletIcon, HPBar.width + 10, startingY);
 }
 function renderSecondaryHP(player, context, secondaryX, secondaryY) {
   //console.log(secondaryX + " " + secondaryY);
@@ -60,11 +68,21 @@ export function renderPlayer(player, context, socketID, additionalY) {
     player.renderCoordinates.y - 5
   );
   context.fillStyle = "black";
-  context.drawImage(
-    playerImage,
-    player.renderCoordinates.x,
-    player.renderCoordinates.y
-  );
+  if (player.canBeTouched) {
+    context.drawImage(
+      playerImage,
+      player.renderCoordinates.x,
+      player.renderCoordinates.y
+    );
+  } else {
+    context.globalAlpha = 0.1;
+    context.drawImage(
+      playerImage,
+      player.renderCoordinates.x,
+      player.renderCoordinates.y
+    );
+    context.globalAlpha = 1;
+  }
   if (player.missileList) {
     player.missileList.forEach((missile) => {
       renderMissile(missile, context);

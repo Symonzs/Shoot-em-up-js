@@ -3,7 +3,7 @@ import express from "express";
 import { Server as IOServer } from "socket.io";
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import BasicShooter from "./entities/BasicShooter.js";
-import Joueur from "./entities/joueur.js";
+import Joueur from "./entities/Joueur.js";
 import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
@@ -73,8 +73,11 @@ io.on("connection", (socket) => {
     } else {
       console.log(data);
       playerGame = findGameByID(data.gameToJoin);
-      console.log(playerGame);
-      playerGame.addPlayer(newPlayer);
+      if (playerGame) {
+        console.log(playerGame);
+        playerGame.addPlayer(newPlayer);
+      } else {
+      }
     }
   });
   socket.on("mousemove", (mouseInfo) => {
@@ -97,6 +100,12 @@ io.on("connection", (socket) => {
         correspondingPlayer.shoot();
       }
     }
+  });
+  socket.on("changeWeapons", () => {
+    const goodPlayer = playerGame.players.find(
+      (player) => (player.id = socket.id)
+    );
+    goodPlayer.cycleWeapon();
   });
   socket.on("noGame", () => {
     console.log("not in a game");

@@ -2,8 +2,8 @@ import BounceDiagonalMissile from "./bullets/BounceDiagonalMissile.js";
 import DiagonalMissile from "./bullets/DiagonalMissile.js";
 import Entity from "./Entity.js";
 import LinearMissile from "./bullets/LinearMissile.js";
-import { Motion } from "../coordCalculator.js";
-import { getJSONValues, getRenderValues } from "../utils/getImageValues.js";
+import { Motion } from "../utils/CoordCalculator.js";
+import { getJSONValues, getRenderValues } from "../utils/GetImageValues.js";
 import HomingMissile from "./bullets/HomingMissile.js";
 
 export default class BasicShooter extends Entity {
