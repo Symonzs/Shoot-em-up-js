@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
-import { renderJoinGame } from "./renderGameList.js";
+
 import $ from "jquery";
 import Router from "./Router.js";
 
@@ -18,6 +18,7 @@ const routes = [
   { path: "/menu", view: $(".mainMenu") },
   { path: "/joinGame", view: $(".joinMenu") },
   { path: "/credit", view: $(".credit") },
+  { path: "/contributeurs", view: $(".contributeurs") },
 ];
 
 Router.routes = routes;
@@ -90,7 +91,7 @@ socket.on("connect", () => {
 });
 
 socket.on("begone", () => {
-  Router.navigate("/login");
+  //Router.navigate("/login");
 });
 
 socket.on("list", (games) => {
