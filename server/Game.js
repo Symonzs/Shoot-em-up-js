@@ -4,9 +4,10 @@ import detectCollision from "./utils/hit.js";
 import { io } from "./index.js";
 
 export default class Game {
-  constructor(player) {
+  constructor(player, id) {
     this.entities = [];
     this.players = [];
+    this.id = id;
     if (player) {
       this.players.push(player);
     }
@@ -59,9 +60,9 @@ export default class Game {
       if (entity.hp < 1) {
         entity.renderCoordinates.x = 5000;
         entity.renderCoordinates.y = 5000;
-        console.log("je suis tp un moment en -1000 -1000");
+        //console.log("je suis tp un moment en -1000 -1000");
         if (entity.missileList && entity.missileList.length < 1) {
-          console.log("ma liste est vide ???");
+          //console.log("ma liste est vide ???");
           this.entities.splice(index, 1);
         }
       }

@@ -47,9 +47,9 @@ io.on("connection", (socket) => {
     if (firstConnection) {
       let newPlayer = new Joueur(socket.id, data);
       console.log(data);
-      const newGame = new Game(newPlayer);
+      const newGame = new Game(newPlayer, games.length);
       newGame.addEntity(
-        new BounceShooter(5, 60, 10, 500, 500, {
+        new BounceShooter(5, 60, 10, 800, 500, {
           xSpeed: 0,
           ySpeed: 0,
           time: 1000,
@@ -62,6 +62,9 @@ io.on("connection", (socket) => {
       playerGame = newGame;
       firstConnection = false;
     }
+  });
+  socket.on("gameList", () => {
+    socket.emit("list", games);
   });
   socket.on("mousemove", (mouseInfo) => {
     if (!firstConnection && playerGame) {

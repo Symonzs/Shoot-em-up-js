@@ -6,7 +6,6 @@ let xOffSet = 0;
 
 function renderBackground(context) {
   xOffSet = xOffSet - 1;
-  console.log(xOffSet);
   const firstBackgroundOffSet = xOffSet;
   const secondBackgroundOffSet = xOffSet - 20 + bg.width;
   if (xOffSet === -bg.width + 20) {

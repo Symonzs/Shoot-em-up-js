@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import renderGame from "./GameRender.js";
-import { renderHP } from "./JoueurRender.js";
+import { renderJoinGame } from "./renderGameList.js";
 import $ from "jquery";
 import Router from "./Router.js";
 
@@ -34,12 +34,12 @@ const $form = $(".loginForm");
 $form.on("submit", function (event) {
   event.preventDefault();
   text = $("input[name=name]").val();
+  socket.login = text;
   Router.navigate("/menu");
 });
 
 $(".createGame").on("click", () => {
   Router.navigate("/game");
-  socket.emit("startGame", text);
 });
 
 $form.on("");
@@ -64,12 +64,10 @@ canvas.addEventListener("mousemove", (event) => {
 });
 canvas.addEventListener("mousedown", (event) => {
   mouseIsDown = true;
-  // console.log("client -> mousedown");
 });
 
 canvas.addEventListener("mouseup", (event) => {
   mouseIsDown = false;
-  // console.log("client -> mouseup");
 });
 
 function render() {
@@ -91,10 +89,14 @@ socket.on("connect", () => {
 });
 
 socket.on("begone", () => {
-  //Router.navigate("/");
+  Router.navigate("/login");
 });
 
-// socket.on("disconnect", () => {
-//   console.log("a");
-//   socket.emit("leaving", "a");
-// });
+socket.on("list", (games) => {
+  console.log("je suis bien dans le socket.on('list')");
+  const joinGameRoute = routes.find((route) => route.path === "/joinGame");
+  const htmlGameList = $(joinGameRoute.view.find(".gameList"));
+  console.log(htmlGameList.html);
+  //console.log(renderJoinGame(games));
+  htmlGameList.html = renderJoinGame(games);
+});

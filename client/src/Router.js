@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { socket } from "./main.js";
 
 export default class Router {
   static routes = [];
@@ -28,9 +29,10 @@ export default class Router {
       this.currentRoute = route;
       route.view.show();
       if (route.path === "/game") {
-        /*
-         * Emit le start de la game
-         */
+        socket.emit("startGame", socket.login);
+      } else if (route.path === "/joinGame") {
+        socket.emit("gameList");
+        console.log("aaa");
       }
       if (!skipPushState) {
         window.history.pushState(null, null, path);
