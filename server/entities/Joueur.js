@@ -18,7 +18,7 @@ export default class Joueur extends Entity {
       this.id = Math.random() * 1000;
     }
     this.pseudo = pseudo;
-    weapons.push(new Weapon(75, 1, 100, this.renderCoordinatesProj));
+    weapons.push(new Weapon(75, 3, 100, this.renderCoordinatesProj));
     weapons.push(
       new BurstWeapon(10, 1, 3000, this.renderCoordinatesProj, 80, 5)
     );

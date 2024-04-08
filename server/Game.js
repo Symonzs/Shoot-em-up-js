@@ -12,6 +12,7 @@ export default class Game {
     this.players = [];
     this.time = 0;
     this.defeatedEnnemies = 0;
+    this.spawnChance = 10;
     this.score = 0;
     this.id = id;
     if (difficulty) {
@@ -100,6 +101,7 @@ export default class Game {
         joueur.missileList.forEach((missile) => {
           const hit = detectCollision(missile, entity);
           if (hit) {
+            console.log(entity.hp);
             missile.renderCoordinates.x = -1000;
             if (entity.hp <= 0) {
               this.score += entity.score;
@@ -124,13 +126,35 @@ export default class Game {
 
   randomEvent() {
     const randomValue = Math.floor(Math.random() * 100) + 1;
-    if (randomValue <= 90) {
-      const randomMonsterIndex = Math.floor(Math.random() * 5) + 1;
-      const monsterToAdd = spawnRandomMonster(randomMonsterIndex);
-      monsterToAdd.hp *= "1," + this.difficulty;
-      if (monsterToAdd) {
-        this.addEntity(monsterToAdd);
+    let monsterToAdd =  [];
+    if (randomValue <= this.spawnChance) {
+      this.spawnChance = 10;
+      const randomNumberOfEnnemie = Math.floor(Math.random() * 10) + 1;
+      if(randomNumberOfEnnemie <= 4){
+        monsterToAdd.push(spawnRandomMonster());
       }
+      if(randomNumberOfEnnemie <= 7){
+        for(let i = 0; i < 2; i++){
+          monsterToAdd.push(spawnRandomMonster());
+        }
+      }
+      else if(randomNumberOfEnnemie <= 9){
+        for(let i = 0; i < 3; i++){
+          monsterToAdd.push(spawnRandomMonster());
+        }
+      }
+      else if(randomNumberOfEnnemie == 10){
+        for(let i = 0; i < 5; i++){
+          monsterToAdd.push(spawnRandomMonster());
+        }
+      }
+      monsterToAdd.forEach((monster) => {
+        monster.hp *= 1 + this.difficulty / 10;
+        this.addEntity(monster);
+      });
+    }
+    else{
+      this.spawnChance *= 1.05;
     }
   }
 
