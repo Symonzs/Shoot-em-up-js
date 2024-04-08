@@ -2,20 +2,10 @@ import http from "http";
 import express from "express";
 import { Server as IOServer } from "socket.io";
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
-import BasicShooter from "./entities/BasicShooter.js";
 import Joueur from "./entities/Joueur.js";
 import Game from "./Game.js";
-import CurvedShooter from "./entities/CurvedShooter.js";
-import SniperShooter from "./entities/SniperShooter.js";
-import BounceShooter from "./entities/BounceShooter.js";
-import SkullShooter from "./entities/SkullShooter.js";
-import homingShooter from "./entities/HomingShooter.js";
 import { readFileSync } from "fs";
-// updateImageValues();
 
-/**
- * Magie Noir
- */
 const fileOptions = { root: process.cwd() };
 const app = express();
 const httpServer = http.createServer(app);
@@ -35,8 +25,6 @@ httpServer.listen(port, () => {
 });
 
 export const io = new IOServer(httpServer, {
-  // pour permettre à express-status-monitor de fonctionner
-  // cf. https://github.com/RafalWilinski/express-status-monitor/issues/181#issuecomment-1086649762
   allowEIO3: true,
 });
 
@@ -116,7 +104,6 @@ io.on("connection", (socket) => {
       `${socket.id} changed weapons --> will change for ${goodPlayer.id}`
     );
     if (goodPlayer) {
-      //goodPlayer.cycleWeapon();
     }
   });
   socket.on("noGame", () => {
@@ -140,9 +127,7 @@ io.on("connection", (socket) => {
     console.log(`leave ${socket.id}`);
   });
 });
-/*
- * Fin Magie Noir
- */
+
 
 setInterval(() => {
   games.forEach((game) => {

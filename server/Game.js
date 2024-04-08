@@ -3,6 +3,8 @@ import Entity from "./entities/Entity.js";
 import detectCollision from "./utils/Hit.js";
 import { io } from "./index.js";
 import spawnRandomMonster from "./SpawnRandomMonster.js";
+import { getRandomArbitrary } from "./utils/GenerateRandomValues.js";
+import Bonus from "./entities/Bonus.js";
 
 export default class Game {
   constructor(player, id, difficulty) {
@@ -10,6 +12,7 @@ export default class Game {
     this.canBeJoined = true;
     this.entities = [];
     this.players = [];
+    this.bonuses = [];
     this.time = 0;
     this.defeatedEnnemies = 0;
     this.spawnChance = 10;
@@ -73,6 +76,7 @@ export default class Game {
         // console.log(entity.missileList.length);
       }
       if (entity.hp < 1) {
+        
         entity.renderCoordinates.x = 5000;
         entity.renderCoordinates.y = 5000;
         //console.log("je suis tp un moment en -1000 -1000");
@@ -101,9 +105,12 @@ export default class Game {
         joueur.missileList.forEach((missile) => {
           const hit = detectCollision(missile, entity);
           if (hit) {
-            console.log(entity.hp);
             missile.renderCoordinates.x = -1000;
             if (entity.hp <= 0) {
+              let rngBonus = Math.floor(Math.random() * 100) + 1;
+        if(rngBonus <= 100){
+          this.bonuses.push(new Bonus(entity.renderCoordinates.x, entity.renderCoordinates.y, getRandomArbitrary(1,3)));
+        }
               this.score += entity.score;
               this.defeatedEnnemies++;
             }
@@ -193,6 +200,18 @@ export default class Game {
             }
           });
         }
+      });
+      this.bonuses.forEach((bonus) => {
+        bonus.move();
+        this.players.forEach((player) => {
+          if (detectCollision(bonus, player, true)) {
+            player.hp += bonus.health;
+            if(player.hp > 10){
+              player.hp = 10;
+            }
+            bonus.renderCoordinates.x = -1000;
+          }
+        });
       });
       this.isInContact();
       this.removeEntity();

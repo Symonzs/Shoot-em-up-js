@@ -1,5 +1,6 @@
 import { renderPlayer } from "./JoueurRender.js";
 import renderEntity from "./EntityRender.js";
+import renderBonus from "./RenderBonus.js";
 const bg = new Image();
 bg.src = "images/HUD/backgroundGreen.png";
 let xOffSet = 0;
@@ -40,6 +41,9 @@ export default function renderGame(game, context, socketID) {
   game.players.forEach((player) => {
     renderPlayer(player, context, socketID, additionalY);
     additionalY += 20;
+  });
+  game.bonuses.forEach((bonus) => {
+    renderBonus(bonus, context);
   });
   renderUI(context, game.id, game.score);
 }
