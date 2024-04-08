@@ -295,7 +295,7 @@ strong{
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-    height: 90vh;
+      height: 200vh;
 	
    }
 
@@ -388,3 +388,5 @@ strong{
       width: 100%;
 
    }
+
+ 
