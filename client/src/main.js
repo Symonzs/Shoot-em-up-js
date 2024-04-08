@@ -104,6 +104,8 @@ socket.on("updateGame", (receivedGame) => {
 
 socket.on("endGame", (receivedGame) => {
   $(".score").text(receivedGame.score);
+  $(".time").text(receivedGame.time);
+  $(".defeated").text(receivedGame.deafeatedEnnemies);
   $(".rejouerMenu").show();
 });
 

@@ -10,12 +10,14 @@ export default class Game {
     this.canBeJoined = true;
     this.entities = [];
     this.players = [];
+    this.time = 0;
+    this.defeatedEnnemies = 0;
     this.score = 0;
     this.id = id;
     if (difficulty) {
       this.difficulty = difficulty;
     } else {
-      this.difficulty = 0;
+      this.difficulty = 1;
     }
     if (player) {
       this.addPlayer(player);
@@ -28,7 +30,7 @@ export default class Game {
 
   addPlayer(player) {
     if (this.difficulty) {
-      this.player.hp = this.player.hp - this.difficulty;
+      player.hp = player.hp - this.difficulty + 1;
     }
     this.players.push(player);
   }
@@ -101,6 +103,7 @@ export default class Game {
             missile.renderCoordinates.x = -1000;
             if (entity.hp <= 0) {
               this.score += entity.score;
+              this.defeatedEnnemies++;
             }
           }
         });
@@ -124,6 +127,7 @@ export default class Game {
     if (randomValue <= 50) {
       const randomMonsterIndex = Math.floor(Math.random() * 5) + 1;
       const monsterToAdd = spawnRandomMonster(randomMonsterIndex);
+      monsterToAdd.hp *= "1," + this.difficulty;
       if (monsterToAdd) {
         this.addEntity(monsterToAdd);
       }
@@ -134,6 +138,7 @@ export default class Game {
     this.frameCounter++;
     if (this.frameCounter == 60) {
       this.randomEvent();
+      this.time++;
       this.frameCounter = 0;
     }
     if (this.canBeJoined) {
