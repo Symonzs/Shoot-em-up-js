@@ -10,6 +10,7 @@ import SniperShooter from "./entities/SniperShooter.js";
 import BounceShooter from "./entities/BounceShooter.js";
 import SkullShooter from "./entities/SkullShooter.js";
 import homingShooter from "./entities/HomingShooter.js";
+import { readFileSync } from "fs";
 // updateImageValues();
 
 /**
@@ -18,6 +19,12 @@ import homingShooter from "./entities/HomingShooter.js";
 const fileOptions = { root: process.cwd() };
 const app = express();
 const httpServer = http.createServer(app);
+let scoreboard = [];
+
+function updateScoreBoard() {
+  const data = readFileSync("./score.json", { encoding: "utf8", flag: "r" });
+  scoreboard = JSON.parse(data);
+}
 
 addWebpackMiddleware(app);
 
@@ -116,6 +123,14 @@ io.on("connection", (socket) => {
     console.log("not in a game");
     if (playerGame) {
       playerGame.removePlayer(socket.id);
+    }
+  });
+  socket.on("getScores", () => {
+    updateScoreBoard();
+    if (scoreboard) {
+      socket.emit("scores", scoreboard);
+    } else {
+      socket.emit("error", "noScores");
     }
   });
   socket.on("disconnect", (data) => {
