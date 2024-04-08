@@ -8,6 +8,7 @@ export default class Game {
     this.canBeJoined = true;
     this.entities = [];
     this.players = [];
+    this.score = 0;
     this.id = id;
     if (player) {
       this.players.push(player);
@@ -102,45 +103,47 @@ export default class Game {
   }
 
   updateGame() {
-    if (this.players) {
-      if (this.players.filter((player) => player.hp <= 0).length > 0) {
-        //TODO make the game end :p
+    if (this.canBeJoined) {
+      this.score++;
 
-        this.endGame();
-        this = null;
-      }
-      this.players.forEach((player) => {
-        player.move();
-        if (player.missileList.length != 0) {
-          player.missileList.forEach((missile) => {
-            missile.move();
-          });
+      if (this.players) {
+        if (this.players.filter((player) => player.hp <= 0).length > 0) {
+          //TODO make the game end :p
+          this.endGame();
         }
-      });
-    }
-    this.entities.forEach((entity) => {
-      entity.shoot(
-        this.players[Math.floor(Math.random() * this.players.length)]
-      );
-      entity.move();
-      if (entity.missileList.length != 0) {
-        entity.missileList.forEach((missile) => {
-          //console.log(missile.target);
-
-          //console.log(getPlayerById(this.players,missile.target));
-          if (missile.target) {
-            missile.move(getPlayerById(this.players, missile.target.id));
-          } else {
-            missile.move();
+        this.players.forEach((player) => {
+          player.move();
+          if (player.missileList.length != 0) {
+            player.missileList.forEach((missile) => {
+              missile.move();
+            });
           }
         });
       }
-    });
-    this.isInContact();
-    this.removeEntity();
-    this.players.forEach((player) => {
-      io.to(player.id).emit("updateGame", this);
-    });
+      this.entities.forEach((entity) => {
+        entity.shoot(
+          this.players[Math.floor(Math.random() * this.players.length)]
+        );
+        entity.move();
+        if (entity.missileList.length != 0) {
+          entity.missileList.forEach((missile) => {
+            //console.log(missile.target);
+
+            //console.log(getPlayerById(this.players,missile.target));
+            if (missile.target) {
+              missile.move(getPlayerById(this.players, missile.target.id));
+            } else {
+              missile.move();
+            }
+          });
+        }
+      });
+      this.isInContact();
+      this.removeEntity();
+      this.players.forEach((player) => {
+        io.to(player.id).emit("updateGame", this);
+      });
+    }
   }
 
   launchWave(wave) {
