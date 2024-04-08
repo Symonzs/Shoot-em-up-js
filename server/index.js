@@ -128,7 +128,7 @@ io.on("connection", (socket) => {
   socket.on("getScores", () => {
     updateScoreBoard();
     if (scoreboard) {
-      socket.emit("scores", scoreboard);
+      socket.emit("scores", scoreboard.scores);
     } else {
       socket.emit("error", "noScores");
     }

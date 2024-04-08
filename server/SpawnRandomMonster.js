@@ -21,7 +21,14 @@ function generateBasicShooter() {
     ySpeed1: getRandomArbitrary(-4, 4),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  return new BasicShooter(5, 60, 10, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new BasicShooter(
+    5,
+    60,
+    10,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateBounceShooter() {
@@ -34,7 +41,14 @@ function generateBounceShooter() {
     transitionTime: getRandomArbitrary(5000, 10000),
   };
 
-  return new BounceShooter(5, 60, 10, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new BounceShooter(
+    5,
+    60,
+    10,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateCurvedShooter() {
@@ -47,7 +61,14 @@ function generateCurvedShooter() {
     transitionTime: getRandomArbitrary(5000, 10000),
   };
 
-  return new CurvedShooter(5, 60, 20, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new CurvedShooter(
+    5,
+    60,
+    20,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateHomingShooter() {
@@ -59,7 +80,14 @@ function generateHomingShooter() {
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  return new HomingShooter(5, 60, 25, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new HomingShooter(
+    5,
+    60,
+    25,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateKamikaze() {
@@ -76,7 +104,14 @@ function generateSkullShooter() {
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  return new SkullShooter(5, 60, 50, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new SkullShooter(
+    5,
+    60,
+    50,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateSniperShooter() {
@@ -89,7 +124,14 @@ function generateSniperShooter() {
     transitionTime: getRandomArbitrary(5000, 10000),
   };
 
-  return new SniperShooter(5, 200, 5, getRandomArbitrary(1200,1400), getRandomArbitrary(200,700), mouvement);
+  return new SniperShooter(
+    5,
+    200,
+    5,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 export default function spawnRandomMonster() {
@@ -99,9 +141,9 @@ export default function spawnRandomMonster() {
     monster = generateBasicShooter();
   } else if (prob < 70) {
     monster = generateBounceShooter();
-  } else if (prob < 80){
+  } else if (prob < 80) {
     monster = generateSniperShooter();
-  }  else if (prob < 90) {
+  } else if (prob < 90) {
     monster = generateHomingShooter();
   } else if (prob < 95) {
     monster = generateCurvedShooter();

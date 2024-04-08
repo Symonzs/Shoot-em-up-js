@@ -22,6 +22,7 @@ const routes = [
   { path: "/difficulty", view: $(".difficultyMenu") },
   { path: "/credit", view: $(".creditMenu") },
   { path: "/contributeurs", view: $(".contributeursMenu") },
+  { path: "/scoreboard", view: $(".highscore") },
 ];
 
 Router.routes = routes;
@@ -33,6 +34,10 @@ window.onpopstate = () => Router.navigate(document.location.pathname, true);
 // gestion du formulaire de login
 let text;
 const $form = $(".loginForm");
+let gameID;
+const $gameJoinForm = $(".gameJoinForm");
+let $highscoreMenu = $(".highscore");
+
 $form.on("submit", function (event) {
   event.preventDefault();
   text = $("input[name=name]").val();
@@ -41,8 +46,6 @@ $form.on("submit", function (event) {
 });
 
 // gestion du formulaire de join de game
-let gameID;
-const $gameJoinForm = $(".gameJoinForm");
 $gameJoinForm.on("submit", function (event) {
   event.preventDefault();
   gameID = $("input[name=gameID]").val();
@@ -50,7 +53,34 @@ $gameJoinForm.on("submit", function (event) {
   Router.navigate("/game");
 });
 
-$form.on("");
+function renderScore(score) {
+  return `
+  <div class="score">
+    <h3>${score.name}</h3>
+    <p> ${score.score} </p>
+  </div>
+  `;
+}
+
+function compareScore(a, b) {
+  if (a.score > b.score) {
+    return -1;
+  } else if (a.score < b.score) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+function populateScoreBoard(data) {
+  const $toAdd = $highscoreMenu.find(".score-container");
+  console.log($toAdd.html());
+  data.sort(compareScore);
+  data.forEach((score) => {
+    console.log(renderScore(score));
+    $toAdd.append(renderScore(score));
+  });
+}
+
 console.log($form);
 
 const canvas = document.querySelector(".gameCanvas"),
@@ -59,9 +89,9 @@ const canvas = document.querySelector(".gameCanvas"),
 
 export const canvase = canvas;
 export const contexte = context;
-
-canvasResizeObserver.observe(canvas);
 let game;
+canvasResizeObserver.observe(canvas);
+
 canvas.addEventListener("mousemove", (event) => {
   const mouseCoord = {
     id: socket.id,
@@ -115,6 +145,10 @@ socket.on("connect", () => {
 
 socket.on("begone", () => {
   Router.navigate("/login");
+});
+
+socket.on("scores", (data) => {
+  populateScoreBoard(data);
 });
 
 socket.on("error", (errorMsg) => {

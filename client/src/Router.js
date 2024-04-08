@@ -37,6 +37,9 @@ export default class Router {
         console.log("pas partie");
         socket.emit("noGame");
       }
+      if (route.path === "/scoreboard") {
+        socket.emit("getScores");
+      }
       if (!skipPushState) {
         window.history.pushState(null, null, path);
       }
