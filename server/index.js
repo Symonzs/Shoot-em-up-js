@@ -47,7 +47,7 @@ function removeDuplicatePlayers(id) {
 
 function findGameByID(id) {
   let tempgame = games.find((game) => game.id == id);
-  if (tempgame.canBeJoined) {
+  if (tempgame && tempgame.canBeJoined) {
     return tempgame;
   }
 }

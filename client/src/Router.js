@@ -17,6 +17,7 @@ export default class Router {
   }
 
   static navigate(path, skipPushState = false) {
+    $(".rejouerMenu").hide();
     console.log(`path ${path}`);
     const route = this.routes.find((route) => {
       return route.path === path;

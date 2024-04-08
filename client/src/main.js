@@ -100,8 +100,10 @@ render();
 socket.on("updateGame", (receivedGame) => {
   game = receivedGame;
 });
+
 socket.on("endGame", (receivedGame) => {
-  Router.navigate("/login");
+  $(".score").text(receivedGame.score);
+  $(".rejouerMenu").show();
 });
 
 socket.on("connect", () => {
