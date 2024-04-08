@@ -1,10 +1,11 @@
+import { Motion } from "../utils/CoordCalculator.js";
 import Entity from "./Entity.js";
-import { Motion } from "./coordCalculator.js";
-import LinearMissile from "./LinearMissile.js";
+
+import SkulllMissile from "./bullets/SkullMissile.js";
 
 export default class SkullShooter extends Entity {
-  constructor(speed, hp, renderCoordinates, renderCoordinatesProj, movement) {
-    super(speed, hp, renderCoordinates, movement);
+  constructor(speed, atkspeed, hp, x, y, movement) {
+    super(speed, atkspeed, hp, "/images/ships/skull-1.png", x, y, movement);
     this.secondPhase = false;
     this.transition = false;
     setTimeout(() => {
@@ -16,16 +17,10 @@ export default class SkullShooter extends Entity {
     this.missileList = [];
     this.imageNumber = 1;
     this.changeImage(this.imageNumber);
-    this.renderCoordinatesProj = renderCoordinatesProj;
-    this.hitboxCoordinatesProj = renderCoordinatesProj;
-    this.imagebullet = `/images/bullets/skull-projectile.png`;
-    this.varProjX = 0;
-    this.varProjY = 90;
-    this.canFire = setInterval(() => {
-      if (this.incrementImage()) {
-        this.shoot();
-      }
-    }, 1000);
+    this.shooting = 1;
+    this.isShooting = false;
+    this.go = false;
+    this.cool = false;
   }
 
   updateHitboxes() {
@@ -62,14 +57,6 @@ export default class SkullShooter extends Entity {
           height: this.renderCoordinates.height - 20,
         };
         break;
-      case 5:
-        this.hitboxCoordinates = {
-          x: this.renderCoordinates.x,
-          y: this.renderCoordinates.y + 15,
-          width: this.renderCoordinates.width,
-          height: this.renderCoordinates.height - 20,
-        };
-        break;
       default:
         this.hitboxCoordinates = {
           x: this.renderCoordinates.x,
@@ -86,31 +73,54 @@ export default class SkullShooter extends Entity {
         missile.hitboxCoordinates.x > 0 &&
         missile.hitboxCoordinates.x < this.canvasWidth
     );
-    this.missileList.forEach((missile) => missile.move());
     Motion(this);
 
     this.updateHitboxes();
   }
 
   changeImage(imageID) {
-    this.image = `/images/ships/skull-${imageID}.png`;
+    this.renderCoordinates.path = `/images/ships/skull-${imageID}.png`;
     this.updateHitboxes();
   }
 
-  shoot() {
-    const newMissileRenderCoordinates = {
-      x: this.renderCoordinates.x + this.varProjX,
-      y: this.renderCoordinates.y + this.varProjY,
-      width: this.renderCoordinatesProj.width,
-      height: this.renderCoordinatesProj.height,
-    };
-    this.missileList.push(
-      new LinearMissile(this.imagebullet, 10, 999, newMissileRenderCoordinates)
-    );
+  shoot(player) {
+    if (this.go) {
+      this.missileList.push(
+        new SkulllMissile(
+          Math.round(Math.random() * 20) + 5,
+          Math.round(Math.random() * 20),
+          3,
+          this.renderCoordinates.x - 10,
+          this.renderCoordinates.y + 80
+        )
+      );
+    }
+    if (!this.isShooting) {
+      this.tickBeforeShooting++;
+      if (this.tickBeforeShooting == this.atkspd) {
+        this.tickBeforeShooting = 0;
+        this.shooting++;
+        this.incrementImage();
+      }
+      if (this.shooting == 4) {
+        this.go = true;
+        this.isShooting = true;
+        if (!this.cool) {
+          this.cool = true;
+
+          setTimeout(() => {
+            this.shooting = 0;
+            this.isShooting = false;
+            this.cool = false;
+            this.go = false;
+          }, 10000);
+        }
+      }
+    }
   }
 
   incrementImage() {
-    if (this.imageNumber > 4) {
+    if (this.imageNumber > 3) {
       this.imageNumber = 1;
     } else {
       this.imageNumber++;

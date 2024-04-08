@@ -24,5 +24,5 @@ export default function renderMissile(entity, context) {
     entity.renderCoordinates.x,
     entity.renderCoordinates.y
   );
-  renderHitbox(entity, context);
+  //renderHitbox(entity, context);
 }
