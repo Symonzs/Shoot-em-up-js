@@ -17,6 +17,7 @@ export default class BounceShooter extends Entity {
       y,
       movement
     );
+    this.score = 150;
     this.secondPhase = false;
     this.transition = false;
     setTimeout(() => {

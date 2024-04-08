@@ -9,6 +9,7 @@ import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
 import BounceShooter from "./entities/BounceShooter.js";
 import SkullShooter from "./entities/SkullShooter.js";
+import homingShooter from "./entities/HomingShooter.js";
 // updateImageValues();
 
 /**

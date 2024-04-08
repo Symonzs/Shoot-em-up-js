@@ -14,5 +14,6 @@ export default class Entity {
     this.canBeHurt = true;
     this.canvasWidth = 1500;
     this.canvasHeight = 800;
+    this.score = 1;
   }
 }

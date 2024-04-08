@@ -50,6 +50,8 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         10,
         1500 - 40,
         40 + Math.round(Math.random() * 800 - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
           xSpeed: Math.round(Math.random() * 5) + 1,
           ySpeed: Math.round(Math.random() * 2),
@@ -66,6 +68,8 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         1500 - 40,
         40 + Math.round(Math.random() * 800 - 40),
         {
@@ -86,6 +90,8 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         10,
         1500 - 40,
         40 + Math.round(Math.random() * 800 - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
           xSpeed: Math.round(Math.random() * 5) + 1,
           ySpeed: Math.round(Math.random() * 2),
@@ -104,6 +110,8 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         10,
         1500 - 40,
         40 + Math.round(Math.random() * 800 - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
           xSpeed: Math.round(Math.random() * 5) + 1,
           ySpeed: Math.round(Math.random() * 2),
@@ -119,6 +127,8 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         1500 - 40,
         40 + Math.round(Math.random() * 800 - 40),
         {

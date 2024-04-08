@@ -18,6 +18,7 @@ export default class SniperShooter extends Entity {
       y,
       movement
     );
+    this.score = 350;
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;

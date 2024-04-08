@@ -90,11 +90,18 @@ export default class Game {
       this.entities.forEach((entity) => {
         if (detectCollision(entity, joueur, true)) {
           entity.hp = 0;
+          this.score -= entity.score * 5;
+          if (this.score < 0) {
+            this.score = 0;
+          }
         }
         joueur.missileList.forEach((missile) => {
           const hit = detectCollision(missile, entity);
           if (hit) {
             missile.renderCoordinates.x = -1000;
+            if (entity.hp <= 0) {
+              this.score += entity.score;
+            }
           }
         });
         if (entity.missileList) {

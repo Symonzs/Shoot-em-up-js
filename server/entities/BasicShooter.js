@@ -13,6 +13,7 @@ export default class BasicShooter extends Entity {
       y,
       movement
     );
+    this.score = 100;
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;
