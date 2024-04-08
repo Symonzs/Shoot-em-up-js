@@ -149,7 +149,9 @@ export default class Game {
       });
     }
     else{
-      this.spawnChance *= 1.05;
+      if(this.entities.length < 1){
+        this.spawnChance *= 1.1;
+      }
     }
   }
 

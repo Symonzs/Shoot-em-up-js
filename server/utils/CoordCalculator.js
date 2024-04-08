@@ -29,6 +29,7 @@ export function Motion(entity) {
     if (entity.hp > 0) {
       entity.renderCoordinates.x -= entity.movement.xSpeed;
       entity.renderCoordinates.y -= entity.movement.ySpeed;
+      entity.secondPhase = true;
     }
   } else {
     if (entity.transition) {
