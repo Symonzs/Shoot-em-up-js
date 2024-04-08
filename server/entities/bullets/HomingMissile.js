@@ -19,8 +19,8 @@ export default class HomingMissile extends Missiles {
       const angle = Math.atan2(distanceY, distanceX);
 
       // Calcul de la vitesse en fonction de la direction
-      const speedX = Math.cos(angle) * 10;
-      const speedY = Math.sin(angle) * 10;
+      const speedX = Math.cos(angle) * 5;
+      const speedY = Math.sin(angle) * 5;
 
       // Déplacement du missile
       this.renderCoordinates.x += speedX;

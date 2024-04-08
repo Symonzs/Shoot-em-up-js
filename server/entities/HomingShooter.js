@@ -5,7 +5,15 @@ import HomingMissile from "./bullets/HomingMissile.js";
 
 export default class homingShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {
-    super(speed, atkspeed, hp, "/images/ships/skull-1.png", x, y, movement);
+    super(
+      speed,
+      atkspeed,
+      hp,
+      "/images/ships/homingShooter.png",
+      x,
+      y,
+      movement
+    );
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;

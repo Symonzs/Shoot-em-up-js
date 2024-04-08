@@ -46,7 +46,7 @@ export default class SniperShooter extends Entity {
         if (this.renderCoordinates.x > player.renderCoordinates.x) {
           this.missileList.push(
             new SniperMissile(
-              50,
+              25,
               2,
               this.renderCoordinates.x,
               this.renderCoordinates.y,
