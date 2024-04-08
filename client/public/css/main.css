@@ -101,14 +101,14 @@ body {
 	padding-right: 3dvw;
 }
 
-.boutons  a {
+a {
 	color: #d73939;
 	text-decoration: none;
 	text-align: center;
 	
 }
 
-.boutons  a:hover {
+a:hover {
 	color: #e97a7a;
 }
 
@@ -150,7 +150,7 @@ strong{
    }
 
    .card-container{
-	background-color: #a79d9d;
+   background-color: rgba(14, 16, 20, 0.6);
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -164,7 +164,7 @@ strong{
   
    
    .card{
-    background-color: #2b2c3d;
+      background-color: rgba(14, 16, 20, 0.6);
     width: 100%;
     display: flex;
     height: 95%;
@@ -185,7 +185,7 @@ strong{
     height: 15%;
     width: 40%;
     font-size: 30px;
-    background-color: #2b2c3d;
+    background-color: rgba(14, 16, 20, 0.6);
     border-radius: 8px 8px 0px 0px;
    }
    
@@ -257,8 +257,10 @@ strong{
    
    .credits{
     height: 5vh;
-    margin-top :5vh;
-	background-color: #a79d9d;
+    color: white;
+    background-color: rgba(14, 16, 20, 0.6);
+    border-radius: 8px;
+    padding: 0 1dvw;
    }
 
    .credit{
@@ -267,9 +269,6 @@ strong{
 
    .morecredit{
 	width: 100%;
-	text-align: center;
-	text-decoration: none;
-	color: white;
    }
 
    .contributeur{
@@ -278,7 +277,7 @@ strong{
 	justify-content: space-around;
 	height: 5vh;
     margin-top :5vh;
-	background-color: #a79d9d;
+    background-color: rgba(14, 16, 20, 0.6);
    }
 
    .contributeurs{
@@ -290,7 +289,7 @@ strong{
    }
 
    .contributeurs-container{
-	background-color: #a79d9d;
+      background-color: rgba(14, 16, 20, 0.6);
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -322,6 +321,8 @@ strong{
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
+   background-color: rgba(14, 16, 20, 0.6);
+   padding: 2dvw 2dvh;
    }
 
    .info-contributor{
@@ -349,8 +350,9 @@ strong{
    }
 
    a{
-      text-decoration: none;
-      color: white;
+	color: #d73939;
+	text-decoration: none;
+	text-align: center;
    }
 
    .retourcontri{

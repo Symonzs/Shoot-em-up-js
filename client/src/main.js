@@ -19,6 +19,7 @@ const routes = [
   { path: "/game", view: $(".game") },
   { path: "/menu", view: $(".mainMenu") },
   { path: "/joinGame", view: $(".joinMenu") },
+  { path: "/difficulty", view: $(".difficultyMenu") },
   { path: "/credit", view: $(".creditMenu") },
   { path: "/contributeurs", view: $(".contributeursMenu") },
 ];

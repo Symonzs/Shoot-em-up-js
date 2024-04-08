@@ -2,16 +2,23 @@ import { getPlayerById } from "./utils/CoordCalculator.js";
 import Entity from "./entities/Entity.js";
 import detectCollision from "./utils/Hit.js";
 import { io } from "./index.js";
+import spawnRandomMonster from "./SpawnRandomMonster.js";
 
 export default class Game {
-  constructor(player, id) {
+  constructor(player, id, difficulty) {
+    this.frameCounter = 0;
     this.canBeJoined = true;
     this.entities = [];
     this.players = [];
     this.score = 0;
     this.id = id;
+    if (difficulty) {
+      this.difficulty = difficulty;
+    } else {
+      this.difficulty = 0;
+    }
     if (player) {
-      this.players.push(player);
+      this.addPlayer(player);
     }
   }
 
@@ -20,6 +27,9 @@ export default class Game {
   }
 
   addPlayer(player) {
+    if (this.difficulty) {
+      this.player.hp = this.player.hp - this.difficulty;
+    }
     this.players.push(player);
   }
 
@@ -102,7 +112,20 @@ export default class Game {
     });
   }
 
+  randomEvent() {
+    const randomValue = Math.floor(Math.random() * 100) + 1;
+    if (randomValue <= 50) {
+      const randomMonsterIndex = Math.floor(Math.random() * 5) + 1;
+      const monsterToAdd = spawnRandomMonster(randomMonsterIndex);
+      this.addEntity(monsterToAdd);
+    }
+  }
+
   updateGame() {
+    this.frameCounter++;
+    if (this.frameCounter == 60) {
+      this.randomEvent();
+    }
     if (this.canBeJoined) {
       this.score++;
 
