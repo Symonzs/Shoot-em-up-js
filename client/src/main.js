@@ -19,8 +19,8 @@ const routes = [
   { path: "/game", view: $(".game") },
   { path: "/menu", view: $(".mainMenu") },
   { path: "/joinGame", view: $(".joinMenu") },
-  { path: "/credit", view: $(".credit") },
-  { path: "/contributeurs", view: $(".contributeurs") },
+  { path: "/credit", view: $(".creditMenu") },
+  { path: "/contributeurs", view: $(".contributeursMenu") },
 ];
 
 Router.routes = routes;
@@ -108,5 +108,5 @@ socket.on("connect", () => {
 });
 
 socket.on("begone", () => {
-  //Router.navigate("/login");
+  Router.navigate("/login");
 });
