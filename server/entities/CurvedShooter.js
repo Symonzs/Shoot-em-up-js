@@ -15,6 +15,7 @@ export default class CurvedShooter extends Entity {
       y,
       movement
     );
+    this.score = 500;
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;

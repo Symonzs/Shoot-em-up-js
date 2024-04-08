@@ -21,6 +21,7 @@ export default class SkullShooter extends Entity {
     this.isShooting = false;
     this.go = false;
     this.cool = false;
+    this.score = 1000;
   }
 
   updateHitboxes() {

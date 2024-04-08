@@ -1,21 +1,17 @@
 import Entity from "./Entity.js";
 import LinearMissile from "./bullets/LinearMissile.js";
 import { Motion } from "../utils/CoordCalculator.js";
+import HomingMissile from "./bullets/HomingMissile.js";
 
 export default class homingShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {
-    super(
-      speed,
-      atkspeed,
-      hp,
-      "/images/ships/homingSHooter.png",
-      x,
-      y,
-      movement
-    );
+    super(speed, atkspeed, hp, "/images/ships/skull-1.png", x, y, movement);
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;
+    this.timeBeforeDisappear = Math.floor(Math.random() * 180) + 240;
+    this.tickWhileShooting = 0;
+    this.score = 500;
     setTimeout(() => {
       this.secondPhase = true;
       setTimeout(() => {
@@ -35,23 +31,31 @@ export default class homingShooter extends Entity {
   }
 
   shoot(player) {
-    if (this.tickBeforeShooting == this.atkspd) {
-      this.missileList.push(
-        new LinearMissile(
-          10,
-          2,
-          this.renderCoordinates.x,
-          this.renderCoordinates.y
-        )
-      );
-      this.tickBeforeShooting = 0;
+    if (this.missileList.length > 0) {
+      this.tickWhileShooting++;
+      if (this.tickWhileShooting == this.timeBeforeDisappear) {
+        this.missileList = [];
+        this.tickWhileShooting = 0;
+      }
+    }
+    if (!this.missileList.length > 0) {
+      this.tickBeforeShooting++;
+      if (this.tickBeforeShooting == this.atkspd) {
+        this.missileList.push(
+          new HomingMissile(
+            10,
+            2,
+            this.renderCoordinates.x,
+            this.renderCoordinates.y,
+            player
+          )
+        );
+        this.tickBeforeShooting = 0;
+      }
     }
   }
 
   move() {
-    if (this.tickBeforeShooting < this.atkspd) {
-      this.tickBeforeShooting++;
-    }
     this.missileList = this.missileList.filter(
       (missile) =>
         missile.hitboxCoordinates.x > 0 &&
