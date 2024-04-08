@@ -8,6 +8,7 @@ import Game from "./Game.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
 import BounceShooter from "./entities/BounceShooter.js";
+import SkullShooter from "./entities/SkullShooter.js";
 // updateImageValues();
 
 /**
@@ -62,7 +63,7 @@ io.on("connection", (socket) => {
     if (!data.gameToJoin) {
       const newGame = new Game(newPlayer, games.length + 1);
       newGame.addEntity(
-        new BounceShooter(5, 60, 10, 800, 500, {
+        new SkullShooter(5, 60, 10, 800, 500, {
           xSpeed: 0,
           ySpeed: 0,
           time: 1000,

@@ -26,7 +26,7 @@ export default function renderEntity(entity, context) {
     entity.renderCoordinates.x,
     entity.renderCoordinates.y
   );
-  renderHitbox(entity, context);
+  //renderHitbox(entity, context);
   if (entity.missileList) {
     entity.missileList.forEach((missile) => {
       renderMissile(missile, context);
