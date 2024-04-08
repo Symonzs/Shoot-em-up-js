@@ -347,3 +347,15 @@ strong{
    font-size:30px ;
    text-decoration: underline;
    }
+
+   a{
+      text-decoration: none;
+      color: white;
+   }
+
+   .retourcontri{
+      position: absolute;
+      top: 55vh;
+      left: 108vh;
+
+   }
