@@ -71,12 +71,17 @@ io.on("connection", (socket) => {
       games.push(newGame);
       playerGame = newGame;
     } else {
-      console.log(data);
-      playerGame = findGameByID(data.gameToJoin);
-      if (playerGame) {
-        console.log(playerGame);
-        playerGame.addPlayer(newPlayer);
+      if (data.gameToJoin > games.length || data.gameToJoin <= 0) {
+        socket.emit("error", "unvalidId");
       } else {
+        console.log(data);
+        playerGame = findGameByID(data.gameToJoin);
+        if (playerGame) {
+          console.log(playerGame);
+          playerGame.addPlayer(newPlayer);
+        } else {
+          socket.emit("error", "gameError");
+        }
       }
     }
   });

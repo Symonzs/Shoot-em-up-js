@@ -110,3 +110,9 @@ socket.on("connect", () => {
 socket.on("begone", () => {
   Router.navigate("/login");
 });
+
+socket.on("error", (errorMsg) => {
+  window.alert(errorMsg);
+  Router.navigate("/menu");
+  socket.gameToJoin = undefined;
+});
