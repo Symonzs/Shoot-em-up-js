@@ -37,6 +37,7 @@ const $form = $(".loginForm");
 let gameID;
 const $gameJoinForm = $(".gameJoinForm");
 let $highscoreMenu = $(".highscore");
+let currentScoreboard;
 
 $form.on("submit", function (event) {
   event.preventDefault();
@@ -71,17 +72,18 @@ function compareScore(a, b) {
     return 0;
   }
 }
-function populateScoreBoard(data) {
-  const $toAdd = $highscoreMenu.find(".score-container");
-  console.log($toAdd.html());
-  data.sort(compareScore);
-  data.forEach((score) => {
-    console.log(renderScore(score));
-    $toAdd.append(renderScore(score));
-  });
-}
 
-console.log($form);
+function populateScoreBoard() {
+  const $toAdd = $highscoreMenu.find(".score-container");
+  $toAdd.html("");
+  if (currentScoreboard) {
+    currentScoreboard.sort(compareScore);
+    currentScoreboard.forEach((score) => {
+      console.log(score);
+      $toAdd.append(renderScore(score));
+    });
+  }
+}
 
 const canvas = document.querySelector(".gameCanvas"),
   context = canvas.getContext("2d"),
@@ -112,7 +114,6 @@ document.addEventListener("keydown", (event) => {
   if (Router.currentRoute.path === "/game") {
     if (event.key === "x") {
       console.log("changeWeapons");
-      //socket.emit("changeWeapons");
     }
   }
 });
@@ -137,6 +138,12 @@ socket.on("endGame", (receivedGame) => {
   $(".time").text(receivedGame.time);
   $(".defeated").text(receivedGame.deafeatedEnnemies);
   $(".rejouerMenu").show();
+  const data = {
+    name: socket.login,
+    score: receivedGame.score,
+  };
+  console.log(data);
+  socket.emit("addedScore", data);
 });
 
 socket.on("connect", () => {
@@ -148,7 +155,8 @@ socket.on("begone", () => {
 });
 
 socket.on("scores", (data) => {
-  populateScoreBoard(data);
+  currentScoreboard = data;
+  populateScoreBoard();
 });
 
 socket.on("error", (errorMsg) => {
