@@ -32,7 +32,6 @@ function renderMainHP(player, context) {
   context.drawImage(bulletIcon, HPBar.width + 10, startingY);
 }
 function renderSecondaryHP(player, context, secondaryX, secondaryY) {
-  //console.log(secondaryX + " " + secondaryY);
   context.drawImage(HPBar, secondaryX, secondaryY);
 }
 
@@ -96,9 +95,6 @@ export function renderPlayer(player, context, socketID, additionalY) {
   const secondaryX = player.canvasWidth;
   const secondaryY = player.canvasHeight;
   renderName(player, context);
-  console.log(
-    `isClient -> ${player.id}===${socketID} = ${player.id == socketID}`
-  );
   const isClient = player.id === socketID;
   drawPlayer(player, context, isClient);
   if (player.missileList) {

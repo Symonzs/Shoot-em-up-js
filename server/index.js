@@ -4,7 +4,8 @@ import { Server as IOServer } from "socket.io";
 import addWebpackMiddleware from "./middlewares/addWebpackMiddleware.js";
 import Joueur from "./entities/Joueur.js";
 import Game from "./Game.js";
-import { readFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
+// updateImageValues();
 
 const fileOptions = { root: process.cwd() };
 const app = express();
@@ -13,7 +14,32 @@ let scoreboard = [];
 
 function updateScoreBoard() {
   const data = readFileSync("./score.json", { encoding: "utf8", flag: "r" });
+  console.log(JSON.parse(data));
   scoreboard = JSON.parse(data);
+}
+
+function compareScore(a, b) {
+  if (a.score > b.score) {
+    return -1;
+  } else if (a.score < b.score) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function exportScoreboard() {
+  console.log(scoreboard);
+  writeFileSync("./score.json", JSON.stringify(scoreboard));
+}
+
+function addScore(newScore) {
+  console.log(scoreboard);
+  scoreboard.push(newScore);
+  scoreboard.sort(compareScore);
+  if (scoreboard.length >= 10) {
+    scoreboard.pop();
+  }
 }
 
 addWebpackMiddleware(app);
@@ -114,11 +140,12 @@ io.on("connection", (socket) => {
   });
   socket.on("getScores", () => {
     updateScoreBoard();
-    if (scoreboard) {
-      socket.emit("scores", scoreboard.scores);
-    } else {
-      socket.emit("error", "noScores");
-    }
+    socket.emit("scores", scoreboard);
+  });
+  socket.on("addedScore", (newScore) => {
+    console.log(newScore);
+    addScore(newScore);
+    exportScoreboard();
   });
   socket.on("disconnect", (data) => {
     if (playerGame) {
