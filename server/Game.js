@@ -150,7 +150,7 @@ export default class Game {
     }
     else{
       if(this.entities.length < 1){
-        this.spawnChance *= 1.1;
+        this.spawnChance *= 3;
       }
     }
   }
