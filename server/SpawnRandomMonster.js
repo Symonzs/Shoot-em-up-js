@@ -21,11 +21,14 @@ function generateBasicShooter() {
     ySpeed1: getRandomArbitrary(-4, 4),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y =
-    canvasHeight / 2 +
-    getRandomArbitrary(-(canvasHeight / 8), canvasHeight / 8);
-  console.log("je creer un mec en y = " + y + " et x = " + canvasWidth - 100);
-  return new BasicShooter(5, 60, 10, canvasWidth - 100, y, mouvement);
+  return new BasicShooter(
+    5,
+    60,
+    10,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateBounceShooter() {
@@ -37,23 +40,35 @@ function generateBounceShooter() {
     ySpeed1: getRandomArbitrary(-4, 4),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y =
-    canvasWidth / 2 + getRandomArbitrary(-(canvasWidth / 8), canvasWidth / 8);
-  return new BounceShooter(5, 60, 10, canvasHeight, y, mouvement);
+
+  return new BounceShooter(
+    5,
+    60,
+    10,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateCurvedShooter() {
   const mouvement = {
     xSpeed: 1,
     ySpeed: getRandomArbitrary(-1, 1),
-    time: getRandomArbitrary(1000, 6000),
+    time: getRandomArbitrary(1000, 3000),
     xSpeed1: 0,
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y =
-    canvasWidth / 4 + getRandomArbitrary(-(canvasWidth / 8), canvasWidth / 8);
-  return new CurvedShooter(5, 60, 20, canvasHeight, y, mouvement);
+
+  return new CurvedShooter(
+    5,
+    60,
+    20,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateHomingShooter() {
@@ -65,10 +80,14 @@ function generateHomingShooter() {
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y =
-    10 * (canvasWidth / 16) +
-    getRandomArbitrary(-(canvasWidth / 16), canvasWidth / 16);
-  return new HomingShooter(5, 60, 25, canvasHeight, y, mouvement);
+  return new HomingShooter(
+    5,
+    60,
+    25,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateKamikaze() {
@@ -85,10 +104,14 @@ function generateSkullShooter() {
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y =
-    canvasWidth / 2 +
-    getRandomArbitrary(-(canvasWidth / 2) + 10, canvasWidth / 2 - 10);
-  return new SkullShooter(5, 60, 50, canvasHeight, y, mouvement);
+  return new SkullShooter(
+    5,
+    60,
+    50,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 function generateSniperShooter() {
@@ -100,8 +123,15 @@ function generateSniperShooter() {
     ySpeed1: getRandomArbitrary(-2, 2),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const y = canvasWidth / 8 + getRandomArbitrary(0, canvasWidth / 4);
-  return new SniperShooter(5, 200, 5, canvasHeight, y, mouvement);
+
+  return new SniperShooter(
+    5,
+    200,
+    5,
+    getRandomArbitrary(1200, 1400),
+    getRandomArbitrary(200, 700),
+    mouvement
+  );
 }
 
 export default function spawnRandomMonster() {
@@ -109,14 +139,14 @@ export default function spawnRandomMonster() {
   const prob = generatePercentage();
   if (prob < 50) {
     monster = generateBasicShooter();
-  } else if (prob < 65) {
+  } else if (prob < 70) {
     monster = generateBounceShooter();
-  } else if (prob < 75) {
-    monster = generateCurvedShooter();
   } else if (prob < 80) {
-    monster = generateHomingShooter();
-  } else if (prob < 90) {
     monster = generateSniperShooter();
+  } else if (prob < 90) {
+    monster = generateHomingShooter();
+  } else if (prob < 95) {
+    monster = generateCurvedShooter();
   } else {
     monster = generateSkullShooter();
   }

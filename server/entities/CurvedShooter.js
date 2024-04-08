@@ -11,24 +11,19 @@ export default class CurvedShooter extends Entity {
     this.isShooting = false;
     this.secondPhase = false;
     this.transition = false;
-    /*setInterval(() => {
-      this.secondPhase = true;
-      setInterval(() => {
-        this.transition = true;
-      }, this.movement.transitionTime);
-    }, this.movement.time);*/
 
     this.missileList = [];
   }
 
   shoot() {
+    if(this.secondPhase){
     if (this.tickBeforeShooting < this.atkspd) {
       return;
     }
     if (this.tickBeforeShooting == this.atkspd) {
       this.tickBeforeShooting = 0;
       this.isShooting = true;
-      for (let i = 0; i < 200; i++) {
+      for (let i = 0; i < 20; i++) {
         setTimeout(() => {
           this.missileList.push(
             new UpperCurvedMissile(
@@ -46,12 +41,13 @@ export default class CurvedShooter extends Entity {
               this.renderCoordinates.y
             )
           );
-          if (i == 199) {
+          if (i == 19) {
             this.isShooting = false;
           }
         }, 200 * i);
       }
     }
+  }
   }
 
   updateHitboxes() {
