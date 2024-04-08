@@ -3,7 +3,7 @@ import LinearMissile from "./bullets/LinearMissile.js";
 import { Motion } from "../utils/CoordCalculator.js";
 import HomingMissile from "./bullets/HomingMissile.js";
 
-export default class homingShooter extends Entity {
+export default class HomingShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {
     super(
       speed,

@@ -6,15 +6,7 @@ import { getRenderValues, getJSONValues } from "../utils/GetImageValues.js";
 
 export default class CurvedShooter extends Entity {
   constructor(speed, atkspeed, hp, x, y, movement) {
-    super(
-      speed,
-      atkspeed,
-      hp,
-      "/images/ships/basicshooter.png",
-      x,
-      y,
-      movement
-    );
+    super(speed, atkspeed, hp, "/images/ships/chadShooter.png", x, y, movement);
     this.score = 500;
     this.isShooting = false;
     this.secondPhase = false;

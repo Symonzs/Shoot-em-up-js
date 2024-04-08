@@ -3,147 +3,120 @@ import BounceShooter from "./entities/BounceShooter.js";
 import CurvedShooter from "./entities/CurvedShooter.js";
 import SniperShooter from "./entities/SniperShooter.js";
 import HomingShooter from "./entities/HomingShooter.js";
+import SkullShooter from "./entities/SkullShooter.js";
+import {
+  generatePercentage,
+  getRandomArbitrary,
+} from "./utils/GenerateRandomValues.js";
+import KamikazeEnemy from "./entities/KamikazeEnemy.js";
+const canvasHeight = 1500;
+const canvasWidth = 800;
 
-export default function spawnRandomMonster(randomMonsterIndex) {
+function generateBasicShooter() {
+  const mouvement = {
+    xSpeed: getRandomArbitrary(-3, 3),
+    ySpeed: getRandomArbitrary(-3, 3),
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: 0,
+    ySpeed1: getRandomArbitrary(-4, 4),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y =
+    canvasWidth / 2 + getRandomArbitrary(-(canvasWidth / 8), canvasWidth / 8);
+  return new BasicShooter(5, 60, 10, canvasHeight - 100, y, mouvement);
+}
+
+function generateBounceShooter() {
+  const mouvement = {
+    xSpeed: getRandomArbitrary(-3, 3),
+    ySpeed: getRandomArbitrary(-3, 3),
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: getRandomArbitrary(-1, 1),
+    ySpeed1: getRandomArbitrary(-4, 4),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y =
+    canvasWidth / 2 + getRandomArbitrary(-(canvasWidth / 8), canvasWidth / 8);
+  return new BounceShooter(5, 60, 10, canvasHeight, y, mouvement);
+}
+
+function generateCurvedShooter() {
+  const mouvement = {
+    xSpeed: 1,
+    ySpeed: getRandomArbitrary(-1, 1),
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: 0,
+    ySpeed1: getRandomArbitrary(-2, 2),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y =
+    canvasWidth / 4 + getRandomArbitrary(-(canvasWidth / 8), canvasWidth / 8);
+  return new CurvedShooter(5, 60, 20, canvasHeight, y, mouvement);
+}
+
+function generateHomingShooter() {
+  const mouvement = {
+    xSpeed: getRandomArbitrary(1, 2),
+    ySpeed: getRandomArbitrary(-1, 1),
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: 0,
+    ySpeed1: getRandomArbitrary(-2, 2),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y =
+    10 * (canvasWidth / 16) +
+    getRandomArbitrary(-(canvasWidth / 16), canvasWidth / 16);
+  return new HomingShooter(5, 60, 25, canvasHeight, y, mouvement);
+}
+
+function generateKamikaze() {
+  const speed = getRandomArbitrary(8, 16);
+  return new KamikazeEnemy(speed, canvasHeight, canvasHeight / 2);
+}
+
+function generateSkullShooter() {
+  const mouvement = {
+    xSpeed: getRandomArbitrary(2, 3),
+    ySpeed: 0,
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: 0,
+    ySpeed1: getRandomArbitrary(-2, 2),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y =
+    canvasWidth / 2 +
+    getRandomArbitrary(-(canvasWidth / 2) + 10, canvasWidth / 2 - 10);
+  return new SkullShooter(5, 60, 50, canvasHeight, y, mouvement);
+}
+
+function generateSniperShooter() {
+  const mouvement = {
+    xSpeed: getRandomArbitrary(1, 2),
+    ySpeed: 0,
+    time: getRandomArbitrary(1000, 6000),
+    xSpeed1: 0,
+    ySpeed1: getRandomArbitrary(-2, 2),
+    transitionTime: getRandomArbitrary(5000, 10000),
+  };
+  const y = canvasWidth / 8 + getRandomArbitrary(0, canvasWidth / 4);
+  return new SniperShooter(5, 200, 5, canvasHeight, y, mouvement);
+}
+
+export default function spawnRandomMonster() {
   let monster;
-  switch (randomMonsterIndex) {
-    case 1:
-      //basicShooter
-      monster = new BasicShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 400),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    case 2:
-      //homingShooter
-      monster = new HomingShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    case 3:
-      //curvedShooter
-      monster = new CurvedShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    case 4:
-      //BounceShooter
-      monster = new BounceShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    case 5:
-      //SniperShooter
-      monster = new SniperShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    case 6:
-      //SkullShooter
-      monster = new SkullShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
-    default:
-      monster = new BasicShooter(
-        5,
-        60,
-        10,
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        1500 - 40,
-        40 + Math.round(Math.random() * 800 - 40),
-        {
-          xSpeed: Math.round(Math.random() * 5) + 1,
-          ySpeed: Math.round(Math.random() * 2),
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 5),
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
-      break;
+  const prob = generatePercentage();
+  if (prob < 25) {
+    monster = generateBasicShooter();
+  } else if (prob < 50) {
+    monster = generateBounceShooter();
+  } else if (prob < 65) {
+    monster = generateCurvedShooter();
+  } else if (prob < 80) {
+    monster = generateHomingShooter();
+  } else if (prob < 90) {
+    monster = generateSniperShooter();
+  } else {
+    monster = generateSkullShooter();
   }
-  if (monster) {
-    return monster;
-  }
+  return monster;
 }

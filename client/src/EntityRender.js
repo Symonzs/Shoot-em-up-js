@@ -8,13 +8,6 @@ function renderHitbox(entity, context) {
     entity.hitboxCoordinates.width,
     entity.hitboxCoordinates.height
   );
-  context.strokeStyle = "blue";
-  context.strokeRect(
-    entity.renderCoordinates.x,
-    entity.renderCoordinates.y,
-    entity.renderCoordinates.width,
-    entity.renderCoordinates.height
-  );
   context.strokeStyle = "black";
 }
 
@@ -26,7 +19,7 @@ export default function renderEntity(entity, context) {
     entity.renderCoordinates.x,
     entity.renderCoordinates.y
   );
-  //renderHitbox(entity, context);
+  renderHitbox(entity, context);
   if (entity.missileList) {
     entity.missileList.forEach((missile) => {
       renderMissile(missile, context);

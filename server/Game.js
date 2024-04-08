@@ -121,9 +121,10 @@ export default class Game {
 
   randomEvent() {
     const randomValue = Math.floor(Math.random() * 100) + 1;
-    if (randomValue <= 50) {
+    if (randomValue <= 90) {
       const randomMonsterIndex = Math.floor(Math.random() * 5) + 1;
       const monsterToAdd = spawnRandomMonster(randomMonsterIndex);
+      console.log(monsterToAdd);
       if (monsterToAdd) {
         this.addEntity(monsterToAdd);
       }
