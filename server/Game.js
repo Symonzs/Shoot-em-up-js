@@ -117,7 +117,9 @@ export default class Game {
     if (randomValue <= 50) {
       const randomMonsterIndex = Math.floor(Math.random() * 5) + 1;
       const monsterToAdd = spawnRandomMonster(randomMonsterIndex);
-      this.addEntity(monsterToAdd);
+      if (monsterToAdd) {
+        this.addEntity(monsterToAdd);
+      }
     }
   }
 
@@ -125,6 +127,7 @@ export default class Game {
     this.frameCounter++;
     if (this.frameCounter == 60) {
       this.randomEvent();
+      this.frameCounter = 0;
     }
     if (this.canBeJoined) {
       this.score++;

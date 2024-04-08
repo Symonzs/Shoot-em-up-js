@@ -62,16 +62,6 @@ io.on("connection", (socket) => {
     let newPlayer = new Joueur(socket.id, data.login);
     if (!data.gameToJoin) {
       const newGame = new Game(newPlayer, games.length + 1);
-      newGame.addEntity(
-        new SkullShooter(5, 60, 10, 800, 500, {
-          xSpeed: 0,
-          ySpeed: 0,
-          time: 1000,
-          xSpeed1: 0,
-          ySpeed1: 0,
-          transitionTime: 10000,
-        })
-      );
       games.push(newGame);
       playerGame = newGame;
     } else {

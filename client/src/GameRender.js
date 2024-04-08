@@ -17,13 +17,16 @@ function renderBackground(context) {
   context.setTransform(1, 0, 0, 1, 0, 0);
 }
 
-function renderUI(context, id) {
+function renderUI(context, id, score) {
   context.textAlign = "right";
   context.fillStyle = "white";
   const oldFont = context.font;
   context.font = "small-caps bold 38px arial";
   context.fillText(`ID - ${id}`, context.canvas.width - 10, 50);
   context.strokeText(`ID - ${id}`, context.canvas.width - 10, 50);
+  context.textAlign = "left";
+  context.fillText(`${score}`, 10, context.canvas.height - 10);
+  context.strokeText(`${score}`, 10, context.canvas.height - 10);
   context.fillStyle = "black";
   context.font = oldFont;
 }
@@ -38,5 +41,5 @@ export default function renderGame(game, context, socketID) {
     renderPlayer(player, context, socketID, additionalY);
     additionalY += 20;
   });
-  renderUI(context, game.id);
+  renderUI(context, game.id, game.score);
 }

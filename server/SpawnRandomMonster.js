@@ -12,35 +12,35 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 400),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
       break;
     case 2:
       //homingShooter
-      monster = new HomingShooter(
-        5,
-        60,
-        10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
-        {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
-          time: Math.round(Math.random() * 6000) + 1000,
-          xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
-          transitionTime: Math.round(Math.random() * 5000) + 7000,
-        }
-      );
+      // monster = new HomingShooter(
+      //   5,
+      //   60,
+      //   10,
+      //   1500 - 40,
+      //   40 + Math.round(Math.random() * 800 - 40),
+      //   {
+      //     xSpeed: Math.round(Math.random() * 5) + 1,
+      //     ySpeed: Math.round(Math.random() * 6) + 1,
+      //     time: Math.round(Math.random() * 6000) + 1000,
+      //     xSpeed1: Math.round(Math.random() * 10) + 10,
+      //     ySpeed1: Math.round(Math.random() * 8) + 7,
+      //     transitionTime: Math.round(Math.random() * 5000) + 7000,
+      //   }
+      // );
       break;
     case 3:
       //curvedShooter
@@ -48,14 +48,14 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
@@ -66,14 +66,14 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
@@ -84,14 +84,14 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
@@ -102,31 +102,31 @@ export default function spawnRandomMonster(randomMonsterIndex) {
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
       break;
     default:
-      monster = new HomingShooter(
+      monster = new BasicShooter(
         5,
         60,
         10,
-        monster.canvasWidth - 40,
-        40 + Math.round(Math.random() * monster.canvasHeight - 40),
+        1500 - 40,
+        40 + Math.round(Math.random() * 800 - 40),
         {
-          xSpeed: Math.round(Math.random() * 10) + 1,
-          ySpeed: Math.round(Math.random() * 6) + 1,
+          xSpeed: Math.round(Math.random() * 5) + 1,
+          ySpeed: Math.round(Math.random() * 2),
           time: Math.round(Math.random() * 6000) + 1000,
           xSpeed1: Math.round(Math.random() * 10) + 10,
-          ySpeed1: Math.round(Math.random() * 8) + 7,
+          ySpeed1: Math.round(Math.random() * 5),
           transitionTime: Math.round(Math.random() * 5000) + 7000,
         }
       );
