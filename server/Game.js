@@ -104,10 +104,7 @@ export default class Game {
   updateGame() {
     if (this.players) {
       if (this.players.filter((player) => player.hp <= 0).length > 0) {
-        //TODO make the game end :p
-
         this.endGame();
-        this = null;
       }
       this.players.forEach((player) => {
         player.move();
