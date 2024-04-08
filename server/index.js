@@ -81,12 +81,10 @@ io.on("connection", (socket) => {
         playerGame = findGameByID(data.gameToJoin);
         if (playerGame) {
           console.log(playerGame);
-
           playerGame.addPlayer(newPlayer);
         } else {
-          socket.emit("error", "gameError");
+          socket.emit("error", "Game is over");
         }
-        socket.emit("error", "Game is over");
       }
     }
   });
