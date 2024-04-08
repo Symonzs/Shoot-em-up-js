@@ -5,6 +5,7 @@ import { io } from "./index.js";
 
 export default class Game {
   constructor(player, id) {
+    this.canBeJoined = true;
     this.entities = [];
     this.players = [];
     this.id = id;
@@ -96,13 +97,17 @@ export default class Game {
   endGame() {
     this.players.forEach((player) => {
       io.to(player.id).emit("endGame", this);
+      this.canBeJoined = false;
     });
   }
 
   updateGame() {
     if (this.players) {
-      if (this.players.filter((player) => player.hp >= 0).length > 0) {
+      if (this.players.filter((player) => player.hp <= 0).length > 0) {
         //TODO make the game end :p
+
+        this.endGame();
+        this = null;
       }
       this.players.forEach((player) => {
         player.move();

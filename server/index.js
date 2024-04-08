@@ -46,7 +46,10 @@ function removeDuplicatePlayers(id) {
 }
 
 function findGameByID(id) {
-  return games.find((game) => game.id == id);
+  let tempgame = games.find((game) => game.id == id);
+  if (tempgame.canBeJoined) {
+    return tempgame;
+  }
 }
 
 io.on("connection", (socket) => {
@@ -75,8 +78,10 @@ io.on("connection", (socket) => {
       playerGame = findGameByID(data.gameToJoin);
       if (playerGame) {
         console.log(playerGame);
+
         playerGame.addPlayer(newPlayer);
       } else {
+        socket.emit("error", "Game is over");
       }
     }
   });
