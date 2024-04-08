@@ -75,7 +75,7 @@ export default class Game {
         entity.missileList = newList;
         // console.log(entity.missileList.length);
       }
-      if (entity.hp < 1) {
+      if (entity.hp <= 0) {
         
         entity.renderCoordinates.x = 5000;
         entity.renderCoordinates.y = 5000;

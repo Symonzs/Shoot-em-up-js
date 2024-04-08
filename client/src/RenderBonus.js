@@ -1,6 +1,6 @@
 export default function renderBonus(bonus, context) {
     const image = new Image();
-    image.src = "/images/ships/basicshooter.png";
+    image.src = "/images/ships/BONUS.png";
     context.save();
     context.globalAlpha = bonus.opacity;
     context.drawImage(image, bonus.renderCoordinates.x, bonus.renderCoordinates.y);
