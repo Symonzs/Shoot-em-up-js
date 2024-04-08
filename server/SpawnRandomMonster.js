@@ -21,9 +21,10 @@ function generateBasicShooter() {
     ySpeed1: getRandomArbitrary(-4, 4),
     transitionTime: getRandomArbitrary(5000, 10000),
   };
-  const  y= 
-    canvasHeight / 2 + getRandomArbitrary(-(canvasHeight / 8), canvasHeight / 8);
-    console.log("je creer un mec en y = " + y + " et x = " + canvasWidth - 100)
+  const y =
+    canvasHeight / 2 +
+    getRandomArbitrary(-(canvasHeight / 8), canvasHeight / 8);
+  console.log("je creer un mec en y = " + y + " et x = " + canvasWidth - 100);
   return new BasicShooter(5, 60, 10, canvasWidth - 100, y, mouvement);
 }
 
@@ -104,7 +105,7 @@ function generateSniperShooter() {
 }
 
 export default function spawnRandomMonster() {
-
+  let monster;
   const prob = generatePercentage();
   if (prob < 50) {
     monster = generateBasicShooter();
