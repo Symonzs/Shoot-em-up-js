@@ -126,20 +126,18 @@ export default class Game {
 
   randomEvent() {
     const randomValue = Math.floor(Math.random() * 100) + 1;
-    let monsterToAdd =  [];
+    let monsterToAdd = [];
     if (randomValue <= this.spawnChance) {
       this.spawnChance = 10;
       const randomNumberOfEnnemie = Math.floor(Math.random() * 9) + 1;
-      if(randomNumberOfEnnemie <= 4){
+      if (randomNumberOfEnnemie <= 5) {
         monsterToAdd.push(spawnRandomMonster());
-      }
-      if(randomNumberOfEnnemie <= 7){
-        for(let i = 0; i < 2; i++){
+      } else if (randomNumberOfEnnemie <= 8) {
+        for (let i = 0; i < 2; i++) {
           monsterToAdd.push(spawnRandomMonster());
         }
-      }
-      else if(randomNumberOfEnnemie == 9){
-        for(let i = 0; i < 3; i++){
+      } else if (randomNumberOfEnnemie == 9) {
+        for (let i = 0; i < 3; i++) {
           monsterToAdd.push(spawnRandomMonster());
         }
       }
@@ -147,9 +145,8 @@ export default class Game {
         monster.hp *= 1 + this.difficulty / 10;
         this.addEntity(monster);
       });
-    }
-    else{
-      if(this.entities.length < 1){
+    } else {
+      if (this.entities.length < 1) {
         this.spawnChance *= 3;
       }
     }

@@ -82,7 +82,7 @@ function generateHomingShooter() {
   };
   return new HomingShooter(
     5,
-    60,
+    10,
     25,
     getRandomArbitrary(1200, 1400),
     getRandomArbitrary(200, 700),
@@ -106,7 +106,7 @@ function generateSkullShooter() {
   };
   return new SkullShooter(
     5,
-    60,
+    15,
     50,
     getRandomArbitrary(1200, 1400),
     getRandomArbitrary(200, 700),
