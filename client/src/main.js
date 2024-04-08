@@ -80,7 +80,8 @@ canvas.addEventListener("mouseup", (event) => {
 document.addEventListener("keydown", (event) => {
   if (Router.currentRoute.path === "/game") {
     if (event.key === "x") {
-      socket.emit("changeWeapons");
+      console.log("changeWeapons");
+      //socket.emit("changeWeapons");
     }
   }
 });

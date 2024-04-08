@@ -24,7 +24,6 @@ function renderMainHP(player, context) {
       startingY + borderHeight
     );
   }
-  console.log(player.weaponIndex);
   if (player.weaponIndex === 1) {
     bulletIcon.src = "/images/HUD/bulletIcon2.png";
   } else {
@@ -55,11 +54,7 @@ function renderHitbox(player, context) {
   context.strokeStyle = "black";
 }
 
-export function renderPlayer(player, context, socketID, additionalY) {
-  const secondaryX = player.canvasWidth;
-  const secondaryY = player.canvasHeight;
-  if (player.health <= 0) return;
-  playerImage.src = player.renderCoordinates.path;
+function renderName(player, context) {
   context.textAlign = "center";
   context.fillStyle = "white";
   context.fillText(
@@ -68,6 +63,14 @@ export function renderPlayer(player, context, socketID, additionalY) {
     player.renderCoordinates.y - 5
   );
   context.fillStyle = "black";
+}
+
+function drawPlayer(player, context, isClient) {
+  if (isClient) {
+    playerImage.src = player.renderCoordinates.path;
+  } else {
+    playerImage.src = "/images/ships/allyship2.png";
+  }
   if (player.canBeTouched) {
     context.drawImage(
       playerImage,
@@ -83,20 +86,24 @@ export function renderPlayer(player, context, socketID, additionalY) {
     );
     context.globalAlpha = 1;
   }
+  if (isClient) {
+    renderMainHP(player, context);
+  }
+}
+
+export function renderPlayer(player, context, socketID, additionalY) {
+  if (player.health <= 0) return;
+  const secondaryX = player.canvasWidth;
+  const secondaryY = player.canvasHeight;
+  renderName(player, context);
+  console.log(
+    `isClient -> ${player.id}===${socketID} = ${player.id == socketID}`
+  );
+  const isClient = player.id === socketID;
+  drawPlayer(player, context, isClient);
   if (player.missileList) {
     player.missileList.forEach((missile) => {
       renderMissile(missile, context);
     });
-  }
-  //renderHitbox(player, context);
-  if (player.id === socketID) {
-    renderMainHP(player, context);
-  } else {
-    renderSecondaryHP(
-      player,
-      context,
-      secondaryX,
-      secondaryY - additionalY * 10
-    );
   }
 }

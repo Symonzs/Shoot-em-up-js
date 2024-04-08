@@ -114,7 +114,12 @@ io.on("connection", (socket) => {
     const goodPlayer = playerGame.players.find(
       (player) => (player.id = socket.id)
     );
-    goodPlayer.cycleWeapon();
+    console.log(
+      `${socket.id} changed weapons --> will change for ${goodPlayer.id}`
+    );
+    if (goodPlayer) {
+      //goodPlayer.cycleWeapon();
+    }
   });
   socket.on("noGame", () => {
     console.log("not in a game");
