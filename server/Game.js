@@ -129,7 +129,7 @@ export default class Game {
     let monsterToAdd =  [];
     if (randomValue <= this.spawnChance) {
       this.spawnChance = 10;
-      const randomNumberOfEnnemie = Math.floor(Math.random() * 10) + 1;
+      const randomNumberOfEnnemie = Math.floor(Math.random() * 9) + 1;
       if(randomNumberOfEnnemie <= 4){
         monsterToAdd.push(spawnRandomMonster());
       }
@@ -138,13 +138,8 @@ export default class Game {
           monsterToAdd.push(spawnRandomMonster());
         }
       }
-      else if(randomNumberOfEnnemie <= 9){
+      else if(randomNumberOfEnnemie == 9){
         for(let i = 0; i < 3; i++){
-          monsterToAdd.push(spawnRandomMonster());
-        }
-      }
-      else if(randomNumberOfEnnemie == 10){
-        for(let i = 0; i < 5; i++){
           monsterToAdd.push(spawnRandomMonster());
         }
       }
